@@ -1,15 +1,17 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Places',
+      title: 'Places app',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -40,6 +42,10 @@ class MyFirstStatlessWidget extends StatelessWidget {
       ),
     );
   }
+
+  // Type getWidgetContext() {
+  //   return context.runtimeType;
+  // }
 }
 
 class MyFirstStatefulWidget extends StatefulWidget {
@@ -60,6 +66,10 @@ class _MyFirstStatefulWidgetState extends State<MyFirstStatefulWidget> {
       ),
     );
   }
+
+  // Type getWidgetContext() {
+  //   return context.runtimeType;
+  // }
 }
 
 
