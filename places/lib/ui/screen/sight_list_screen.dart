@@ -10,6 +10,7 @@ class _SightListScreenState extends State<SightListScreen> {
       child: Text(
           "Список \nинтересных мест",
           overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.left,
           style: TextStyle(
             color: Color(0xff3B3E5B),
             fontFamily: "Roboto",
