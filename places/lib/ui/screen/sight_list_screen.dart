@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/res/strings/strings.dart';
 
 class SightListScreen extends StatefulWidget {
   @override
@@ -7,31 +9,21 @@ class SightListScreen extends StatefulWidget {
 
 class _SightListScreenState extends State<SightListScreen> {
   var _appBarTextSimple = Padding(
-    padding: EdgeInsets.only(left: 16, top: 64, right: 16),
+    padding: appBarPadding,
     child: Text(
-      "Список \nинтересных мест",
+      appBarTitle,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.left,
       maxLines: 2,
-      style: TextStyle(
-        color: Color(0xff3B3E5B),
-        fontFamily: "Roboto",
-        fontStyle: FontStyle.normal,
-        fontSize: 32,
+      style: appBarStyle,
       ),
-    ),
-  );
+    );
 
   var _appBarTextRich = Padding(
-    padding: EdgeInsets.only(left: 16, top: 64, right: 16),
+    padding: appBarPadding,
     child: RichText(
       text: TextSpan(
-          style: TextStyle(
-            color: Color(0xff3B3E5B),
-            fontFamily: "Roboto",
-            fontStyle: FontStyle.normal,
-            fontSize: 32,
-          ),
+          style: appBarStyle,
           children: [
             TextSpan(text: "С",  style: TextStyle(color: Colors.green)),
             TextSpan(text: "писок\n"),
