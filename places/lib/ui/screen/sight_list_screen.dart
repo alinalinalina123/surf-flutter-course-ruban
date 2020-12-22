@@ -19,26 +19,13 @@ class _SightListScreenState extends State<SightListScreen> {
       ),
     );
 
-  var _appBarTextRich = Padding(
-    padding: appBarPadding,
-    child: RichText(
-      text: TextSpan(
-          style: appBarStyle,
-          children: [
-            TextSpan(text: "С",  style: TextStyle(color: Colors.green)),
-            TextSpan(text: "писок\n"),
-            TextSpan(text: "и", style: TextStyle(color: Colors.yellow)),
-            TextSpan(text: "нтересных мест"),
-          ]),
-    ),
-  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           toolbarHeight: 136,
-          title: _appBarTextRich,
+          title: _appBarTextSimple,
           backgroundColor: Colors.transparent,
           elevation: 0.0),
     );
