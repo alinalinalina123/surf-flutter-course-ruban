@@ -19,7 +19,7 @@ class SightCard extends StatelessWidget {
           padding: standardWidgetPadding,
           child: Text(
             sight.type.name,
-            style: whiteTitleStyle,
+            style: greyTitleBigStyle,
           ),
         ),
         Positioned(
@@ -44,7 +44,7 @@ class SightCard extends StatelessWidget {
             ),
             Text(
               sight.details,
-              style: greySubTitleStyle,
+              style: greySubTitleLightStyle,
             )
           ],
           mainAxisSize: MainAxisSize.max,
