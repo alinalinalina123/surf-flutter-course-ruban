@@ -4,6 +4,7 @@ import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings/strings.dart';
 import 'package:places/mocks.dart';
 
+//Widget that displays list of sights
 class SightListScreen extends StatefulWidget {
   @override
   _SightListScreenState createState() => _SightListScreenState();
