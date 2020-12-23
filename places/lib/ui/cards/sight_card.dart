@@ -22,48 +22,59 @@ class SightCard extends StatelessWidget {
           borderRadius: standardWidgetCircleBorder,
         ),
         child: Column(
-          children: [_buildCardImage(), _buildCardDescription()],
+          children: [
+            _buildCardImage(),
+            const SizedBox(height: 16),
+            _buildCardDescription(),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildCardImage() {
-    return Container(
-      height: 96,
-      child: Stack(children: [
-        ImageCardWidget(url: sight.url),
-        SubTitleWidget(
-          name: sight.type.name,
-          style: whiteTitleStyle,
-          paddings: standardWidgetPadding,
-        ),
-        PositionedButtonWidget(
-          top: 16,
-          right: 16,
-        ),
-      ]),
+    return AspectRatio(
+      aspectRatio: 3 / 2,
+      child: SizedBox(
+        width: double.infinity,
+        height: 96,
+        child: Stack(children: [
+          ImageCardWidget(url: sight.url),
+          SubTitleWidget(
+            name: sight.type.name,
+            style: whiteTitleStyle,
+            paddings: standardWidgetPadding,
+          ),
+          PositionedButtonWidget(
+            top: 16,
+            right: 16,
+          ),
+        ]),
+      ),
     );
   }
 
   Widget _buildCardDescription() {
-    return Container(
-      child: Column(
-        children: [
-          SubTitleWidget(
-            name: sight.name,
-            style: greyTitleStyle,
-            paddings: titleWidgetPadding,
-          ),
-          SubTitleWidget(
-            name: sight.details,
-            style: greySubTitleLightStyle,
-            paddings: bottomWidgetPadding,
-          )
-        ],
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return AspectRatio(
+      aspectRatio: 3 / 2,
+      child: Container(
+        child: Column(
+          children: [
+            SubTitleWidget(
+              name: sight.name,
+              style: greyTitleStyle,
+              paddings: bottomWidgetPadding,
+            ),
+            SubTitleWidget(
+              name: sight.details,
+              style: greySubTitleLightStyle,
+              paddings: bottomWidgetPadding,
+            )
+          ],
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
       ),
     );
   }
