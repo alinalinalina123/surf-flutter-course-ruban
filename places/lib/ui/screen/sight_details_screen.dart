@@ -37,6 +37,7 @@ class _SightDetailsState extends State<SightDetails> {
               ),
               SubTitleWidget(
                 name: "закрыто до 09:00",
+                style: greySubTitleLightStyle,
                 paddings: leftWidgetPadding,
               ),
             ],
