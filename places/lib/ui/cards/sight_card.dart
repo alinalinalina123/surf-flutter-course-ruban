@@ -33,9 +33,7 @@ class SightCard extends StatelessWidget {
   }
 
   Widget _buildCardImage() {
-    return AspectRatio(
-      aspectRatio: 3 / 2,
-      child: SizedBox(
+    return  SizedBox(
         width: double.infinity,
         height: 96,
         child: Stack(children: [
@@ -50,20 +48,17 @@ class SightCard extends StatelessWidget {
             right: 16,
           ),
         ]),
-      ),
     );
   }
 
   Widget _buildCardDescription() {
-    return AspectRatio(
-      aspectRatio: 3 / 2,
-      child: Container(
+    return Container(
         child: Column(
           children: [
             SubTitleWidget(
               name: sight.name,
               style: greyTitleStyle,
-              paddings: bottomWidgetPadding,
+              paddings: topWidgetPadding,
             ),
             SubTitleWidget(
               name: sight.details,
@@ -75,7 +70,6 @@ class SightCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
-      ),
     );
   }
 }
