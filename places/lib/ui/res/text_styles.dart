@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:places/utils/colors.dart';
 
 TextStyle appBarStyle = const TextStyle(
-  color: Color(0xff3B3E5B),
+  color: greyStandard,
   fontFamily: "Roboto",
   fontStyle: FontStyle.normal,
   fontSize: 32,
@@ -17,7 +18,7 @@ TextStyle whiteTitleStyle = const TextStyle(
 );
 
 TextStyle greyTitleStyle = const TextStyle(
-  color: Colors.black,
+  color: greyStandard,
   fontFamily: "Roboto",
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
@@ -25,7 +26,7 @@ TextStyle greyTitleStyle = const TextStyle(
 );
 
 TextStyle greyTitleBigStyle = const TextStyle(
-  color: Colors.black,
+  color: greyStandard,
   fontFamily: "Roboto",
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
@@ -33,7 +34,7 @@ TextStyle greyTitleBigStyle = const TextStyle(
 );
 
 TextStyle greySubTitleStyle = const TextStyle(
-  color: Colors.black,
+  color: greyStandard,
   fontFamily: "Roboto",
   fontStyle: FontStyle.normal,
   fontSize: 14,
@@ -47,7 +48,7 @@ TextStyle greySubTitleLightStyle = const TextStyle(
 );
 
 TextStyle greySubTitleBoldStyle = const TextStyle(
-  color: Colors.black,
+  color: greyStandard,
   fontFamily: "Roboto",
   fontWeight: FontWeight.w500,
   fontSize: 14,
@@ -65,7 +66,7 @@ EdgeInsets leftWidgetPadding = EdgeInsets.only(left: 16);
 
 EdgeInsets bottomWidgetPadding = EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 2);
 
-EdgeInsets topWidgetPadding = EdgeInsets.only(left: 16, right: 16, top: 16);
+EdgeInsets topWidgetPadding = EdgeInsets.only(left: 16, right: 16);
 
 EdgeInsets titleWidgetPadding = EdgeInsets.only(left: 16.0, right: 16.0, top: 24.0);
 
