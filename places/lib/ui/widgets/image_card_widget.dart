@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/ui/res/text_styles.dart';
+import 'package:places/utils/loader.dart';
 
 //Widget used to show image on details pages.
 class ImageCardWidget extends StatelessWidget {
@@ -16,6 +17,7 @@ class ImageCardWidget extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         fit: BoxFit.cover,
+        loadingBuilder: buildImageLoadingIndicator,
       ),
     );
   }

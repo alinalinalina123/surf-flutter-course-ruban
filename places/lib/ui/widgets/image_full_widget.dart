@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/utils/loader.dart';
 
 //Widget used to show image on details pages.
 class ImageFullWidget extends StatelessWidget {
@@ -15,7 +16,8 @@ class ImageFullWidget extends StatelessWidget {
           height: 360,
           child: Image.network(
             url,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
+            loadingBuilder: buildImageLoadingIndicator,
           ),
         ),
         Positioned(
