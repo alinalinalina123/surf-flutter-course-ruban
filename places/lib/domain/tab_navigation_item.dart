@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visiting_screen.dart';
 
+//Defines navigation items for BottomNavigation
 class TabNavigationItem {
   final Widget page;
   final Widget title;

@@ -1,3 +1,5 @@
+
+//Sight type
 enum SightType {
   museum,
   tower,

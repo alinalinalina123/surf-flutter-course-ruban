@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:places/ui/screen/tabs_page.dart';
+import 'package:places/ui/screen/tabs_screen.dart';
 
 void main() {
   runApp(App());
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Places app',
-      home: TabsPage(),
+      home: TabsScreen(),
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.white,
