@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/tab_navigation_item.dart';
 import 'package:places/utils/colors.dart';
 
-class TabsPage extends StatefulWidget {
+//Screen with bottomNavigation bar
+class TabsScreen extends StatefulWidget {
   @override
-  _TabsPageState createState() => _TabsPageState();
+  _TabsScreenState createState() => _TabsScreenState();
 }
 
-class _TabsPageState extends State<TabsPage> {
+class _TabsScreenState extends State<TabsScreen> {
   int _currentIndex = 0;
 
   @override

@@ -42,6 +42,12 @@ TextStyle greySubTitleStyle = const TextStyle(
   fontSize: 14,
 );
 
+TextStyle greyTitleLightStyle = const TextStyle(
+  color: Colors.grey,
+  fontStyle: FontStyle.normal,
+  fontSize: 18,
+);
+
 TextStyle greySubTitleLightStyle = const TextStyle(
   color: Colors.grey,
   fontStyle: FontStyle.normal,
