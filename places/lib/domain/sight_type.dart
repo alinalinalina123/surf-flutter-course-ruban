@@ -1,3 +1,4 @@
+import 'package:places/ui/res/strings/strings.dart';
 
 //Sight type
 enum SightType {
@@ -11,13 +12,13 @@ extension SightTypeName on SightType {
   String get name {
     switch (this) {
       case SightType.museum:
-        return 'Музей';
+        return museumName;
       case SightType.tower:
-        return 'Башня';
+        return towerName;
       case SightType.bridge:
-        return 'Мост';
+        return bridgeName;
       default:
-        return "Неизвестный тип";
+        return unknownName;
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
-import 'package:places/ui/cards/sight_card_type.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/image_card_widget.dart';
 import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
@@ -10,9 +10,9 @@ import 'package:places/ui/widgets/sub_title_widget.dart';
 // Widget for card view of sight
 class SightCard extends StatelessWidget {
   final Sight sight;
-  final SightCardType type;
+  final SightStateType type;
 
-  SightCard({Key key, @required this.sight, this.type = SightCardType.simple})
+  SightCard({Key key, @required this.sight, this.type = SightStateType.initial})
       : super(key: key);
 
   @override
@@ -51,7 +51,7 @@ class SightCard extends StatelessWidget {
           top: 16,
           right: 16,
         ),
-        if (type != SightCardType.simple)
+        if (type != SightStateType.initial)
           PositionedButtonWidget(
             top: 16,
             right: 48,
@@ -68,13 +68,13 @@ class SightCard extends StatelessWidget {
           style: greyTitleStyle,
           paddings: topWidgetPadding,
         ),
-        if (type == SightCardType.visited)
+        if (type == SightStateType.visited)
           SubTitleWidget(
             name: sight.stateDescription,
             style: greenSubTitleStyle,
             paddings: bottomWidgetPadding,
           ),
-        if (type == SightCardType.want_to_visit)
+        if (type == SightStateType.want_to_visit)
           SubTitleWidget(
             name: sight.stateDescription,
             style: greySubTitleLightStyle,

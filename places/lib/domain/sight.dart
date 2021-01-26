@@ -36,7 +36,7 @@ class Sight {
 
 extension SightStateName on Sight {
   String get stateDescription {
-    var dateString = DateFormat('dd MM. yyyy').format(this.dateOfVisit);
+    var dateString = DateFormat(simpleDateFormat).format(this.dateOfVisit);
     switch (this.state) {
       case SightStateType.initial:
         return '';

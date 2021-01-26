@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
-import 'package:places/ui/cards/sight_card_type.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings/strings.dart';
 import 'package:places/mocks.dart';
@@ -63,13 +62,13 @@ class _VisitingScreenState extends State<VisitingScreen> {
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listWantToVisit[index],
-                    type: SightCardType.want_to_visit,
+                    type: SightStateType.want_to_visit,
                   );
                 },
               )
             else
               EmptyListWidget(
-                type: SightCardType.want_to_visit,
+                type: SightStateType.want_to_visit,
               ),
             if (listVisited.length > 0)
               ListView.builder(
@@ -77,13 +76,13 @@ class _VisitingScreenState extends State<VisitingScreen> {
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listVisited[index],
-                    type: SightCardType.visited,
+                    type: SightStateType.visited,
                   );
                 },
               )
             else
               EmptyListWidget(
-                type: SightCardType.visited,
+                type: SightStateType.visited,
               ),
           ],
         ),
