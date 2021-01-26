@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
           maxLines: 2,
-          style: appBarStyle,
+          style: Theme.of(context).textTheme.headline1,
         ),
       ),
     );

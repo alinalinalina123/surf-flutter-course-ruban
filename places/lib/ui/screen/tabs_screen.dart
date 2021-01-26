@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/tab_navigation_item.dart';
-import 'package:places/utils/colors.dart';
 
 //Screen with bottomNavigation bar
 class TabsScreen extends StatefulWidget {
@@ -21,9 +20,6 @@ class _TabsScreenState extends State<TabsScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: white,
-        selectedItemColor: darkBlue,
-        unselectedItemColor: greyLight,
         currentIndex: _currentIndex,
         onTap: (int index) => setState(() => _currentIndex = index),
         items: [

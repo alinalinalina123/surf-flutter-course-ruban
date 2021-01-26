@@ -1,4 +1,4 @@
-import 'package:places/ui/res/strings/strings.dart';
+import 'package:places/ui/res/strings.dart';
 
 //Sight type
 enum SightType {

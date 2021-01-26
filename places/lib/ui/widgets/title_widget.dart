@@ -16,7 +16,7 @@ class TitleWidget extends StatelessWidget {
       padding: titleWidgetPadding,
       child: Text(
         name,
-        style: greyTitleBigStyle,
+        style: Theme.of(context).textTheme.headline2,
       ),
     );
   }

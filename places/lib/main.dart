@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/ui/screen/res/themes.dart';
 import 'package:places/ui/screen/tabs_screen.dart';
 
 void main() {
@@ -12,12 +13,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Places app',
       home: TabsScreen(),
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.white,
-        fontFamily: "Roboto",
-        scaffoldBackgroundColor: Colors.white,
-      ),
+      theme: darkTheme,
     );
   }
 }

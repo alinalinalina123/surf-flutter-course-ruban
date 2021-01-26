@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:places/utils/colors.dart';
 
-TextStyle appBarStyle = const TextStyle(
-  color: greyStandard,
-  fontStyle: FontStyle.normal,
-  fontSize: 32,
-);
+
 
 TextStyle whiteTitleStyle = const TextStyle(
   color: Colors.white,
@@ -15,32 +10,7 @@ TextStyle whiteTitleStyle = const TextStyle(
   fontSize: 14,
 );
 
-TextStyle greyTitleStyle = const TextStyle(
-  color: greyStandard,
-  fontWeight: FontWeight.w500,
-  fontStyle: FontStyle.normal,
-  fontSize: 16,
-);
 
-TextStyle greyTitleBigStyle = const TextStyle(
-  color: greyStandard,
-  fontWeight: FontWeight.w500,
-  fontStyle: FontStyle.normal,
-  fontSize: 24,
-);
-
-TextStyle titlePageStyle = const TextStyle(
-  color: greyStandard,
-  fontWeight: FontWeight.w500,
-  fontStyle: FontStyle.normal,
-  fontSize: 18,
-);
-
-TextStyle greySubTitleStyle = const TextStyle(
-  color: greyStandard,
-  fontStyle: FontStyle.normal,
-  fontSize: 14,
-);
 
 TextStyle greyTitleLightStyle = const TextStyle(
   color: Colors.grey,
@@ -60,11 +30,6 @@ TextStyle greenSubTitleStyle = const TextStyle(
   fontSize: 14,
 );
 
-TextStyle greySubTitleBoldStyle = const TextStyle(
-  color: greyStandard,
-  fontWeight: FontWeight.w500,
-  fontSize: 14,
-);
 
 EdgeInsets appBarPadding = const EdgeInsets.only(
   left: 16,

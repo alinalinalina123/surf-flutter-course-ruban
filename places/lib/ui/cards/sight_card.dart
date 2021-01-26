@@ -22,7 +22,7 @@ class SightCard extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(minHeight: 100),
         decoration: BoxDecoration(
-          color: Colors.grey[50],
+          color: Theme.of(context).cardColor,
           borderRadius: standardWidgetCircleBorder,
         ),
         child: Column(
@@ -65,7 +65,6 @@ class SightCard extends StatelessWidget {
       children: [
         SubTitleWidget(
           name: sight.name,
-          style: greyTitleStyle,
           paddings: topWidgetPadding,
         ),
         if (type == SightStateType.visited)
