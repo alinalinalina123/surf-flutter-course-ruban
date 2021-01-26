@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:places/ui/screen/sight_details_screen.dart';
-import 'package:places/mocks.dart';
+import 'package:places/ui/screen/tabs_screen.dart';
 
 void main() {
   runApp(App());
@@ -12,7 +11,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Places app',
-      home: Scaffold(body: SightDetails(sight: mocks[1], )),
+      home: TabsScreen(),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.white,
+        fontFamily: "Roboto",
+        scaffoldBackgroundColor: Colors.white,
+      ),
     );
   }
 }

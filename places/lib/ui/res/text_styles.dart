@@ -4,14 +4,12 @@ import 'package:places/utils/colors.dart';
 
 TextStyle appBarStyle = const TextStyle(
   color: greyStandard,
-  fontFamily: "Roboto",
   fontStyle: FontStyle.normal,
   fontSize: 32,
 );
 
 TextStyle whiteTitleStyle = const TextStyle(
   color: Colors.white,
-  fontFamily: "Roboto",
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.normal,
   fontSize: 14,
@@ -19,7 +17,6 @@ TextStyle whiteTitleStyle = const TextStyle(
 
 TextStyle greyTitleStyle = const TextStyle(
   color: greyStandard,
-  fontFamily: "Roboto",
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
   fontSize: 16,
@@ -27,29 +24,44 @@ TextStyle greyTitleStyle = const TextStyle(
 
 TextStyle greyTitleBigStyle = const TextStyle(
   color: greyStandard,
-  fontFamily: "Roboto",
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
   fontSize: 24,
 );
 
+TextStyle titlePageStyle = const TextStyle(
+  color: greyStandard,
+  fontWeight: FontWeight.w500,
+  fontStyle: FontStyle.normal,
+  fontSize: 18,
+);
+
 TextStyle greySubTitleStyle = const TextStyle(
   color: greyStandard,
-  fontFamily: "Roboto",
   fontStyle: FontStyle.normal,
   fontSize: 14,
 );
 
+TextStyle greyTitleLightStyle = const TextStyle(
+  color: Colors.grey,
+  fontStyle: FontStyle.normal,
+  fontSize: 18,
+);
+
 TextStyle greySubTitleLightStyle = const TextStyle(
   color: Colors.grey,
-  fontFamily: "Roboto",
+  fontStyle: FontStyle.normal,
+  fontSize: 14,
+);
+
+TextStyle greenSubTitleStyle = const TextStyle(
+  color: Colors.green,
   fontStyle: FontStyle.normal,
   fontSize: 14,
 );
 
 TextStyle greySubTitleBoldStyle = const TextStyle(
   color: greyStandard,
-  fontFamily: "Roboto",
   fontWeight: FontWeight.w500,
   fontSize: 14,
 );

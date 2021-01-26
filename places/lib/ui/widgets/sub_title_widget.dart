@@ -12,11 +12,13 @@ class SubTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: paddings ?? titleWidgetPadding,
-      child: Text(
-        name,
-        style: style ?? greySubTitleStyle,
+    return Container(
+      child: Padding(
+        padding: paddings ?? titleWidgetPadding,
+        child: Text(
+          name,
+          style: style ?? greySubTitleStyle,
+        ),
       ),
     );
   }

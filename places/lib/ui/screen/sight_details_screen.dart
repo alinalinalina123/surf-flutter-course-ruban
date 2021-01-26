@@ -8,7 +8,7 @@ import 'package:places/ui/widgets/navigation_button_widget.dart';
 import 'package:places/ui/widgets/separator_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
 import 'package:places/ui/widgets/title_widget.dart';
-
+import 'package:places/domain/sight_type.dart';
 /// Widget to show the details of the sight
 class SightDetails extends StatefulWidget {
   final Sight sight;
