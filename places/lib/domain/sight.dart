@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
-import 'package:places/ui/res/strings/strings.dart';
+import 'package:places/ui/res/strings.dart';
 
 class Sight {
   String name;

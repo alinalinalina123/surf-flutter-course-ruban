@@ -14,7 +14,16 @@ class ButtonWithIconWidget extends StatelessWidget {
     return Padding(
       padding: smallPadding,
       child: Row(
-        children: [Icon(icon), Text(title)],
+        children: [
+          Icon(
+            icon,
+            color: Theme.of(context).accentColor,
+          ),
+          Text(
+            title,
+            style: TextStyle(color: Theme.of(context).accentColor),
+          )
+        ],
       ),
     );
   }

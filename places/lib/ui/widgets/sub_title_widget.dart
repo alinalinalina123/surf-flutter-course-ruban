@@ -17,7 +17,7 @@ class SubTitleWidget extends StatelessWidget {
         padding: paddings ?? titleWidgetPadding,
         child: Text(
           name,
-          style: style ?? greySubTitleStyle,
+          style: style ?? Theme.of(context).textTheme.headline3,
         ),
       ),
     );
