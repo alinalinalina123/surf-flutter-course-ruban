@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
+import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/image_card_widget.dart';
 import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
@@ -47,14 +48,18 @@ class SightCard extends StatelessWidget {
           style: whiteTitleStyle,
           paddings: standardWidgetPadding,
         ),
-        PositionedButtonWidget(
+        PositionedIconButtonWidget(
           top: 16,
           right: 16,
+          iconName: (type == SightStateType.initial) ? heartIconLightUnselected : closeIconLight,
+          onPressed: (){ print("Button clicked"); },
         ),
         if (type != SightStateType.initial)
-          PositionedButtonWidget(
+          PositionedIconButtonWidget(
             top: 16,
             right: 48,
+            iconName: (type == SightStateType.want_to_visit) ? calendarIconLight : shareIconLight,
+            onPressed: (){ print("Button clicked"); },
           )
       ]),
     );
