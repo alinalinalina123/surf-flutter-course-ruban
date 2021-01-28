@@ -1,16 +1,19 @@
-
 const appBarTitle = "Список \nинтересных мест";
 
 //Date formats
 const simpleDateFormat = "dd MM. yyyy";
 
+// Buttons title
+const clearButtonTitle = 'Очистить';
 
 //Sights Type
 
 const museumName = 'Музей';
-const towerName =  'Башня';
-const bridgeName =  'Мост';
-const unknownName =  "Неизвестный тип";
+const hotelName = 'Отель';
+const restourantName = 'Ресторан';
+const placeName = "Особое место";
+const parkName = "Парк";
+const cafeName = "Кафе";
 
 //Sight Details
 const scheduleButtonTitle = "Запланировать";
@@ -29,4 +32,9 @@ const emptyText = "Пусто";
 const emptyVisitedText = "Завершите маршрут, чтобы место попало сюда.";
 const emptyWantToVisitText = "Отмечайте понравившиеся места и они появиятся здесь.";
 
-
+//Filters
+const categoriesTitle = "КАТЕГОРИИ";
+const distanceTitle = "Расстояние";
+const rangeTitle = "от {0} до {1} км";
+const showButtonTitle = "Показать";
+const selectFilters = "Выберите фильтры";

@@ -21,3 +21,12 @@ const noneFavouriteIcon = "res/images/none_favourite_icon.svg";
 const noneVisitedIcon = "res/images/none_visited_icon.svg";
 
 const arrowIcon = "res/images/arrow_icon.svg";
+const ticIcon = "res/images/tick_choice.svg";
+
+const hotelIcon = "res/images/category/hotel.svg";
+const cafeIcon = "res/images/category/cafe.svg";
+const museumIcon = "res/images/category/museum.svg";
+const parkIcon = "res/images/category/park.svg";
+const placeIcon = "res/images/category/place.svg";
+const restourantIcon = "res/images/category/restourant.svg";
+
