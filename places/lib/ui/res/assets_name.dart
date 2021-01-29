@@ -22,6 +22,7 @@ const noneVisitedIcon = "res/images/none_visited_icon.svg";
 
 const arrowIcon = "res/images/arrow_icon.svg";
 const ticIcon = "res/images/tick_choice.svg";
+const infoIcon = "res/images/info_icon.svg";
 
 const hotelIcon = "res/images/category/hotel.svg";
 const cafeIcon = "res/images/category/cafe.svg";
