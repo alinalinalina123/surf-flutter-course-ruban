@@ -15,6 +15,7 @@ dependencies:
   flutter_svg: ^0.19.2
   geolocator: ^6.1.14
   intl: 0.15.7
+  provider: ^3.1.0
 
 dev_dependencies:
   flutter_test:

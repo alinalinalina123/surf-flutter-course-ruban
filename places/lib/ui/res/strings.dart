@@ -38,3 +38,9 @@ const distanceTitle = "Расстояние";
 const rangeTitle = "от {0} до {1} км";
 const showButtonTitle = "Показать";
 const selectFilters = "Выберите фильтры";
+
+//Settings
+const settingsTitle = "Настройки";
+const darkThemeTitle = "Темная тема";
+const lightThemeTitle = "Светлая тема";
+const watchTutorialTitle = "Смотреть туториал";

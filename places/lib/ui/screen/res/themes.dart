@@ -27,6 +27,11 @@ ThemeData darkTheme = ThemeData(
         fontStyle: FontStyle.normal,
         fontSize: 16,
       ),
+      headline4: TextStyle(
+        color: dTextMain,
+        fontStyle: FontStyle.normal,
+        fontSize: 16,
+      ),
     ),
     tabBarTheme: TabBarTheme(
       indicator: ShapeDecoration(
@@ -73,6 +78,11 @@ ThemeData lightTheme = ThemeData(
       headline3: TextStyle(
         color: lTextMain,
         fontWeight: FontWeight.w500,
+        fontStyle: FontStyle.normal,
+        fontSize: 16,
+      ),
+      headline4: TextStyle(
+        color: lTextMain,
         fontStyle: FontStyle.normal,
         fontSize: 16,
       ),
