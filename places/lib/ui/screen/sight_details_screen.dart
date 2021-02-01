@@ -4,11 +4,13 @@ import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/widgets/button_with_icon_widget.dart';
 import 'package:places/ui/widgets/image_full_widget.dart';
-import 'package:places/ui/widgets/navigation_button_widget.dart';
+import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/ui/widgets/separator_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
 import 'package:places/ui/widgets/title_widget.dart';
 import 'package:places/domain/sight_type.dart';
+import 'package:places/ui/res/assets_name.dart';
+
 /// Widget to show the details of the sight
 class SightDetails extends StatefulWidget {
   final Sight sight;
@@ -22,7 +24,6 @@ class SightDetails extends StatefulWidget {
 class _SightDetailsState extends State<SightDetails> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         child: Column(
@@ -47,15 +48,32 @@ class _SightDetailsState extends State<SightDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
             SubTitleWidget(name: widget.sight.details),
-            NavigationButtonWidget(title: buildDirectionButtonTitle),
+            CustomButtonWidget(
+              title: buildDirectionButtonTitle,
+              iconName: directionIconLight,
+              onPressed: () {
+                print("Button pressed");
+              },
+            ),
             SeparatorWidget(),
             Row(
               children: [
-                ButtonWithIconWidget(title: scheduleButtonTitle, icon: Icons.calendar_today,),
-                ButtonWithIconWidget(title: favouriteButtonTitle, icon: Icons.favorite_border,),
+                ButtonWithIconWidget(
+                    title: scheduleButtonTitle,
+                    iconName: calendarIconDark,
+                    onPressed: () {
+                      print("Button clicked");
+                    }),
+                ButtonWithIconWidget(
+                  title: favouriteButtonTitle,
+                  iconName: heartIconDarkUnselected,
+                  onPressed: () {
+                    print("Button clicked");
+                  },
+                ),
               ],
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
           ],

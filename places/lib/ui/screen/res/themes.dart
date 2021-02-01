@@ -33,7 +33,7 @@ ThemeData darkTheme = ThemeData(
       indicator: ShapeDecoration(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           color: dColorAccent),
-      unselectedLabelColor: dColorGrey,
+      unselectedLabelColor: colorGrey,
       labelColor: dColorPrimary,
     ),
 
@@ -42,8 +42,8 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: dColorBackground,
       selectedItemColor: dColorAccent,
       selectedIconTheme: IconThemeData(color: dColorAccent),
-      unselectedItemColor: dColorGrey,
-      unselectedIconTheme: IconThemeData(color: dColorGrey),
+      unselectedItemColor: colorGrey,
+      unselectedIconTheme: IconThemeData(color: colorGrey),
       type: BottomNavigationBarType.fixed,
     ));
 
@@ -79,7 +79,7 @@ ThemeData lightTheme = ThemeData(
       indicator: ShapeDecoration(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           color: lColorAccent),
-      unselectedLabelColor: lColorGrey,
+      unselectedLabelColor: colorGrey,
       labelColor: lColorPrimary,
     ),
 
@@ -88,7 +88,7 @@ ThemeData lightTheme = ThemeData(
       backgroundColor: lColorBackground,
       selectedItemColor: lColorAccent,
       selectedIconTheme: IconThemeData(color: lColorAccent),
-      unselectedItemColor: lColorGrey,
-      unselectedIconTheme: IconThemeData(color: lColorGrey),
+      unselectedItemColor: colorGrey,
+      unselectedIconTheme: IconThemeData(color: colorGrey),
       type: BottomNavigationBarType.fixed,
     ));
