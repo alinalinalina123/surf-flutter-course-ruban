@@ -28,15 +28,18 @@ ThemeData darkTheme = ThemeData(
         fontSize: 16,
       ),
     ),
-
     tabBarTheme: TabBarTheme(
       indicator: ShapeDecoration(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           color: dColorAccent),
       unselectedLabelColor: colorGrey,
       labelColor: dColorPrimary,
     ),
-
+    sliderTheme: SliderThemeData(
+        activeTrackColor: colorGreen,
+        thumbColor: colorGreen,
+        inactiveTrackColor: colorGrey),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 5.0,
       backgroundColor: dColorBackground,
@@ -74,15 +77,18 @@ ThemeData lightTheme = ThemeData(
         fontSize: 16,
       ),
     ),
-
     tabBarTheme: TabBarTheme(
       indicator: ShapeDecoration(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           color: lColorAccent),
       unselectedLabelColor: colorGrey,
       labelColor: lColorPrimary,
     ),
-
+    sliderTheme: SliderThemeData(
+        activeTrackColor: colorGreen,
+        thumbColor: colorGreen,
+        inactiveTrackColor: colorGrey),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 5.0,
       backgroundColor: lColorBackground,

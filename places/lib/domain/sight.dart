@@ -4,6 +4,7 @@ import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
 import 'package:places/ui/res/strings.dart';
 
+//Data class for sight
 class Sight {
   String name;
   double lat;
