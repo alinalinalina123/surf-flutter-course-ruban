@@ -20,18 +20,26 @@ class SightCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: standardWidgetPadding,
-      child: Container(
-        constraints: BoxConstraints(minHeight: 100),
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: standardWidgetCircleBorder,
-        ),
-        child: Column(
-          children: [
-            _buildCardImage(),
-            const SizedBox(height: 16),
-            _buildCardDescription(),
-          ],
+      child: Material(
+        type: MaterialType.transparency,
+        child: Ink(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: standardWidgetCircleBorder,
+          ),
+          child: InkWell(
+            customBorder: RoundedRectangleBorder(
+              borderRadius: standardWidgetCircleBorder,
+            ),
+            onTap: () {},
+            child: Column(
+              children: [
+                _buildCardImage(),
+                const SizedBox(height: 16),
+                _buildCardDescription(),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -51,15 +59,23 @@ class SightCard extends StatelessWidget {
         PositionedIconButtonWidget(
           top: 16,
           right: 16,
-          iconName: (type == SightStateType.initial) ? heartIconLightUnselected : closeIconLight,
-          onPressed: (){ print("Button clicked"); },
+          iconName: (type == SightStateType.initial)
+              ? heartIconLightUnselected
+              : closeIconLight,
+          onPressed: () {
+            print("Button clicked");
+          },
         ),
         if (type != SightStateType.initial)
           PositionedIconButtonWidget(
             top: 16,
             right: 48,
-            iconName: (type == SightStateType.want_to_visit) ? calendarIconLight : shareIconLight,
-            onPressed: (){ print("Button clicked"); },
+            iconName: (type == SightStateType.want_to_visit)
+                ? calendarIconLight
+                : shareIconLight,
+            onPressed: () {
+              print("Button clicked");
+            },
           )
       ]),
     );
