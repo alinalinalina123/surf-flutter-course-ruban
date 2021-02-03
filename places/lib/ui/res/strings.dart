@@ -44,3 +44,21 @@ const settingsTitle = "Настройки";
 const darkThemeTitle = "Темная тема";
 const lightThemeTitle = "Светлая тема";
 const watchTutorialTitle = "Смотреть туториал";
+
+// New place
+const newPlaceTitle = "Новое место";
+const newPlaceButtonTitle = "НОВОЕ МЕСТО";
+const categoryTitle = "КАТЕГОРИЯ";
+const categoryPageTitle = "Категория";
+const nameTitle = "НАЗВАНИЕ";
+const notSelectedTitle = "Не выбрано";
+const latTitle = "ШИРОТА";
+const lonTitle = "ДОЛГОТА";
+const showOnMapTitle = "Показать на карте";
+const descriptionTitle = "ОПИСАНИЕ";
+const enterTextHint = "Введите текст";
+const createTitle = "СОЗДАТЬ";
+const saveTitle = "СОХРАНИТЬ";
+const inputEmptyErrorTitle = "Поле обязательное для заполнения";
+const inputNotDoubleErrorTitle = "Введите числовое значение";
+const cancelButtonTitle = "Отмена";

@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:places/ui/res/assets_name.dart';
+import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 
 // Widget to display button with customized title and background color
 class CustomButtonWidget extends StatelessWidget {
   final String title;
   final String iconName;
+  final bool isEnabled;
   final VoidCallback onPressed;
 
-  const CustomButtonWidget(
-      {Key key, @required this.title, @required this.onPressed, this.iconName})
-      : super(key: key);
+  const CustomButtonWidget({
+    Key key,
+    @required this.title,
+    @required this.onPressed,
+    this.iconName,
+    this.isEnabled = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +35,12 @@ class CustomButtonWidget extends StatelessWidget {
               title,
               style: whiteTitleStyle,
             ),
-            color: Colors.green,
+            disabledColor: colorGrey,
+            color: colorGreen,
             textColor: Theme.of(context).primaryColor,
-            onPressed: () {
+            onPressed: isEnabled ? () {
               onPressed();
-            },
+            } : null,
           ),
         ),
       );
@@ -52,11 +58,12 @@ class CustomButtonWidget extends StatelessWidget {
               title,
               style: whiteTitleStyle,
             ),
-            color: Colors.green,
+            disabledColor: colorGrey,
+            color: colorGreen,
             textColor: Theme.of(context).primaryColor,
-            onPressed: () {
+            onPressed: isEnabled ? () {
               onPressed();
-            },
+            } : null,
           ),
         ),
       );

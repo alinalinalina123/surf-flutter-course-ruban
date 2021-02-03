@@ -3,12 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/colors.dart';
-import 'package:places/ui/res/text_styles.dart';
 
 //Class that provide widget for categories filter view
 class CategoryCard extends StatefulWidget {
   final Category category;
-  final Function(Category) notifyParent;
+  final void Function(Category) notifyParent;
 
   CategoryCard({Key key, @required this.category, @required this.notifyParent})
       : super(key: key);

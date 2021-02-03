@@ -4,6 +4,7 @@ import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/screen/sight_details_screen.dart';
 import 'package:places/ui/widgets/image_card_widget.dart';
 import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
@@ -31,7 +32,16 @@ class SightCard extends StatelessWidget {
             customBorder: RoundedRectangleBorder(
               borderRadius: standardWidgetCircleBorder,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return SightDetails(
+                    sight: sight,
+                  );
+                }),
+              );
+            },
             child: Column(
               children: [
                 _buildCardImage(),
