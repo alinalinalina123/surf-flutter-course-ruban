@@ -54,3 +54,5 @@ final List<Category> categories = [
   Category(type: SightType.museum, isSelected: false, iconName: museumIcon),
   Category(type: SightType.cafe, isSelected: false, iconName: cafeIcon),
 ];
+
+final List<String> searchHistory = ["Музей", "кафе один"];

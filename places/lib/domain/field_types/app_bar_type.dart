@@ -1,2 +1,2 @@
 //App bar type
-enum AppBarType { simple, main, filter }
+enum AppBarType { simple, main, filter, search }

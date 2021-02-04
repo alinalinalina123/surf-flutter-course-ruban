@@ -1,4 +1,4 @@
-const appBarTitle = "Список \nинтересных мест";
+const appBarTitle = "Список интересных мест";
 
 //Date formats
 const simpleDateFormat = "dd MM. yyyy";
@@ -29,6 +29,8 @@ const visitedDescription = "Цель достигнута {0}";
 
 //Empty List
 const emptyText = "Пусто";
+const emptySearchText = "Ничего не найдено";
+const emptySearchDescriptionText = "Попробуйте изменить параметры поиска";
 const emptyVisitedText = "Завершите маршрут, чтобы место попало сюда.";
 const emptyWantToVisitText = "Отмечайте понравившиеся места и они появиятся здесь.";
 
@@ -62,3 +64,5 @@ const saveTitle = "СОХРАНИТЬ";
 const inputEmptyErrorTitle = "Поле обязательное для заполнения";
 const inputNotDoubleErrorTitle = "Введите числовое значение";
 const cancelButtonTitle = "Отмена";
+const searchHint = "Поиск";
+const clearHistoryButtonTitle = "Осичтить историю";
