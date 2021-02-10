@@ -12,6 +12,7 @@ import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/ui/widgets/custom_input_field.dart';
 
+//Widget for screen for adding new sights
 class AddSightScreen extends StatefulWidget {
   @override
   _AddSightScreenState createState() => _AddSightScreenState();
@@ -48,17 +49,22 @@ class _AddSightScreenState extends State<AddSightScreen> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-
             _buildTitle(categoryTitle),
             _buildCategoryField(),
             _buildTitle(nameTitle),
             _buildNameField(),
             Row(
               children: [
-                _buildCoordinateField(InputFieldType.lat, _controllerLatitude,
-                    _focusNodeLatitude),
-                _buildCoordinateField(InputFieldType.lon, _controllerLongitude,
-                    _focusNodeLongitude)
+                _buildCoordinateField(
+                  InputFieldType.lat,
+                  _controllerLatitude,
+                  _focusNodeLatitude,
+                ),
+                _buildCoordinateField(
+                  InputFieldType.lon,
+                  _controllerLongitude,
+                  _focusNodeLongitude,
+                )
               ],
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

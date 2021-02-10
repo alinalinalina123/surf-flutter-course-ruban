@@ -8,13 +8,16 @@ import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 
+//Widget for screen for category selection
 class CategorySelectionScreen extends StatefulWidget {
   final void Function(Category) notifyParent;
   final Category initialCategory;
 
-  CategorySelectionScreen(
-      {Key key, @required this.initialCategory, @required this.notifyParent})
-      : super(key: key);
+  CategorySelectionScreen({
+    Key key,
+    @required this.initialCategory,
+    @required this.notifyParent,
+  }) : super(key: key);
 
   @override
   _CategorySelectionScreenState createState() =>
@@ -81,7 +84,6 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
   Widget _buildCreateButton() {
     return CustomButtonWidget(
       title: saveTitle,
-      isEnabled: selectedRadioTile != null,
       onPressed: () {
         widget.notifyParent(
           categories.firstWhere(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Widget for custom floating button
 class CustomFloatingActionButton extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -14,13 +15,14 @@ class CustomFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var halfOfScreen = MediaQuery.of(context).size.width / 2;
     return InkWell(
       onTap: () {
         onPressed();
       },
       child: Container(
         height: 40.0,
-        width: MediaQuery.of(context).size.width / 2,
+        width: halfOfScreen,
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.circular(24.0),
           gradient: new LinearGradient(
