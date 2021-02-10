@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:places/domain/sight.dart';
+import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/mocks.dart';
+import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
 
 //Screen that displays places that user wants to visit/visited.
@@ -17,25 +18,20 @@ class _VisitingScreenState extends State<VisitingScreen> {
   @override
   Widget build(BuildContext context) {
     var listVisited = mocks
-        .where((sight) => (sight as Sight).state == SightStateType.visited)
+        .where((sight) => (sight).state == SightStateType.visited)
         .toList();
+
     var listWantToVisit = mocks
-        .where(
-            (sight) => (sight as Sight).state == SightStateType.want_to_visit)
+        .where((sight) => (sight).state == SightStateType.want_to_visit)
         .toList();
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Center(
-            child: Text(
-              favouritePageTitle,
-              style: Theme.of(context).textTheme.headline2,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          bottom: TabBar(
+        appBar: CustomAppBar(
+          title: favouritePageTitle,
+          type: AppBarType.simple,
+          tabBar: TabBar(
             indicatorPadding: topWidgetPadding,
             tabs: [
               Tab(

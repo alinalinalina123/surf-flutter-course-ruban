@@ -19,7 +19,7 @@ extension SightTypeName on SightType {
       case SightType.cafe:
         return cafeName;
       default:
-        return "";
+        return notSelectedTitle;
     }
   }
 }

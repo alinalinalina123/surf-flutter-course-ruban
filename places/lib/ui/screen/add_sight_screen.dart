@@ -1,0 +1,201 @@
+import 'package:flutter/material.dart';
+import 'package:places/domain/category.dart';
+import 'package:places/domain/field_types/app_bar_type.dart';
+import 'package:places/domain/field_types/input_field_type.dart';
+import 'package:places/domain/sight.dart';
+import 'package:places/domain/sight_state_type.dart';
+import 'package:places/mocks.dart';
+import 'package:places/ui/res/strings.dart';
+import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/screen/category_selection_screen.dart';
+import 'package:places/ui/widgets/custom_app_bar.dart';
+import 'package:places/ui/widgets/custom_button_widget.dart';
+import 'package:places/ui/widgets/custom_input_field.dart';
+
+class AddSightScreen extends StatefulWidget {
+  @override
+  _AddSightScreenState createState() => _AddSightScreenState();
+}
+
+class _AddSightScreenState extends State<AddSightScreen> {
+  Category _categorySelected;
+  TextEditingController _controllerCategory = new TextEditingController();
+  TextEditingController _controllerName = new TextEditingController();
+  TextEditingController _controllerLatitude = new TextEditingController();
+  TextEditingController _controllerLongitude = new TextEditingController();
+  TextEditingController _controllerDescription = new TextEditingController();
+
+  FocusNode _focusNodeCategory = new FocusNode();
+  FocusNode _focusNodeName = new FocusNode();
+  FocusNode _focusNodeLatitude = new FocusNode();
+  FocusNode _focusNodeLongitude = new FocusNode();
+  FocusNode _focusNodeDescription = new FocusNode();
+
+  final _nameKey = GlobalKey<FormState>();
+  final _latKey = GlobalKey<FormState>();
+  final _lonKey = GlobalKey<FormState>();
+  final _descriptionKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: newPlaceTitle,
+        type: AppBarType.simple,
+        backButtonTitle: cancelButtonTitle,
+      ),
+      body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Column(
+          children: [
+
+            _buildTitle(categoryTitle),
+            _buildCategoryField(),
+            _buildTitle(nameTitle),
+            _buildNameField(),
+            Row(
+              children: [
+                _buildCoordinateField(InputFieldType.lat, _controllerLatitude,
+                    _focusNodeLatitude),
+                _buildCoordinateField(InputFieldType.lon, _controllerLongitude,
+                    _focusNodeLongitude)
+              ],
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            _buildShowOnMapButton(),
+            _buildTitle(descriptionTitle),
+            _buildDescriptionField(),
+            _buildCreateButton()
+          ],
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryField() {
+    _controllerCategory.text = _categorySelected?.name ?? notSelectedTitle;
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: TextField(
+        focusNode: _focusNodeCategory,
+        decoration: InputDecoration(
+          suffixIcon: Icon(Icons.navigate_next),
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return CategorySelectionScreen(
+                  initialCategory: _categorySelected,
+                  notifyParent: (Category category) {
+                    setState(() {
+                      _categorySelected = category;
+                    });
+                  });
+            }),
+          );
+        },
+        readOnly: true,
+        controller: _controllerCategory,
+      ),
+    );
+  }
+
+  Widget _buildNameField() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: CustomInputField(
+        formKey: _nameKey,
+        controller: _controllerName,
+        focusNode: _focusNodeName,
+        onChanged: (String value) {},
+      ),
+    );
+  }
+
+  Widget _buildCoordinateField(InputFieldType type,
+      TextEditingController controller, FocusNode focusNode) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 2.1,
+      child: Column(
+        children: [
+          if (type == InputFieldType.lat) _buildTitle(latTitle),
+          if (type == InputFieldType.lon) _buildTitle(lonTitle),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CustomInputField(
+              formKey: type == InputFieldType.lat ? _latKey : _lonKey,
+              focusNode: focusNode,
+              controller: controller,
+              type: type,
+              onChanged: (String value) {},
+            ),
+          ),
+        ],
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+    );
+  }
+
+  Widget _buildShowOnMapButton() {
+    return FlatButton(
+      child: Text(showOnMapTitle),
+      onPressed: () {},
+    );
+  }
+
+  Widget _buildTitle(String title) {
+    return Padding(
+      padding: EdgeInsets.only(left: 16.0),
+      child: Text(
+        title,
+        style: greySimpleTitle,
+      ),
+    );
+  }
+
+  Widget _buildDescriptionField() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: CustomInputField(
+        formKey: _descriptionKey,
+        hint: enterTextHint,
+        type: InputFieldType.multiline,
+        controller: _controllerDescription,
+        focusNode: _focusNodeDescription,
+        onChanged: (String value) {},
+      ),
+    );
+  }
+
+  Widget _buildCreateButton() {
+    return CustomButtonWidget(
+      title: createTitle,
+      onPressed: () {
+        if (_nameKey.currentState.validate() &&
+            _latKey.currentState.validate() &&
+            _lonKey.currentState.validate() &&
+            _descriptionKey.currentState.validate()) {
+          var sight = Sight(
+            name: _controllerName.text ?? "",
+            url: "",
+            lat: double.tryParse(_controllerLatitude.text) ?? 0.0,
+            lon: double.tryParse(_controllerLongitude.text) ?? 0.0,
+            type: _categorySelected.type,
+            state: SightStateType.initial,
+            details: _controllerDescription.text ?? "",
+          );
+          mocks.add(sight);
+          Navigator.pop(context);
+        }
+      },
+    );
+  }
+}

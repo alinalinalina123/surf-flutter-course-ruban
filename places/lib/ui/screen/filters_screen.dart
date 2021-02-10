@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/category.dart';
+import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/cards/category_card.dart';
-import 'package:places/ui/res/assets_name.dart';
-import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/utils/geolocator.dart';
 
@@ -24,11 +23,18 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Center(
-          child: buildToolBar(),
-        ),
+      appBar: CustomAppBar(
+        title: appBarTitle,
+        type: AppBarType.filter,
+        onClear: () {
+          setState(() {
+            values = null;
+            categorySelected = [];
+            categories.forEach((category) {
+              category.isSelected = false;
+            });
+          });
+        },
       ),
       body: Container(
         child: Padding(
@@ -52,35 +58,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget buildToolBar() {
-    return Row(
-      children: [
-        IconButton(
-          icon: SvgPicture.asset(
-            arrowIcon,
-          ),
-          onPressed: () {},
-        ),
-        FlatButton(
-          child: Text(clearButtonTitle),
-          textColor: colorGreen,
-          onPressed: () {
-            setState(() {
-              values = null;
-              categorySelected = [];
-              categories.forEach((category) {
-                category.isSelected = false;
-              });
-            });
-          },
-        ),
-      ],
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
     );
   }
 
