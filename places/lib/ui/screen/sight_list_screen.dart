@@ -16,6 +16,8 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
+  var sights = mocks;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +28,7 @@ class _SightListScreenState extends State<SightListScreen> {
       floatingActionButton: CustomFloatingActionButton(
         title: newPlaceButtonTitle,
         icon: Icons.add,
-        onPressed: (){
+        onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
@@ -37,9 +39,16 @@ class _SightListScreenState extends State<SightListScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: ListView.builder(
-        itemCount: mocks.length,
+        itemCount: sights.length,
         itemBuilder: (context, index) {
-          return SightCard(sight: mocks[index]);
+          return SightCard(
+            sight: sights[index],
+            stateUpdated: () {
+              setState(() {
+                sights = mocks;
+              });
+            },
+          );
         },
       ),
     );

@@ -63,9 +63,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
   List<Sight> _sightSearchResult(String query) {
     var listToDisplay = filteredSights != null ? filteredSights : mocks;
     return listToDisplay
-        .where((sight) => sight.name.toLowerCase().contains(query.toLowerCase())
-            ? true
-            : false)
+        .where((sight) => sight.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
   }
 

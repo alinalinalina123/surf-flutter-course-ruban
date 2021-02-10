@@ -15,13 +15,14 @@ class VisitingScreen extends StatefulWidget {
 }
 
 class _VisitingScreenState extends State<VisitingScreen> {
+  var sights = mocks;
   @override
   Widget build(BuildContext context) {
-    var listVisited = mocks
+    var listVisited = sights
         .where((sight) => (sight).state == SightStateType.visited)
         .toList();
 
-    var listWantToVisit = mocks
+    var listWantToVisit = sights
         .where((sight) => (sight).state == SightStateType.want_to_visit)
         .toList();
 
@@ -52,6 +53,11 @@ class _VisitingScreenState extends State<VisitingScreen> {
                   return SightCard(
                     sight: listWantToVisit[index],
                     type: SightStateType.want_to_visit,
+                    stateUpdated: (){
+                      setState(() {
+                        sights = mocks;
+                      });
+                    },
                   );
                 },
               )
@@ -66,6 +72,11 @@ class _VisitingScreenState extends State<VisitingScreen> {
                   return SightCard(
                     sight: listVisited[index],
                     type: SightStateType.visited,
+                    stateUpdated: (){
+                      setState(() {
+                        sights = mocks;
+                      });
+                    },
                   );
                 },
               )
