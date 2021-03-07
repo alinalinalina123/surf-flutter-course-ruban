@@ -55,4 +55,9 @@ final List<Category> categories = [
   Category(type: SightType.cafe, isSelected: false, iconName: cafeIcon),
 ];
 
+final List<String> photos = [
+  "https://fs.tonkosti.ru/8k/1f/8k1fwkm9wg4kogs4k0s0g48kk.jpg",
+  "https://architime.ru/specarch/gustave_eiffel/1.jpg"
+];
+
 final List<String> searchHistory = ["Музей", "кафе один"];

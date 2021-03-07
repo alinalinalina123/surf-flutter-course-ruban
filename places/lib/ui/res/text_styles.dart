@@ -51,6 +51,8 @@ EdgeInsets appBarPadding = const EdgeInsets.only(
 
 EdgeInsets standardWidgetPadding = EdgeInsets.all(16);
 
+EdgeInsets smallWidgetPadding = EdgeInsets.all(8);
+
 EdgeInsets leftWidgetPadding = EdgeInsets.only(left: 16);
 
 EdgeInsets bottomWidgetPadding = EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 2);

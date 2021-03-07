@@ -5,6 +5,7 @@ import 'package:places/domain/field_types/input_field_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/mocks.dart';
+import 'package:places/ui/cards/photo_card.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/category_selection_screen.dart';
@@ -31,6 +32,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
   FocusNode _focusNodeLatitude = new FocusNode();
   FocusNode _focusNodeLongitude = new FocusNode();
   FocusNode _focusNodeDescription = new FocusNode();
+  var photosOfSight = photos;
 
   final _nameKey = GlobalKey<FormState>();
   final _latKey = GlobalKey<FormState>();
@@ -49,6 +51,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
+            _buildPhotosField(),
             _buildTitle(categoryTitle),
             _buildCategoryField(),
             _buildTitle(nameTitle),
@@ -78,6 +81,36 @@ class _AddSightScreenState extends State<AddSightScreen> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPhotosField() {
+    var sightPhotos = List.from(photosOfSight);
+    sightPhotos.insert(0, fakePhotoUrl);
+    return Padding(
+      padding: smallWidgetPadding,
+      child: SizedBox(
+        height: 96,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: sightPhotos.length,
+          itemBuilder: (context, index) {
+            return PhotoCard(
+              source: sightPhotos[index],
+              photoAdded: () {
+                setState(() {
+                  photosOfSight = photos;
+                });
+              },
+              photoRemoved: (){
+                setState(() {
+                  photosOfSight.removeAt(index - 1);
+                });
+              },
+            );
+          },
         ),
       ),
     );
