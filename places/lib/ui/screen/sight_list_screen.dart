@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
-import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
@@ -16,7 +15,6 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
-  var sights = mocks;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +37,14 @@ class _SightListScreenState extends State<SightListScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: ListView.builder(
-        itemCount: sights.length,
+        itemCount: mocks.length,
         itemBuilder: (context, index) {
           return SightCard(
-            sight: sights[index],
+            sight: mocks[index],
+            index: index,
             stateUpdated: () {
               setState(() {
-                sights = mocks;
+                updateStateOfData();
               });
             },
           );
