@@ -20,10 +20,13 @@ class EmptyListWidget extends StatelessWidget {
             Container(
               height: 50,
               width: 50,
-              color: Colors.grey,
+              child: Icon(
+                Icons.search,
+              ),
             ),
             SubTitleWidget(
-              name: emptyText,
+              name:
+                  type == SightStateType.initial ? emptySearchText : emptyText,
               style: greyTitleLightStyle,
               paddings: titleWidgetPadding,
             ),
@@ -36,6 +39,12 @@ class EmptyListWidget extends StatelessWidget {
             if (type == SightStateType.visited)
               SubTitleWidget(
                 name: emptyVisitedText,
+                style: greySubTitleLightStyle,
+                paddings: bottomWidgetPadding,
+              ),
+            if (type == SightStateType.initial)
+              SubTitleWidget(
+                name: emptySearchDescriptionText,
                 style: greySubTitleLightStyle,
                 paddings: bottomWidgetPadding,
               ),

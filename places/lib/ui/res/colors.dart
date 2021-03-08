@@ -20,3 +20,4 @@ const dTextMain = const Color(0xffFFFFFF);
 const colorGrey = const Color(0xff7C7E92);
 const colorGreen = const Color(0xff4CAF50);
 const colorLightGreen =  const Color(0x4f4CAF50);
+const colorLightGrey = const Color(0xffF5F5F5);

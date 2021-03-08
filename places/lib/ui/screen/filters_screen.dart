@@ -12,6 +12,11 @@ import 'package:places/utils/geolocator.dart';
 
 /// Widget to show filters for list of sights
 class FiltersScreen extends StatefulWidget {
+  final void Function(List<Sight>) filteredSights;
+
+  FiltersScreen(
+      {Key key, @required this.filteredSights})
+      : super(key: key);
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -39,22 +44,22 @@ class _FiltersScreenState extends State<FiltersScreen> {
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Container(
-                height: 24.0,
-              ),
-              Text(
-                categoriesTitle,
-                style: greySimpleTitle,
-              ),
-              buildCategories(),
-              buildSlider(),
-              buildSubmitButton(),
-            ],
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Column(
+              children: [
+                Text(
+                  categoriesTitle,
+                  style: greySimpleTitle,
+                ),
+                buildCategories(),
+                buildSlider(),
+                buildSubmitButton(),
+              ],
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
           ),
         ),
       ),
@@ -100,13 +105,19 @@ class _FiltersScreenState extends State<FiltersScreen> {
               padding: const EdgeInsets.all(16.0),
               child: CustomButtonWidget(
                 title: _buttonTitle(snapshot.data),
-                onPressed: () {},
+                onPressed: () {
+                  widget.filteredSights(snapshot.data);
+                  Navigator.of(context).pop();
+                },
               ),
             );
           }
           return CustomButtonWidget(
             title: _buttonTitle(mocks),
-            onPressed: () {},
+            onPressed: () {
+              widget.filteredSights(mocks);
+              Navigator.of(context).pop();
+            },
           );
         });
   }
