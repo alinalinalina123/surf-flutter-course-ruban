@@ -45,23 +45,6 @@ final List<Sight> mocks = [
       state: SightStateType.want_to_visit)
 ];
 
-var listVisited = mocks
-    .where((sight) => (sight).state == SightStateType.visited)
-    .toList();
-
-var listWantToVisit = mocks
-    .where((sight) => (sight).state == SightStateType.want_to_visit)
-    .toList();
-
-void updateStateOfData() {
-  listVisited = mocks
-      .where((sight) => (sight).state == SightStateType.visited)
-      .toList();
-
-  listWantToVisit = mocks
-      .where((sight) => (sight).state == SightStateType.want_to_visit)
-      .toList();
-}
 
 final List<Category> categories = [
   Category(type: SightType.hotel, isSelected: false, iconName: hotelIcon),

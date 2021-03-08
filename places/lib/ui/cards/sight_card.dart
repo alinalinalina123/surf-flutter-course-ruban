@@ -11,101 +11,21 @@ import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
 
 // Widget for card view of sight
-class SightCard extends StatefulWidget {
+
+class SightCard extends StatelessWidget {
   final Sight sight;
-  final int index;
   final SightStateType type;
   final VoidCallback stateUpdated;
-  final VoidCallback orderChanged;
 
-  SightCard(
-      {Key key,
-      @required this.sight,
-      @required this.index,
-      this.stateUpdated,
-      this.type = SightStateType.initial,
-      this.orderChanged})
-      : super(key: key);
+  SightCard({
+    Key key,
+    @required this.sight,
+    this.stateUpdated,
+    this.type = SightStateType.initial,
+  }) : super(key: key);
 
-  @override
-  _SightCardState createState() => _SightCardState();
-}
-
-class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    Widget card = _buildCard(context);
-    Draggable draggable = LongPressDraggable<Sight>(
-      data: widget.sight,
-      axis: Axis.vertical,
-      maxSimultaneousDrags: 1,
-      child: card,
-      childWhenDragging: Container(),
-      feedback: ConstrainedBox(
-        constraints:
-            BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-        child: card,
-      ),
-    );
-
-    var target = DragTarget<Sight>(
-      onWillAccept: (sight) {
-        switch (widget.type) {
-          case SightStateType.initial:
-            return false;
-            break;
-          case SightStateType.want_to_visit:
-            return listWantToVisit.indexOf(sight) != widget.index;
-            break;
-          case SightStateType.visited:
-            return listVisited.indexOf(sight) != widget.index;
-            break;
-        }
-        return false;
-      },
-      onAccept: (sight) {
-        switch (widget.type) {
-          case SightStateType.initial:
-            break;
-          case SightStateType.want_to_visit:
-            int currentIndex = listWantToVisit.indexOf(sight);
-            listWantToVisit.remove(sight);
-            listWantToVisit.insert(
-                currentIndex > widget.index ? widget.index : widget.index - 1,
-                sight);
-            widget.orderChanged();
-            break;
-          case SightStateType.visited:
-            int currentIndex = listVisited.indexOf(sight);
-            listVisited.remove(sight);
-            listVisited.insert(
-                currentIndex > widget.index ? widget.index : widget.index - 1,
-                sight);
-            widget.orderChanged();
-            break;
-        }
-      },
-      builder: (BuildContext context, List<Sight> candidateData,
-          List<dynamic> rejectedData) {
-        return Column(
-          children: [
-            candidateData.isEmpty ? draggable : card,
-          ],
-        );
-      },
-    );
-
-    switch (widget.type) {
-      case SightStateType.initial:
-        return card;
-        break;
-      default:
-        return target;
-        break;
-    }
-  }
-
-  Widget _buildCard(BuildContext context) {
     return Padding(
       padding: standardWidgetPadding,
       child: Material(
@@ -124,7 +44,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
                 context,
                 MaterialPageRoute(builder: (context) {
                   return SightDetails(
-                    sight: widget.sight,
+                    sight: sight,
                   );
                 }),
               );
@@ -147,29 +67,27 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
       width: double.infinity,
       height: 96,
       child: Stack(children: [
-        ImageCardWidget(url: widget.sight.url),
+        ImageCardWidget(url: sight.url),
         SubTitleWidget(
-          name: widget.sight.type.name,
+          name: sight.type.name,
           style: whiteTitleStyle,
           paddings: standardWidgetPadding,
         ),
         PositionedIconButtonWidget(
           top: 16,
           right: 16,
-          iconName: (widget.type == SightStateType.initial)
-              ? widget.sight.state == SightStateType.want_to_visit
-                  ? heartIconDarkSelected
-                  : heartIconLightUnselected
+          iconName: (type == SightStateType.initial)
+              ? sight.state == SightStateType.want_to_visit ?  heartIconDarkSelected : heartIconLightUnselected
               : closeIconLight,
           onPressed: () {
-            switch (widget.type) {
+            switch (type) {
               case SightStateType.initial:
                 mocks.forEach(
                   (sightFromData) => {
-                    if (sightFromData == widget.sight)
+                    if (sightFromData == sight)
                       {
-                        widget.sight.state =
-                            widget.sight.state == SightStateType.want_to_visit
+                        sight.state =
+                            sight.state == SightStateType.want_to_visit
                                 ? SightStateType.initial
                                 : SightStateType.want_to_visit
                       }
@@ -179,20 +97,20 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
               default:
                 mocks.forEach(
                   (sightFromData) => {
-                    if (sightFromData == widget.sight)
-                      {widget.sight.state = SightStateType.initial}
+                    if (sightFromData == sight)
+                      {sight.state = SightStateType.initial}
                   },
                 );
                 break;
             }
-            widget.stateUpdated();
+            stateUpdated();
           },
         ),
-        if (widget.type != SightStateType.initial)
+        if (type != SightStateType.initial)
           PositionedIconButtonWidget(
             top: 16,
             right: 48,
-            iconName: (widget.type == SightStateType.want_to_visit)
+            iconName: (type == SightStateType.want_to_visit)
                 ? calendarIconLight
                 : shareIconLight,
             onPressed: () {
@@ -207,23 +125,23 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
     return Column(
       children: [
         SubTitleWidget(
-          name: widget.sight.name,
+          name: sight.name,
           paddings: topWidgetPadding,
         ),
-        if (widget.type == SightStateType.visited)
+        if (type == SightStateType.visited)
           SubTitleWidget(
-            name: widget.sight.stateDescription,
+            name: sight.stateDescription,
             style: greenSubTitleStyle,
             paddings: bottomWidgetPadding,
           ),
-        if (widget.type == SightStateType.want_to_visit)
+        if (type == SightStateType.want_to_visit)
           SubTitleWidget(
-            name: widget.sight.stateDescription,
+            name: sight.stateDescription,
             style: greySubTitleLightStyle,
             paddings: bottomWidgetPadding,
           ),
         SubTitleWidget(
-          name: widget.sight.details,
+          name: sight.details,
           style: greySubTitleLightStyle,
           paddings: bottomWidgetPadding,
         )

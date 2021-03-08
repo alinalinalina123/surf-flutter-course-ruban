@@ -15,9 +15,16 @@ class VisitingScreen extends StatefulWidget {
 }
 
 class _VisitingScreenState extends State<VisitingScreen> {
-
+  var sights = mocks;
   @override
   Widget build(BuildContext context) {
+    var listVisited = sights
+        .where((sight) => (sight).state == SightStateType.visited)
+        .toList();
+
+    var listWantToVisit = sights
+        .where((sight) => (sight).state == SightStateType.want_to_visit)
+        .toList();
 
     return DefaultTabController(
       length: 2,
@@ -45,14 +52,10 @@ class _VisitingScreenState extends State<VisitingScreen> {
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listWantToVisit[index],
-                    index: index,
                     type: SightStateType.want_to_visit,
-                    orderChanged: () {
-                      setState(() {});
-                    },
                     stateUpdated: (){
                       setState(() {
-                        updateStateOfData();
+                        sights = mocks;
                       });
                     },
                   );
@@ -68,14 +71,10 @@ class _VisitingScreenState extends State<VisitingScreen> {
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listVisited[index],
-                    index: index,
                     type: SightStateType.visited,
-                    orderChanged: () {
-                      setState(() {});
-                    },
                     stateUpdated: (){
                       setState(() {
-                        updateStateOfData();
+                        sights = mocks;
                       });
                     },
                   );
