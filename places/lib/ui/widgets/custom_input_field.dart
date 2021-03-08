@@ -8,6 +8,7 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/utils/text_formatter_coordinates.dart';
 
+//Widget for custom input field
 class CustomInputField extends StatefulWidget {
   final String hint;
   final void Function(String) onChanged;

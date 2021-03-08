@@ -12,7 +12,10 @@ import 'package:places/ui/widgets/sub_title_widget.dart';
 class SearchSightCard extends StatelessWidget {
   final Sight sight;
 
-  SearchSightCard({Key key, @required this.sight}) : super(key: key);
+  SearchSightCard({
+    Key key,
+    @required this.sight,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

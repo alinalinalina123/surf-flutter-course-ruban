@@ -9,7 +9,7 @@ class TextFormatterForCoordinates extends TextInputFormatter {
   TextFormatterForCoordinates({
     @required InputFieldType type,
   }) {
-    this.type = type ?? InputFieldType.simple;
+    this.type = type;
   }
 
   @override
