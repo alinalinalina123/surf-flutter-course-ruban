@@ -11,7 +11,7 @@ import 'package:places/ui/widgets/image_card_widget.dart';
 import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
 
-// Widget for card view of sight
+/// Widget for card view of sight
 
 class SightCard extends StatefulWidget {
   final Sight sight;

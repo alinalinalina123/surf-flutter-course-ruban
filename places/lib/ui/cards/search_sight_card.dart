@@ -8,7 +8,7 @@ import 'package:places/ui/widgets/image_card_widget.dart';
 import 'package:places/ui/widgets/separator_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
 
-// Widget for card view of sight
+/// Widget for card view of sight
 class SearchSightCard extends StatelessWidget {
   final Sight sight;
 
