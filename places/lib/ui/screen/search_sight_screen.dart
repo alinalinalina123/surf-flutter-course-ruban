@@ -8,6 +8,7 @@ import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
+import 'package:places/ui/widgets/custom_list_view.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
 
 class SearchSightScreen extends StatefulWidget {
@@ -45,8 +46,8 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
   Widget _buildListOfSights() {
     var sightsToDisplay = _sightSearchResult(queryString);
     if (sightsToDisplay.length > 0) {
-      return ListView.builder(
-        itemCount: sightsToDisplay.length,
+      return CustomListView(
+        list: sightsToDisplay,
         itemBuilder: (context, index) {
           return SearchSightCard(
             sight: sightsToDisplay[index],

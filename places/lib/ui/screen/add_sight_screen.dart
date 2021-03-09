@@ -12,6 +12,7 @@ import 'package:places/ui/screen/category_selection_screen.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/ui/widgets/custom_input_field.dart';
+import 'package:places/ui/widgets/custom_list_view.dart';
 
 //Widget for screen for adding new sights
 class AddSightScreen extends StatefulWidget {
@@ -93,9 +94,9 @@ class _AddSightScreenState extends State<AddSightScreen> {
       padding: smallWidgetPadding,
       child: SizedBox(
         height: 96,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: sightPhotos.length,
+        child: CustomListView(
+          axis: Axis.horizontal,
+          list: sightPhotos,
           itemBuilder: (context, index) {
             return PhotoCard(
               source: sightPhotos[index],

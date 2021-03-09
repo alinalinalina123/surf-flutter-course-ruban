@@ -5,6 +5,7 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_fab.dart';
+import 'package:places/ui/widgets/custom_list_view.dart';
 
 import 'add_sight_screen.dart';
 
@@ -35,8 +36,8 @@ class _SightListScreenState extends State<SightListScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: ListView.builder(
-        itemCount: mocks.length,
+      body: CustomListView(
+        list: mocks,
         itemBuilder: (context, index) {
           return SightCard(
             sight: mocks[index],

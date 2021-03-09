@@ -6,6 +6,7 @@ import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
+import 'package:places/ui/widgets/custom_list_view.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
 
 //Screen that displays places that user wants to visit/visited.
@@ -39,8 +40,8 @@ class _VisitingScreenState extends State<VisitingScreen> {
         body: TabBarView(
           children: [
             if (listWantToVisit.length > 0)
-              ListView.builder(
-                itemCount: listWantToVisit.length,
+              CustomListView(
+                list: listWantToVisit,
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listWantToVisit[index],
@@ -62,8 +63,8 @@ class _VisitingScreenState extends State<VisitingScreen> {
                 type: SightStateType.want_to_visit,
               ),
             if (listVisited.length > 0)
-              ListView.builder(
-                itemCount: listVisited.length,
+              CustomListView(
+                list: listVisited,
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listVisited[index],

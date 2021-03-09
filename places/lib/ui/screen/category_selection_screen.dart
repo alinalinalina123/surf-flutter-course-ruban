@@ -7,6 +7,7 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
+import 'package:places/ui/widgets/custom_list_view.dart';
 
 //Widget for screen for category selection
 class CategorySelectionScreen extends StatefulWidget {
@@ -41,11 +42,8 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
         type: AppBarType.simple,
         backButtonIcon: Icons.arrow_back_ios,
       ),
-      body: Column(
-        children: createRadioListCategories(),
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: CustomListView(
+        cards: createRadioListCategories(),
       ),
     );
   }
