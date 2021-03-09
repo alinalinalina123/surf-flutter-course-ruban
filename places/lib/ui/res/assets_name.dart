@@ -25,6 +25,7 @@ const ticIcon = "res/images/tick_choice.svg";
 const infoIcon = "res/images/info_icon.svg";
 const clearIcon = "res/images/clear.svg";
 const filterIcon = "res/images/filter.svg";
+const deleteButtonIcon = "res/images/delete_button.svg";
 
 const hotelIcon = "res/images/category/hotel.svg";
 const cafeIcon = "res/images/category/cafe.svg";

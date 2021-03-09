@@ -66,3 +66,4 @@ const inputNotDoubleErrorTitle = "Введите числовое значени
 const cancelButtonTitle = "Отмена";
 const searchHint = "Поиск";
 const clearHistoryButtonTitle = "Осичтить историю";
+const fakePhotoUrl = "FakePhoto";
