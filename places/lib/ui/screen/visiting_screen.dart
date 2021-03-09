@@ -15,7 +15,6 @@ class VisitingScreen extends StatefulWidget {
 }
 
 class _VisitingScreenState extends State<VisitingScreen> {
-  var sights = mocks;
   @override
   Widget build(BuildContext context) {
 
@@ -52,7 +51,7 @@ class _VisitingScreenState extends State<VisitingScreen> {
                     },
                     stateUpdated: (){
                       setState(() {
-                        sights = mocks;
+                        updateStateOfData();
                       });
                     },
                   );
@@ -75,7 +74,7 @@ class _VisitingScreenState extends State<VisitingScreen> {
                     type: SightStateType.visited,
                     stateUpdated: (){
                       setState(() {
-                        sights = mocks;
+                        updateStateOfData();
                       });
                     },
                   );

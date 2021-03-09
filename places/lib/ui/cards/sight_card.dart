@@ -4,6 +4,7 @@ import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/res/assets_name.dart';
+import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/sight_details_screen.dart';
 import 'package:places/ui/widgets/image_card_widget.dart';
@@ -19,13 +20,12 @@ class SightCard extends StatefulWidget {
   final VoidCallback stateUpdated;
   final VoidCallback orderChanged;
 
-  SightCard(
-      {Key key,
-        @required this.sight,
-        @required this.index,
-        this.stateUpdated,
-        this.type = SightStateType.initial,
-        this.orderChanged})
+  SightCard({Key key,
+    @required this.sight,
+    @required this.index,
+    this.stateUpdated,
+    this.type = SightStateType.initial,
+    this.orderChanged})
       : super(key: key);
 
   @override
@@ -33,7 +33,6 @@ class SightCard extends StatefulWidget {
 }
 
 class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
     Widget card = _buildCard(context);
@@ -45,7 +44,10 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
       childWhenDragging: Container(),
       feedback: ConstrainedBox(
         constraints:
-            BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+        BoxConstraints(maxWidth: MediaQuery
+            .of(context)
+            .size
+            .width),
         child: card,
       ),
     );
@@ -108,13 +110,23 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
   }
 
   Widget _buildCard(BuildContext context) {
+    var content = Column(
+      children: [
+        _buildCardImage(),
+        const SizedBox(height: 16),
+        _buildCardDescription(),
+      ],
+    );
+
     return Padding(
       padding: standardWidgetPadding,
       child: Material(
         type: MaterialType.transparency,
         child: Ink(
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: Theme
+                .of(context)
+                .cardColor,
             borderRadius: standardWidgetCircleBorder,
           ),
           child: InkWell(
@@ -131,17 +143,46 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
                 }),
               );
             },
-            child: Column(
-              children: [
-                _buildCardImage(),
-                const SizedBox(height: 16),
-                _buildCardDescription(),
-              ],
-            ),
+            child: widget.type != SightStateType.initial ? Dismissible(
+              direction: DismissDirection.endToStart,
+              key: UniqueKey(),
+              onDismissed: (direction) {
+                deleteFromList();
+              },
+              background: _buildCardDeleteContainer(),
+              child: content,
+            ) : content,
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildCardDeleteContainer() {
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: standardWidgetCircleBorder,
+        ),
+        child: Padding(
+          padding: standardWidgetPadding,
+          child: Row(
+            children: [
+              new Text(
+                deleteTitle,
+                textAlign: TextAlign.right,
+                style: whiteTitleStyle,
+              ),
+              new Icon(
+                Icons.delete,
+                color: Colors.white,
+              )
+            ],
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+          ),
+        ));
   }
 
   Widget _buildCardImage() {
@@ -160,34 +201,11 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
           right: 16,
           iconName: (widget.type == SightStateType.initial)
               ? widget.sight.state == SightStateType.want_to_visit
-                  ? heartIconDarkSelected
-                  : heartIconLightUnselected
+              ? heartIconDarkSelected
+              : heartIconLightUnselected
               : closeIconLight,
           onPressed: () {
-            switch (widget.type) {
-              case SightStateType.initial:
-                mocks.forEach(
-                  (sightFromData) => {
-                    if (sightFromData == widget.sight)
-                      {
-                        widget.sight.state =
-                        widget.sight.state == SightStateType.want_to_visit
-                                ? SightStateType.initial
-                                : SightStateType.want_to_visit
-                      }
-                  },
-                );
-                break;
-              default:
-                mocks.forEach(
-                  (sightFromData) => {
-                    if (sightFromData == widget.sight)
-                      {widget.sight.state = SightStateType.initial}
-                  },
-                );
-                break;
-            }
-            widget.stateUpdated();
+            deleteFromList();
           },
         ),
         if (widget.type != SightStateType.initial)
@@ -203,6 +221,35 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
           )
       ]),
     );
+  }
+
+  void deleteFromList() {
+    switch (widget.type) {
+      case SightStateType.initial:
+        mocks.forEach(
+              (sightFromData) =>
+          {
+            if (sightFromData == widget.sight)
+              {
+                widget.sight.state =
+                widget.sight.state == SightStateType.want_to_visit
+                    ? SightStateType.initial
+                    : SightStateType.want_to_visit
+              }
+          },
+        );
+        break;
+      default:
+        mocks.forEach(
+              (sightFromData) =>
+          {
+            if (sightFromData == widget.sight)
+              {widget.sight.state = SightStateType.initial}
+          },
+        );
+        break;
+    }
+    widget.stateUpdated();
   }
 
   Widget _buildCardDescription() {

@@ -7,7 +7,7 @@ import 'domain/sight_type.dart';
 final List<Sight> mocks = [
   Sight(
       name: "Лувр",
-      url: "https://posmotrim.by/pics/37dcb2689.jpg",
+      url: "https://img-fotki.yandex.ru/get/5405/14403785.ba/0_a0e32_a011308a_XL.jpg",
       lat: 48.860294,
       lon: 2.338629,
       details: "Закрыто до 14:00",
