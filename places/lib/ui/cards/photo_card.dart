@@ -8,14 +8,14 @@ import 'package:places/utils/loader.dart';
 //Widget for card of photo
 class PhotoCard extends StatelessWidget {
   final String source;
-  final void Function() photoRemoved;
-  final void Function() photoAdded;
+  final int index;
+  final void Function() updatePhotos;
 
   PhotoCard({
     Key key,
     @required this.source,
-    @required this.photoRemoved,
-    @required this.photoAdded,
+    @required this.index,
+    @required this.updatePhotos,
   }) : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class PhotoCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         photos.add("https://34travel.me/media/posts/5cc09d7c87bd6-mostar-og.jpg");
-        photoAdded();
+        updatePhotos();
       },
       child: Container(
         decoration: BoxDecoration(
@@ -58,30 +58,39 @@ class PhotoCard extends StatelessWidget {
   }
 
   Widget _buildPhotoCard(BuildContext context) {
-    return Container(
-      child: ClipRRect(
-        borderRadius: standardWidgetCircleBorder,
-        child: Stack(alignment: Alignment.topRight, children: [
-          Image.network(
-            source,
-            height: double.infinity,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            loadingBuilder: buildImageLoadingIndicator,
-          ),
-          Padding(
-            padding: smallWidgetPadding,
-            child: GestureDetector(
-              onTap: () {
-                photoRemoved();
-              },
-              child: Icon(
-                Icons.cancel,
-                color: Colors.white,
+    return Dismissible(
+      key: Key(index.toString()),
+      direction: DismissDirection.up,
+      onDismissed: (direction) {
+        photos.removeAt(index - 1);
+        updatePhotos();
+      },
+      child: Container(
+        child: ClipRRect(
+          borderRadius: standardWidgetCircleBorder,
+          child: Stack(alignment: Alignment.topRight, children: [
+            Image.network(
+              source,
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              loadingBuilder: buildImageLoadingIndicator,
+            ),
+            Padding(
+              padding: smallWidgetPadding,
+              child: GestureDetector(
+                onTap: () {
+                  photos.removeAt(index - 1);
+                  updatePhotos();
+                },
+                child: Icon(
+                  Icons.cancel,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

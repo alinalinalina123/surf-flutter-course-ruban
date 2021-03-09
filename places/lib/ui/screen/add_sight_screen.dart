@@ -87,7 +87,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
   }
 
   Widget _buildPhotosField() {
-    var sightPhotos = List.from(photosOfSight);
+    var sightPhotos = List.from(photos);
     sightPhotos.insert(0, fakePhotoUrl);
     return Padding(
       padding: smallWidgetPadding,
@@ -99,15 +99,9 @@ class _AddSightScreenState extends State<AddSightScreen> {
           itemBuilder: (context, index) {
             return PhotoCard(
               source: sightPhotos[index],
-              photoAdded: () {
-                setState(() {
-                  photosOfSight = photos;
-                });
-              },
-              photoRemoved: (){
-                setState(() {
-                  photosOfSight.removeAt(index - 1);
-                });
+              index: index,
+              updatePhotos: () {
+                setState(() {});
               },
             );
           },
