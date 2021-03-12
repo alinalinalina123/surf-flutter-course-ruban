@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
@@ -41,11 +42,11 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
         type: AppBarType.simple,
         backButtonIcon: Icons.arrow_back_ios,
       ),
-      body: Column(
+      body: ListView(
         children: createRadioListCategories(),
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        physics: Platform.isAndroid
+            ? ClampingScrollPhysics()
+            : BouncingScrollPhysics(),
       ),
     );
   }

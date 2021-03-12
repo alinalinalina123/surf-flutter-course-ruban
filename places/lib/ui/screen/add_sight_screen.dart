@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
@@ -96,6 +98,9 @@ class _AddSightScreenState extends State<AddSightScreen> {
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: sightPhotos.length,
+          physics: Platform.isAndroid
+              ? ClampingScrollPhysics()
+              : BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return PhotoCard(
               source: sightPhotos[index],

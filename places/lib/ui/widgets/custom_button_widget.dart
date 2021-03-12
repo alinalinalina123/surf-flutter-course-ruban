@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 
-// Widget to display button with customized title and background color
+/// Widget to display button with customized title and background color
 class CustomButtonWidget extends StatelessWidget {
   final String title;
   final String iconName;

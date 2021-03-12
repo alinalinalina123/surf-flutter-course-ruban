@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
@@ -47,6 +48,9 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
     if (sightsToDisplay.length > 0) {
       return ListView.builder(
         itemCount: sightsToDisplay.length,
+        physics: Platform.isAndroid
+            ? ClampingScrollPhysics()
+            : BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return SearchSightCard(
             sight: sightsToDisplay[index],
@@ -63,7 +67,8 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
   List<Sight> _sightSearchResult(String query) {
     var listToDisplay = filteredSights != null ? filteredSights : mocks;
     return listToDisplay
-        .where((sight) => sight.name.toLowerCase().contains(query.toLowerCase()))
+        .where(
+            (sight) => sight.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
   }
 
@@ -84,7 +89,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
     for (String oldQuery in searchHistory) {
       widgets.add(_buildHistoryCell(oldQuery));
     }
-    if(widgets.length > 0) widgets.add(_clearHistoryButton());
+    if (widgets.length > 0) widgets.add(_clearHistoryButton());
     return widgets;
   }
 

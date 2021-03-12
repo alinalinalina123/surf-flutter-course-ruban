@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-// Widget to display button with customized title and background color
+/// Widget to display button with customized title and background color
 class PositionedIconButtonWidget extends StatelessWidget {
   final String iconName;
   final Color color;

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight_state_type.dart';
@@ -41,6 +42,9 @@ class _VisitingScreenState extends State<VisitingScreen> {
             if (listWantToVisit.length > 0)
               ListView.builder(
                 itemCount: listWantToVisit.length,
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listWantToVisit[index],
@@ -64,6 +68,9 @@ class _VisitingScreenState extends State<VisitingScreen> {
             if (listVisited.length > 0)
               ListView.builder(
                 itemCount: listVisited.length,
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listVisited[index],
