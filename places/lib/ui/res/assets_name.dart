@@ -34,3 +34,7 @@ const parkIcon = "res/images/category/park.svg";
 const placeIcon = "res/images/category/place.svg";
 const restourantIcon = "res/images/category/restourant.svg";
 
+const onboarding_1 = "res/images/onboarding/onboarding_1.svg";
+const onboarding_2 = "res/images/onboarding/onboarding_2.svg";
+const onboarding_3 = "res/images/onboarding/onboarding_3.svg";
+

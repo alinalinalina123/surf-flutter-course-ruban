@@ -57,6 +57,10 @@ EdgeInsets leftWidgetPadding = EdgeInsets.only(left: 16);
 
 EdgeInsets bottomWidgetPadding = EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 2);
 
+EdgeInsets onBoardingWidgetPadding = EdgeInsets.only(left: 58, right: 58, bottom: 8, top: 8);
+
+EdgeInsets onBoardingTopWidgetPadding = EdgeInsets.only(left: 58, right: 58, bottom: 50, top: 120);
+
 EdgeInsets topWidgetPadding = EdgeInsets.only(left: 16, right: 16);
 
 EdgeInsets titleWidgetPadding = EdgeInsets.only(left: 16.0, right: 16.0, top: 24.0);

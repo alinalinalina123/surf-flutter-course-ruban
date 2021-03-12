@@ -12,6 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData backButtonIcon;
   final String backButtonTitle;
   final VoidCallback onClear;
+  final VoidCallback onSkip;
   final Function(String) onQueryChanged;
   final Function(List<Sight>) onFilterApplied;
   final TabBar tabBar;
@@ -24,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.backButtonTitle,
       this.onClear,
       this.tabBar,
+      this.onSkip,
       this.onQueryChanged,
       this.onFilterApplied})
       : super(key: key);
@@ -50,6 +52,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             leadingWidth: 85.0,
             leading: _leadingWidget(context),
             bottom: tabBar,
+          ),
+        );
+        break;
+
+      case AppBarType.onBoarding:
+        return SizedBox(
+          height: statusBarHeight + 80,
+          child: AppBar(
+            elevation: 0,
+            actions: [
+              FlatButton(
+                child: Text(skipButtonTitle),
+                textColor: colorGreen,
+                onPressed: () {
+                  onSkip();
+                },
+              ),
+            ],
           ),
         );
         break;
