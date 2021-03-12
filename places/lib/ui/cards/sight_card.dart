@@ -190,7 +190,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
       width: double.infinity,
       height: 96,
       child: Stack(children: [
-        ImageCardWidget(url: widget.sight.url),
+        ImageCardWidget(url: widget.sight.urls.first),
         SubTitleWidget(
           name: widget.sight.type.name,
           style: whiteTitleStyle,

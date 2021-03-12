@@ -28,7 +28,7 @@ class _SightDetailsState extends State<SightDetails> {
       body: Container(
         child: Column(
           children: [
-            ImageFullWidget(url: widget.sight.url),
+            ImageFullWidget(urls: widget.sight.urls),
             TitleWidget(name: widget.sight.name),
             Row(
               children: [

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:places/ui/res/assets_name.dart';
+import 'package:places/ui/widgets/custom_page_view_indicator.dart';
 import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
 import 'package:places/utils/loader.dart';
 
 //Widget used to show image on details pages.
 class ImageFullWidget extends StatelessWidget {
-  final String url;
+  final List<String> urls;
+  final _controller = PageController();
 
-  const ImageFullWidget({Key key, @required this.url}) : super(key: key);
+  ImageFullWidget({Key key, @required this.urls}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +17,21 @@ class ImageFullWidget extends StatelessWidget {
       children: [
         Container(
           height: 360,
-          child: Image.network(
-            url,
-            fit: BoxFit.cover,
-            loadingBuilder: buildImageLoadingIndicator,
+          width: double.infinity,
+          child: PageView.builder(
+            itemCount: urls.length,
+            controller: _controller,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                height: double.maxFinite,
+                width: double.maxFinite,
+                child: Image.network(
+                  urls[index],
+                  fit: BoxFit.fill,
+                  loadingBuilder: buildImageLoadingIndicator,
+                ),
+              );
+            },
           ),
         ),
         PositionedIconButtonWidget(
@@ -30,7 +43,20 @@ class ImageFullWidget extends StatelessWidget {
           onPressed: () {
             print("Button Pressed");
           },
-        )
+        ),
+        if (urls.length > 1)
+          Positioned(
+            bottom: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child: new Container(
+              width: double.infinity,
+              child: CustomPageViewIndicator(
+                controller: _controller,
+                itemCount: urls.length,
+              ),
+            ),
+          ),
       ],
     );
   }
