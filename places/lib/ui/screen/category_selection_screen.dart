@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
@@ -7,7 +8,6 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
-import 'package:places/ui/widgets/custom_list_view.dart';
 
 //Widget for screen for category selection
 class CategorySelectionScreen extends StatefulWidget {
@@ -42,8 +42,11 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
         type: AppBarType.simple,
         backButtonIcon: Icons.arrow_back_ios,
       ),
-      body: CustomListView(
-        cards: createRadioListCategories(),
+      body: ListView(
+        children: createRadioListCategories(),
+        physics: Platform.isAndroid
+            ? ClampingScrollPhysics()
+            : BouncingScrollPhysics(),
       ),
     );
   }

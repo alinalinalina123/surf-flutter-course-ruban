@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight_state_type.dart';
@@ -6,7 +7,6 @@ import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
-import 'package:places/ui/widgets/custom_list_view.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
 
 //Screen that displays places that user wants to visit/visited.
@@ -40,8 +40,11 @@ class _VisitingScreenState extends State<VisitingScreen> {
         body: TabBarView(
           children: [
             if (listWantToVisit.length > 0)
-              CustomListView(
-                list: listWantToVisit,
+              ListView.builder(
+                itemCount: listWantToVisit.length,
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listWantToVisit[index],
@@ -63,8 +66,11 @@ class _VisitingScreenState extends State<VisitingScreen> {
                 type: SightStateType.want_to_visit,
               ),
             if (listVisited.length > 0)
-              CustomListView(
-                list: listVisited,
+              ListView.builder(
+                itemCount: listVisited.length,
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return SightCard(
                     sight: listVisited[index],

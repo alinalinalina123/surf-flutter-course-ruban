@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
@@ -5,7 +6,6 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_fab.dart';
-import 'package:places/ui/widgets/custom_list_view.dart';
 
 import 'add_sight_screen.dart';
 
@@ -36,8 +36,11 @@ class _SightListScreenState extends State<SightListScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: CustomListView(
-        list: mocks,
+      body: ListView.builder(
+        itemCount: mocks.length,
+        physics: Platform.isAndroid
+            ? ClampingScrollPhysics()
+            : BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return SightCard(
             sight: mocks[index],
