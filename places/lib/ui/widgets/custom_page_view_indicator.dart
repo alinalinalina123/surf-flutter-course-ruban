@@ -29,13 +29,13 @@ class CustomPageViewIndicator extends AnimatedWidget {
     }
     switch (type) {
       case IndicatorType.lines:
-        return new Row(
+        return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: dots,
         );
         break;
       case IndicatorType.dots:
-        return new Row(
+        return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: dots,
         );
@@ -45,13 +45,13 @@ class CustomPageViewIndicator extends AnimatedWidget {
 
   Widget _buildLines(int index, BuildContext context) {
     var currentPage = (controller.page ?? controller.initialPage).round();
-    return new Container(
+    return Container(
       decoration: BoxDecoration(
         borderRadius: standardWidgetCircleBorder,
       ),
       width: MediaQuery.of(context).size.width / itemCount,
       height: 8,
-      child: new Material(
+      child: Material(
         color: index == currentPage
             ? Theme.of(context).accentColor
             : Theme.of(context).accentColor.withOpacity(0.3),
@@ -61,10 +61,10 @@ class CustomPageViewIndicator extends AnimatedWidget {
 
   Widget _buildDots(int index, BuildContext context) {
     var currentPage = (controller.page ?? controller.initialPage).round();
-    return new Container(
+    return Container(
       width: 25,
       height: 8,
-      child: new Material(
+      child: Material(
         type: index == currentPage ? MaterialType.card : MaterialType.circle,
         color: index == currentPage
             ? colorGreen

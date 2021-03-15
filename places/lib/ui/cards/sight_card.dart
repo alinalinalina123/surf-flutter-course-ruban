@@ -168,12 +168,12 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
           padding: standardWidgetPadding,
           child: Row(
             children: [
-              new Text(
+              Text(
                 deleteTitle,
                 textAlign: TextAlign.right,
                 style: whiteTitleStyle,
               ),
-              new Icon(
+              Icon(
                 Icons.delete,
                 color: Colors.white,
               )
