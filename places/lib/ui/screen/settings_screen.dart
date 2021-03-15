@@ -4,6 +4,7 @@ import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
+import 'package:places/ui/screen/on_boarding_screen.dart';
 import 'package:places/ui/screen/res/themes.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/utils/theme_notifier.dart';
@@ -75,7 +76,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         IconButton(
           icon: SvgPicture.asset(infoIcon),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return OnBoardingScreen();
+              }),
+            );
+          },
         )
       ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

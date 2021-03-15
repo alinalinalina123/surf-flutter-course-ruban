@@ -5,6 +5,8 @@ const simpleDateFormat = "dd MM. yyyy";
 
 // Buttons title
 const clearButtonTitle = 'Очистить';
+const startButtonTitle = 'На старт';
+const skipButtonTitle = 'Пропустить';
 
 //Sights Type
 
@@ -68,3 +70,14 @@ const searchHint = "Поиск";
 const clearHistoryButtonTitle = "Осичтить историю";
 const deleteTitle = "Удалить";
 const fakePhotoUrl = "FakePhoto";
+
+//OnBoarding
+
+const onBoardingTitle_1 = "Добро пожаловать в Путеводитель";
+const onBoardingTitle_2 = "Построй маршрут и отправляйся в путь";
+const onBoardingTitle_3 = "Добавляй места, которые нашёл сам";
+
+const onBoardingDescription_1 = "Ищи новые локации и сохраняй самые любимые.";
+const onBoardingDescription_2 = "Достигай цели максимально быстро и комфортно.";
+const onBoardingDescription_3 = "Делись самыми интересными и помоги нам стать лучше!";
+
