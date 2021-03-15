@@ -223,7 +223,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
             _descriptionKey.currentState.validate()) {
           var sight = Sight(
             name: _controllerName.text ?? "",
-            url: "",
+            urls: [""],
             lat: double.tryParse(_controllerLatitude.text) ?? 0.0,
             lon: double.tryParse(_controllerLongitude.text) ?? 0.0,
             type: _categorySelected.type,

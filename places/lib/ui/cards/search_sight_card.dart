@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_type.dart';
-import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/sight_details_screen.dart';
 import 'package:places/ui/widgets/image_card_widget.dart';
@@ -56,7 +55,7 @@ class SearchSightCard extends StatelessWidget {
         width: 56,
         height: 56,
         child: ImageCardWidget(
-          url: sight.url,
+          url: sight.urls.first,
           radius: 10.0,
         ));
   }

@@ -9,23 +9,23 @@ class Sight {
   String name;
   double lat;
   double lon;
-  String url;
+  List<String> urls;
   String details;
   SightType type;
   SightStateType state;
   DateTime dateOfVisit;
 
   Sight({
-        @required String name,
-        @required String url,
-        @required double lat,
-        @required double lon,
-        @required String details,
-        @required SightType type,
-        SightStateType state
-      }) {
+    @required String name,
+    @required List<String> urls,
+    @required double lat,
+    @required double lon,
+    @required String details,
+    @required SightType type,
+    SightStateType state,
+  }) {
     this.name = name;
-    this.url = url;
+    this.urls = urls;
     this.lat = lat;
     this.lon = lon;
     this.details = details;
