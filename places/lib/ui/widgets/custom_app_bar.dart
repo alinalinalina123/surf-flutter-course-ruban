@@ -3,6 +3,7 @@ import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
+import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/search_sight_screen.dart';
 import 'package:places/ui/widgets/search_bar.dart';
 
@@ -91,7 +92,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         );
         break;
-      default:
+      case AppBarType.search:
         return SizedBox(
           height: preferredSize.height,
           child: AppBar(
@@ -124,6 +125,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     }),
                   );
                 },
+              ),
+            ),
+          ),
+        );
+      case AppBarType.main:
+        return SliverAppBar(
+          expandedHeight: preferredSize.height,
+          floating: false,
+          elevation: 0,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: Padding(
+              padding: smallWidgetPadding,
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
           ),
