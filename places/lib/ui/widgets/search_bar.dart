@@ -96,7 +96,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             color: colorGrey,
           ),
           filled: true,
-          enabledBorder: new OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: colorLightGrey,
             ),
@@ -104,7 +104,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               const Radius.circular(24.0),
             ),
           ),
-          border: new OutlineInputBorder(
+          border: OutlineInputBorder(
             borderSide: BorderSide(
               color: colorLightGrey,
             ),

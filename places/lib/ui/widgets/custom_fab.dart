@@ -23,9 +23,9 @@ class CustomFloatingActionButton extends StatelessWidget {
       child: Container(
         height: 40.0,
         width: halfOfScreen,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24.0),
-          gradient: new LinearGradient(
+          gradient: LinearGradient(
             colors: [Colors.yellow, Colors.green],
             begin: FractionalOffset.centerLeft,
             end: FractionalOffset.centerRight,

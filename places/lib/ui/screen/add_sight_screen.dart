@@ -23,17 +23,17 @@ class AddSightScreen extends StatefulWidget {
 
 class _AddSightScreenState extends State<AddSightScreen> {
   Category _categorySelected;
-  TextEditingController _controllerCategory = new TextEditingController();
-  TextEditingController _controllerName = new TextEditingController();
-  TextEditingController _controllerLatitude = new TextEditingController();
-  TextEditingController _controllerLongitude = new TextEditingController();
-  TextEditingController _controllerDescription = new TextEditingController();
+  TextEditingController _controllerCategory = TextEditingController();
+  TextEditingController _controllerName = TextEditingController();
+  TextEditingController _controllerLatitude = TextEditingController();
+  TextEditingController _controllerLongitude = TextEditingController();
+  TextEditingController _controllerDescription = TextEditingController();
 
-  FocusNode _focusNodeCategory = new FocusNode();
-  FocusNode _focusNodeName = new FocusNode();
-  FocusNode _focusNodeLatitude = new FocusNode();
-  FocusNode _focusNodeLongitude = new FocusNode();
-  FocusNode _focusNodeDescription = new FocusNode();
+  FocusNode _focusNodeCategory = FocusNode();
+  FocusNode _focusNodeName = FocusNode();
+  FocusNode _focusNodeLatitude = FocusNode();
+  FocusNode _focusNodeLongitude = FocusNode();
+  FocusNode _focusNodeDescription = FocusNode();
   var photosOfSight = photos;
 
   final _nameKey = GlobalKey<FormState>();
