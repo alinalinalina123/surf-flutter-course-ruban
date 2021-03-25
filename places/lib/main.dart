@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:places/ui/screen/on_boarding_screen.dart';
 import 'package:places/ui/screen/res/themes.dart';
-import 'package:places/ui/screen/tabs_screen.dart';
+import 'package:places/ui/screen/splash_screen.dart';
 import 'package:places/utils/theme_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +20,7 @@ class App extends StatelessWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
       title: 'Places app',
-      home: OnBoardingScreen(),
+      home: SplashScreen(),
       theme: themeNotifier.getTheme(),
     );
   }

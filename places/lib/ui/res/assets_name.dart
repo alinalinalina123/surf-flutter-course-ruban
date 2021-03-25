@@ -8,10 +8,9 @@ const calendarIconDark = "res/images/calendar_dark_icon.svg";
 const calendarIconLight = "res/images/calendar_light_icon.svg";
 
 const directionIconLight = "res/images/direction_light_icon.svg";
-
 const closeIconLight = "res/images/close_light_icon.svg";
-
 const shareIconLight = "res/images/share_light_icon.svg";
+const logo_places = "res/images/place.svg";
 
 const listIconDark = "res/images/list_dark_icon.svg";
 const mapIconDark = "res/images/map_dark_icon.svg";
