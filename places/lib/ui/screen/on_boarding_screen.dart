@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/field_types/indicators_type.dart';
 import 'package:places/domain/onboarding_item.dart';
+import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/tabs_screen.dart';
@@ -25,17 +26,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "",
-        type: AppBarType.onBoarding,
-        onSkip: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return TabsScreen();
-            }),
-          );
-        },
+      appBar:  AppBar(
+        elevation: 0,
+        actions: [
+          FlatButton(
+            child: Text(skipButtonTitle),
+            textColor: colorGreen,
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return TabsScreen();
+                }),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

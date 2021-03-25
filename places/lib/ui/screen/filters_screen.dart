@@ -4,6 +4,7 @@ import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/cards/category_card.dart';
+import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
@@ -28,18 +29,23 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: appBarTitle,
-        type: AppBarType.filter,
-        onClear: () {
-          setState(() {
-            values = null;
-            categorySelected = [];
-            categories.forEach((category) {
-              category.isSelected = false;
-            });
-          });
-        },
+      appBar: AppBar(
+        elevation: 0,
+        actions: [
+          FlatButton(
+            child: Text(clearButtonTitle),
+            textColor: colorGreen,
+            onPressed: () {
+              setState(() {
+                values = null;
+                categorySelected = [];
+                categories.forEach((category) {
+                  category.isSelected = false;
+                });
+              });
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Padding(
