@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/category.dart';
-import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/cards/category_card.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
-import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/utils/geolocator.dart';
 
 /// Widget to show filters for list of sights
 class FiltersScreen extends StatefulWidget {
-  final void Function(List<Sight>) filteredSights;
+  static const routeName =
+      '/mainScreen/sightListScreen/searchScreen/filtersScreen';
 
-  FiltersScreen(
-      {Key key, @required this.filteredSights})
-      : super(key: key);
+  FiltersScreen({
+    Key key,
+  }) : super(key: key);
+
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -28,6 +28,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Function(List<Sight>) filteredSights =
+    ModalRoute.of(context).settings.arguments as Function(List<Sight>);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -60,7 +62,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 ),
                 buildCategories(),
                 buildSlider(),
-                buildSubmitButton(),
+                buildSubmitButton(filteredSights),
               ],
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -102,7 +104,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
-  Widget buildSubmitButton() {
+  Widget buildSubmitButton(Function(List<Sight>) filteredSights) {
     return FutureBuilder<List<Sight>>(
         future: distanceBetweenUserAndSight(mocks, values),
         builder: (context, snapshot) {
@@ -112,7 +114,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: CustomButtonWidget(
                 title: _buttonTitle(snapshot.data),
                 onPressed: () {
-                  widget.filteredSights(snapshot.data);
+                  filteredSights(snapshot.data);
                   Navigator.of(context).pop();
                 },
               ),
@@ -121,7 +123,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           return CustomButtonWidget(
             title: _buttonTitle(mocks),
             onPressed: () {
-              widget.filteredSights(mocks);
+              filteredSights(mocks);
               Navigator.of(context).pop();
             },
           );

@@ -134,13 +134,10 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
               borderRadius: standardWidgetCircleBorder,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(builder: (context) {
-                  return SightDetails(
-                    sight: widget.sight,
-                  );
-                }),
+                SightDetails.routeName,
+                arguments: widget.sight.id,
               );
             },
             child: widget.type != SightStateType.initial ? Dismissible(

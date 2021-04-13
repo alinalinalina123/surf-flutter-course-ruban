@@ -9,15 +9,24 @@ import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 
-//Widget for screen for category selection
-class CategorySelectionScreen extends StatefulWidget {
+class CategorySelectionScreenArguments {
   final void Function(Category) notifyParent;
   final Category initialCategory;
 
+  CategorySelectionScreenArguments({
+    Key key,
+    this.initialCategory,
+    this.notifyParent,
+  });
+}
+
+//Widget for screen for category selection
+class CategorySelectionScreen extends StatefulWidget {
+  static const routeName =
+      '/mainScreen/sightListScreen/searchScreen/filtersScreen/categorySelectionScreen';
+
   CategorySelectionScreen({
     Key key,
-    @required this.initialCategory,
-    @required this.notifyParent,
   }) : super(key: key);
 
   @override
@@ -29,13 +38,9 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
   int selectedRadioTile;
 
   @override
-  void initState() {
-    super.initState();
-    selectedRadioTile = widget.initialCategory?.type?.index;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final CategorySelectionScreenArguments input =
+    ModalRoute.of(context).settings.arguments as CategorySelectionScreenArguments;
     return Scaffold(
       appBar: CustomAppBar(
         title: categoryPageTitle,
@@ -43,7 +48,7 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
         backButtonIcon: Icons.arrow_back_ios,
       ),
       body: ListView(
-        children: createRadioListCategories(),
+        children: createRadioListCategories(input),
         physics: Platform.isAndroid
             ? ClampingScrollPhysics()
             : BouncingScrollPhysics(),
@@ -51,24 +56,24 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
     );
   }
 
-  List<Widget> createRadioListCategories() {
+  List<Widget> createRadioListCategories(CategorySelectionScreenArguments input) {
     List<Widget> widgets = [];
     for (Category category in categories) {
-      widgets.add(_buildCategoryCell(category));
+      widgets.add(_buildCategoryCell(category, input));
     }
-    widgets.add(_buildCreateButton());
+    widgets.add(_buildCreateButton(input));
     return widgets;
   }
 
-  Widget _buildCategoryCell(Category category) {
+  Widget _buildCategoryCell(Category category, CategorySelectionScreenArguments input) {
     return ListTile(
-      selected: category.type.index == selectedRadioTile,
+      selected: category.type.index == selectedRadioTile ?? input.initialCategory?.type?.index,
       selectedTileColor: Colors.transparent,
       title: Text(
         category.name,
         style: greySimpleTitle,
       ),
-      trailing: category.type.index == selectedRadioTile
+      trailing: category.type.index == selectedRadioTile ?? input.initialCategory?.type?.index
           ? Icon(
               Icons.done,
               color: colorGreen,
@@ -82,11 +87,11 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
     );
   }
 
-  Widget _buildCreateButton() {
+  Widget _buildCreateButton(CategorySelectionScreenArguments input ) {
     return CustomButtonWidget(
       title: saveTitle,
       onPressed: () {
-        widget.notifyParent(
+        input.notifyParent(
           categories.firstWhere(
               (category) => category.type.index == selectedRadioTile),
         );

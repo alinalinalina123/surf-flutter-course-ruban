@@ -71,15 +71,14 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 )
               : InkWell(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(builder: (context) {
-                        return FiltersScreen(
-                          filteredSights: (List<Sight> sights) {
-                            widget.onFilterApplied(sights);
-                          },
-                        );
-                      }),
+                      FiltersScreen.routeName,
+                      arguments: {
+                        (List<Sight> sights) {
+                          widget.onFilterApplied(sights);
+                        },
+                      },
                     );
                   },
                   child: Padding(

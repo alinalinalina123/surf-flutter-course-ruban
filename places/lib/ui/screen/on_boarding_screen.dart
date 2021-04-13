@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/field_types/indicators_type.dart';
 import 'package:places/domain/onboarding_item.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/tabs_screen.dart';
-import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/ui/widgets/custom_page_view_indicator.dart';
 
 /// Widget for OnBoarding page
 class OnBoardingScreen extends StatefulWidget {
+  static const routeName = '/onBoardingScreen';
   OnBoardingScreen({Key key}) : super(key: key);
 
   @override
@@ -25,6 +24,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar:  AppBar(
         elevation: 0,
@@ -33,11 +34,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: Text(skipButtonTitle),
             textColor: colorGreen,
             onPressed: () {
-              Navigator.pushReplacement(
+              Navigator.pushReplacementNamed(
                 context,
-                MaterialPageRoute(builder: (context) {
-                  return TabsScreen();
-                }),
+                TabsScreen.routeName,
               );
             },
           ),
@@ -69,11 +68,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: CustomButtonWidget(
                     title: startButtonTitle,
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacementNamed(
                         context,
-                        MaterialPageRoute(builder: (context) {
-                          return TabsScreen();
-                        }),
+                        TabsScreen.routeName,
                       );
                     },
                   ),

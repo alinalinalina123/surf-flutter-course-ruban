@@ -11,6 +11,7 @@ import 'package:places/ui/widgets/empty_list_widget.dart';
 
 //Screen that displays places that user wants to visit/visited.
 class VisitingScreen extends StatefulWidget {
+  static const routeName = '/onBoardingScreen/sightVisitingHistoryScreen';
   @override
   _VisitingScreenState createState() => _VisitingScreenState();
 }
