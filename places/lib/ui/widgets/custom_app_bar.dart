@@ -81,11 +81,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onFilterApplied(sights);
                 },
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(builder: (context) {
-                      return SearchSightScreen();
-                    }),
+                    SearchSightScreen.routeName,
                   );
                 },
               ),

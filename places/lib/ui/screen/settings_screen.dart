@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 //Widget for Settings page
 class SettingsScreen extends StatefulWidget {
+  static const routeName = '/mainScreen/settingsScreen';
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -77,11 +78,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         IconButton(
           icon: SvgPicture.asset(infoIcon),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(builder: (context) {
-                return OnBoardingScreen();
-              }),
+              OnBoardingScreen.routeName,
             );
           },
         )

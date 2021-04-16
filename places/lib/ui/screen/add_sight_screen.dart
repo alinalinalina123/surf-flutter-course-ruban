@@ -17,6 +17,8 @@ import 'package:places/ui/widgets/custom_input_field.dart';
 
 //Widget for screen for adding new sights
 class AddSightScreen extends StatefulWidget {
+  static const routeName = '/mainScreen/sightListScreen/addNewSightScreen';
+
   @override
   _AddSightScreenState createState() => _AddSightScreenState();
 }
@@ -125,17 +127,17 @@ class _AddSightScreenState extends State<AddSightScreen> {
           suffixIcon: Icon(Icons.navigate_next),
         ),
         onTap: () {
-          Navigator.push(
+          Navigator.pushNamed(
             context,
-            MaterialPageRoute(builder: (context) {
-              return CategorySelectionScreen(
-                  initialCategory: _categorySelected,
-                  notifyParent: (Category category) {
-                    setState(() {
-                      _categorySelected = category;
-                    });
-                  });
-            }),
+            CategorySelectionScreen.routeName,
+            arguments: CategorySelectionScreenArguments(
+              initialCategory: _categorySelected,
+              notifyParent: (Category category) {
+                setState(() {
+                  _categorySelected = category;
+                });
+              },
+            ),
           );
         },
         readOnly: true,

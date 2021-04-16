@@ -12,6 +12,8 @@ import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
 
 class SearchSightScreen extends StatefulWidget {
+  static const routeName = '/mainScreen/sightListScreen/searchScreen';
+
   @override
   _SearchSightScreenState createState() => _SearchSightScreenState();
 }

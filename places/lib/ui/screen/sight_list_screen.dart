@@ -12,6 +12,7 @@ import 'add_sight_screen.dart';
 
 //Widget that displays list of sights
 class SightListScreen extends StatefulWidget {
+  static const routeName = '/mainScreen/sightListScreen';
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }
@@ -25,11 +26,9 @@ class _SightListScreenState extends State<SightListScreen> {
           title: newPlaceButtonTitle,
           icon: Icons.add,
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(builder: (context) {
-                return AddSightScreen();
-              }),
+              AddSightScreen.routeName,
             );
           },
         ),
@@ -47,11 +46,9 @@ class _SightListScreenState extends State<SightListScreen> {
                   CustomSearchBar(
                     isForNavigation: true,
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(builder: (context) {
-                          return SearchSightScreen();
-                        }),
+                        SearchSightScreen.routeName,
                       );
                     },
                   ),

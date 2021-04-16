@@ -6,6 +6,7 @@ import 'package:places/ui/res/strings.dart';
 
 //Data class for sight
 class Sight {
+  int id;
   String name;
   double lat;
   double lon;
@@ -16,6 +17,7 @@ class Sight {
   DateTime dateOfVisit;
 
   Sight({
+    @required int id,
     @required String name,
     @required List<String> urls,
     @required double lat,
@@ -24,6 +26,7 @@ class Sight {
     @required SightType type,
     SightStateType state,
   }) {
+    this.id = id;
     this.name = name;
     this.urls = urls;
     this.lat = lat;

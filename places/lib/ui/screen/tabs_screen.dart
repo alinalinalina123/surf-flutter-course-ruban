@@ -3,6 +3,8 @@ import 'package:places/domain/tab_navigation_item.dart';
 
 //Screen with bottomNavigation bar
 class TabsScreen extends StatefulWidget {
+  static const routeName = '/mainScreen';
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
