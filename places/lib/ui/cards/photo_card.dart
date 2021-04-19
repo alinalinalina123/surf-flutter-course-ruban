@@ -3,6 +3,7 @@ import 'package:places/mocks.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/widgets/custom_button_widget.dart';
 import 'package:places/utils/loader.dart';
 
 //Widget for card of photo
@@ -39,8 +40,7 @@ class PhotoCard extends StatelessWidget {
   Widget _buildAddPhotoCard(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        photos.add("https://34travel.me/media/posts/5cc09d7c87bd6-mostar-og.jpg");
-        updatePhotos();
+        _pickedImage(context);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -92,6 +92,78 @@ class PhotoCard extends StatelessWidget {
           ]),
         ),
       ),
+    );
+  }
+
+  void _pickedImage(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        double width = MediaQuery.of(context).size.width;
+        double height = MediaQuery.of(context).size.height;
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          // title: Center(child: Text("Evaluation our APP")),
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(10.0))),
+                child: Column(
+                  children: [
+                    FlatButton.icon(
+                      label: Text(cameraButtonTitle),
+                      icon: Icon(
+                        Icons.camera_alt,
+                        color: colorGrey,
+                      ),
+                      onPressed: () =>
+                          Navigator.pop(context, cameraButtonTitle),
+                    ),
+                    Divider(),
+                    FlatButton.icon(
+                      label: Text(photoButtonTitle),
+                      icon: Icon(
+                        Icons.image_outlined,
+                        color: colorGrey,
+                      ),
+                      onPressed: () =>
+                          Navigator.pop(context, cameraButtonTitle),
+                    ),
+                    Divider(),
+                    FlatButton.icon(
+                      label: Text(fileButtonTitle),
+                      icon: Icon(
+                        Icons.insert_drive_file_outlined,
+                        color: colorGrey,
+                      ),
+                      onPressed: () =>
+                          Navigator.pop(context, cameraButtonTitle),
+                    ),
+                  ],
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              CustomButtonWidget(
+                title: cancelButtonTitle,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
