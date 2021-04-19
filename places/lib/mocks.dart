@@ -18,7 +18,7 @@ final List<Sight> mocks = [
   ),
   Sight(
     id: 1,
-    name: "Мост золотые ворота Мост золотые ворота Мост золотые ворота",
+    name: "Мост золотые ворота Мост золотые ворота Мост золотые ворота Мост золотые ворота Мост золотые ворота Мост золотые ворота",
     urls: [
       "https://www.history.com/.image/t_share/MTY1MTc3MjE0MzExMDgxNTQ1/topic-golden-gate-bridge-gettyimages-177770941.jpg"
     ],

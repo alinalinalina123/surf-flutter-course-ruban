@@ -14,10 +14,10 @@ class SliverFullImageDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 360;
+  double get maxExtent => 300;
 
   @override
-  double get minExtent => 0;
+  double get minExtent => 150;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
