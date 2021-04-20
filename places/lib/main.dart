@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:places/ui/screen/add_sight_screen.dart';
 import 'package:places/ui/screen/category_selection_screen.dart';
 import 'package:places/ui/screen/filters_screen.dart';
@@ -6,7 +7,6 @@ import 'package:places/ui/screen/on_boarding_screen.dart';
 import 'package:places/ui/screen/res/themes.dart';
 import 'package:places/ui/screen/search_sight_screen.dart';
 import 'package:places/ui/screen/settings_screen.dart';
-import 'package:places/ui/screen/sight_details_screen.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/splash_screen.dart';
 import 'package:places/ui/screen/tabs_screen.dart';
@@ -44,6 +44,13 @@ class App extends StatelessWidget {
         FiltersScreen.routeName: (context) => FiltersScreen(),
         CategorySelectionScreen.routeName: (context) => CategorySelectionScreen(),
       },
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('en'),
+        const Locale('ru')
+      ],
     );
   }
 }

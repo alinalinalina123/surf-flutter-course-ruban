@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/res/colors.dart';
@@ -95,75 +96,70 @@ class PhotoCard extends StatelessWidget {
     );
   }
 
-  void _pickedImage(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        double width = MediaQuery.of(context).size.width;
-        double height = MediaQuery.of(context).size.height;
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          contentPadding: EdgeInsets.zero,
-          // title: Center(child: Text("Evaluation our APP")),
-          content: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(10.0))),
-                child: Column(
-                  children: [
-                    FlatButton.icon(
-                      label: Text(cameraButtonTitle),
-                      icon: Icon(
-                        Icons.camera_alt,
-                        color: colorGrey,
-                      ),
-                      onPressed: () =>
-                          Navigator.pop(context, cameraButtonTitle),
-                    ),
-                    Divider(),
-                    FlatButton.icon(
-                      label: Text(photoButtonTitle),
-                      icon: Icon(
-                        Icons.image_outlined,
-                        color: colorGrey,
-                      ),
-                      onPressed: () =>
-                          Navigator.pop(context, cameraButtonTitle),
-                    ),
-                    Divider(),
-                    FlatButton.icon(
-                      label: Text(fileButtonTitle),
-                      icon: Icon(
-                        Icons.insert_drive_file_outlined,
-                        color: colorGrey,
-                      ),
-                      onPressed: () =>
-                          Navigator.pop(context, cameraButtonTitle),
-                    ),
-                  ],
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CustomButtonWidget(
-                title: cancelButtonTitle,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
+  Widget _buildAlertSheetButton(String title, IconData icon) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: colorGrey,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: colorGrey,
           ),
-        );
-      },
+        )
+      ],
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+    );
+  }
+
+  void _pickedImage(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        actions: [
+          CupertinoActionSheetAction(
+            child: _buildAlertSheetButton(
+              cameraButtonTitle,
+              Icons.camera_alt,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: _buildAlertSheetButton(
+              photoButtonTitle,
+              Icons.image_outlined,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: _buildAlertSheetButton(
+              fileButtonTitle,
+              Icons.insert_drive_file_outlined,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          child: Text(
+            cancelButtonTitle,
+            style: TextStyle(
+              color: colorGreen,
+            ),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
     );
   }
 }

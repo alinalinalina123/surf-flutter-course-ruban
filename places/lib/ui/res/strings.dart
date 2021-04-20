@@ -10,6 +10,7 @@ const skipButtonTitle = 'Пропустить';
 const cameraButtonTitle = 'Камера';
 const photoButtonTitle = 'Фото';
 const fileButtonTitle = 'Файл';
+const dateTimePickerTitle = 'Выберите дату для напоминания';
 
 
 //Sights Type
@@ -84,4 +85,10 @@ const onBoardingTitle_3 = "Добавляй места, которые нашё�
 const onBoardingDescription_1 = "Ищи новые локации и сохраняй самые любимые.";
 const onBoardingDescription_2 = "Достигай цели максимально быстро и комфортно.";
 const onBoardingDescription_3 = "Делись самыми интересными и помоги нам стать лучше!";
+
+
+//Locale
+
+const russianLanguageCode = "ru";
+const russianCountryCode = "RU";
 

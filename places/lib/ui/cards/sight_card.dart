@@ -4,6 +4,7 @@ import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/res/assets_name.dart';
+import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/sight_details_screen.dart';
@@ -20,12 +21,13 @@ class SightCard extends StatefulWidget {
   final VoidCallback stateUpdated;
   final VoidCallback orderChanged;
 
-  SightCard({Key key,
-    @required this.sight,
-    @required this.index,
-    this.stateUpdated,
-    this.type = SightStateType.initial,
-    this.orderChanged})
+  SightCard(
+      {Key key,
+      @required this.sight,
+      @required this.index,
+      this.stateUpdated,
+      this.type = SightStateType.initial,
+      this.orderChanged})
       : super(key: key);
 
   @override
@@ -44,10 +46,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
       childWhenDragging: Container(),
       feedback: ConstrainedBox(
         constraints:
-        BoxConstraints(maxWidth: MediaQuery
-            .of(context)
-            .size
-            .width),
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
         child: card,
       ),
     );
@@ -124,9 +123,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
         type: MaterialType.transparency,
         child: Ink(
           decoration: BoxDecoration(
-            color: Theme
-                .of(context)
-                .cardColor,
+            color: Theme.of(context).cardColor,
             borderRadius: standardWidgetCircleBorder,
           ),
           child: InkWell(
@@ -143,15 +140,17 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
                     );
                   });
             },
-            child: widget.type != SightStateType.initial ? Dismissible(
-              direction: DismissDirection.endToStart,
-              key: UniqueKey(),
-              onDismissed: (direction) {
-                deleteFromList();
-              },
-              background: _buildCardDeleteContainer(),
-              child: content,
-            ) : content,
+            child: widget.type != SightStateType.initial
+                ? Dismissible(
+                    direction: DismissDirection.endToStart,
+                    key: UniqueKey(),
+                    onDismissed: (direction) {
+                      _deleteFromList();
+                    },
+                    background: _buildCardDeleteContainer(),
+                    child: content,
+                  )
+                : content,
           ),
         ),
       ),
@@ -201,11 +200,11 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
           right: 16,
           iconName: (widget.type == SightStateType.initial)
               ? widget.sight.state == SightStateType.want_to_visit
-              ? heartIconDarkSelected
-              : heartIconLightUnselected
+                  ? heartIconDarkSelected
+                  : heartIconLightUnselected
               : closeIconLight,
           onPressed: () {
-            deleteFromList();
+            _deleteFromList();
           },
         ),
         if (widget.type != SightStateType.initial)
@@ -216,33 +215,56 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
                 ? calendarIconLight
                 : shareIconLight,
             onPressed: () {
-              print("Button clicked");
+              if (widget.type == SightStateType.want_to_visit) {
+                _openDateTimeSlection();
+              }
             },
           )
       ]),
     );
   }
 
-  void deleteFromList() {
+  Future<DateTime> _openDateTimeSlection() async {
+    return await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2025),
+        locale : const Locale(russianLanguageCode, russianCountryCode),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.dark().copyWith(
+              colorScheme: ColorScheme.dark(
+                primary: colorGreen,
+                onPrimary: Theme.of(context).accentColor,
+                surface: Theme.of(context).primaryColor,
+                onSurface: Theme.of(context).accentColor,
+              ),
+              dialogBackgroundColor: Theme.of(context).primaryColor,
+            ),
+            child: child,
+          );
+        });
+  }
+
+  void _deleteFromList() {
     switch (widget.type) {
       case SightStateType.initial:
         mocks.forEach(
-              (sightFromData) =>
-          {
+          (sightFromData) => {
             if (sightFromData == widget.sight)
               {
                 widget.sight.state =
-                widget.sight.state == SightStateType.want_to_visit
-                    ? SightStateType.initial
-                    : SightStateType.want_to_visit
+                    widget.sight.state == SightStateType.want_to_visit
+                        ? SightStateType.initial
+                        : SightStateType.want_to_visit
               }
           },
         );
         break;
       default:
         mocks.forEach(
-              (sightFromData) =>
-          {
+          (sightFromData) => {
             if (sightFromData == widget.sight)
               {widget.sight.state = SightStateType.initial}
           },
