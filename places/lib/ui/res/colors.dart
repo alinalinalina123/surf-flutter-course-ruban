@@ -7,6 +7,7 @@ const lColorAccent = const Color(0xff3B3E5B);
 const lColorCard = const Color(0xffF5F5F5);
 const lColorBackground = const Color(0xffFFFFFF);
 const lTextMain = const Color(0xff21222C);
+const bottomSheetColor = const Color(0xFF737373);
 
 
 //Dark Theme

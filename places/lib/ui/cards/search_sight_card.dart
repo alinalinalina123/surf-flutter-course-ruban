@@ -25,11 +25,14 @@ class SearchSightCard extends StatelessWidget {
         child: Ink(
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(
-                context,
-                SightDetails.routeName,
-                arguments: sight.id,
-              );
+              showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (_) {
+                    return SightDetailsBottomSheet(
+                      sightId: sight.id,
+                    );
+                  });
             },
             child: Row(
               children: [

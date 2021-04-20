@@ -40,7 +40,6 @@ class App extends StatelessWidget {
         VisitingScreen.routeName: (context) => VisitingScreen(),
         SettingsScreen.routeName: (context) => SettingsScreen(),
         SearchSightScreen.routeName: (context) => SearchSightScreen(),
-        SightDetails.routeName: (context) => SightDetails(),
         AddSightScreen.routeName: (context) => AddSightScreen(),
         FiltersScreen.routeName: (context) => FiltersScreen(),
         CategorySelectionScreen.routeName: (context) => CategorySelectionScreen(),

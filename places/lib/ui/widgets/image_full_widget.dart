@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/widgets/custom_page_view_indicator.dart';
-import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
 import 'package:places/utils/loader.dart';
 
 //Widget used to show image on details pages.
@@ -16,7 +14,7 @@ class ImageFullWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 360,
+          height: 300,
           width: double.infinity,
           child: PageView.builder(
             itemCount: urls.length,
@@ -34,15 +32,20 @@ class ImageFullWidget extends StatelessWidget {
             },
           ),
         ),
-        PositionedIconButtonWidget(
-          left: 16.0,
+        Positioned(
+          right: 16.0,
           top: 36.0,
           width: 32.0,
           height: 32.0,
-          iconName: arrowIcon,
-          onPressed: () {
-            print("Button Pressed");
-          },
+          child: RawMaterialButton(
+            onPressed: () {},
+            elevation: 2.0,
+            fillColor: Colors.white,
+            child: Icon(
+              Icons.close,
+            ),
+            shape: CircleBorder(),
+          ),
         ),
         if (urls.length > 1)
           Positioned(

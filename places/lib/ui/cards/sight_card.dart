@@ -134,11 +134,14 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
               borderRadius: standardWidgetCircleBorder,
             ),
             onTap: () {
-              Navigator.pushNamed(
-                context,
-                SightDetails.routeName,
-                arguments: widget.sight.id,
-              );
+              showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (_) {
+                    return SightDetailsBottomSheet(
+                      sightId: widget.sight.id,
+                    );
+                  });
             },
             child: widget.type != SightStateType.initial ? Dismissible(
               direction: DismissDirection.endToStart,
