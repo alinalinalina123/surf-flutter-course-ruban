@@ -224,6 +224,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
             _lonKey.currentState.validate() &&
             _descriptionKey.currentState.validate()) {
           var sight = Sight(
+            id: mocks.length + 1,
             name: _controllerName.text ?? "",
             urls: [""],
             lat: double.tryParse(_controllerLatitude.text) ?? 0.0,

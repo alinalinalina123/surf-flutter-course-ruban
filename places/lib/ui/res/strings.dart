@@ -7,6 +7,10 @@ const simpleDateFormat = "dd MM. yyyy";
 const clearButtonTitle = 'Очистить';
 const startButtonTitle = 'На старт';
 const skipButtonTitle = 'Пропустить';
+const cameraButtonTitle = 'Камера';
+const photoButtonTitle = 'Фото';
+const fileButtonTitle = 'Файл';
+
 
 //Sights Type
 

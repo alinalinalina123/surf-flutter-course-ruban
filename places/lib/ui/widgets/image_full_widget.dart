@@ -38,7 +38,9 @@ class ImageFullWidget extends StatelessWidget {
           width: 32.0,
           height: 32.0,
           child: RawMaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             elevation: 2.0,
             fillColor: Colors.white,
             child: Icon(
