@@ -45,10 +45,10 @@ class App extends StatelessWidget {
         CategorySelectionScreen.routeName: (context) => CategorySelectionScreen(),
       },
       localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('en'),
         const Locale('ru')
       ],
     );
