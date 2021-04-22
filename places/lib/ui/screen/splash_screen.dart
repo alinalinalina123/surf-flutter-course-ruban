@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future _navigateToNext() async {
     return await _isInitialized.then(
-      (value) => Navigator.pushNamed(
+      (value) => Navigator.pushReplacementNamed(
         context,
         OnBoardingScreen.routeName,
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
 import 'package:places/ui/res/strings.dart';
@@ -13,12 +14,12 @@ import 'add_sight_screen.dart';
 //Widget that displays list of sights
 class SightListScreen extends StatefulWidget {
   static const routeName = '/mainScreen/sightListScreen';
+
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }
 
 class _SightListScreenState extends State<SightListScreen> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,7 +57,7 @@ class _SightListScreenState extends State<SightListScreen> {
                 ]),
               ),
             ),
-           _buildCollection(),
+            _buildCollection(),
           ],
         ),
       ),
@@ -64,9 +65,10 @@ class _SightListScreenState extends State<SightListScreen> {
   }
 
   Widget _buildCollection() {
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var list = SliverList(
       delegate: SliverChildBuilderDelegate(
-            (context, index) {
+        (context, index) {
           return SightCard(
             sight: mocks[index],
             index: index,
@@ -80,7 +82,28 @@ class _SightListScreenState extends State<SightListScreen> {
         childCount: mocks.length,
       ),
     );
-    return  list;
+
+    var grid = SliverStaggeredGrid(
+      gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
+        staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+        crossAxisCount: 2,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return SightCard(
+            sight: mocks[index],
+            index: index,
+            stateUpdated: () {
+              setState(() {
+                updateStateOfData();
+              });
+            },
+          );
+        },
+        childCount: mocks.length,
+      ),
+    );
+
+    return isPortrait ? list : grid;
   }
 }
-
