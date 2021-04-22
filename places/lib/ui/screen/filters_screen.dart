@@ -132,11 +132,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   String _buttonTitle(List<Sight>? sightsFilteredByDistance) {
     var categoriesToApply =
-        categorySelected.isEmpty ? categories : categorySelected;
+    categorySelected.isEmpty ? categories : categorySelected;
     var sightsFiltered = sightsFilteredByDistance?.where((sightByDistance) =>
-        categoriesToApply
-            .where((category) => sightByDistance.type == category.type)
-            .length >
+    categoriesToApply
+        .where((category) => sightByDistance.type == category.type)
+        .length >
         0);
     return "$showButtonTitle (${sightsFiltered?.length ?? 0})";
   }
@@ -153,9 +153,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
             Text(
               rangeTitle
                   .replaceAll(
-                      "{0}", ((values?.start ?? 1) / 1000).toStringAsFixed(1))
+                  "{0}", ((values?.start ?? 1) / 1000).toStringAsFixed(1))
                   .replaceAll("{1}",
-                      ((values?.end ?? 10000) / 1000).toStringAsFixed(1)),
+                  ((values?.end ?? 10000) / 1000).toStringAsFixed(1)),
               style: greySimpleTitle,
             )
           ],
