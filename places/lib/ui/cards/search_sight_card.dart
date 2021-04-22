@@ -12,8 +12,8 @@ class SearchSightCard extends StatelessWidget {
   final Sight sight;
 
   SearchSightCard({
-    Key key,
-    @required this.sight,
+    Key? key,
+    required this.sight,
   }) : super(key: key);
 
   @override
@@ -66,12 +66,12 @@ class SearchSightCard extends StatelessWidget {
         children: [
           SubTitleWidget(
             name: sight.name,
-            paddings: topWidgetPadding,
+            padding: topWidgetPadding,
           ),
           SubTitleWidget(
             name: sight.type.name,
             style: greySimpleTitle,
-            paddings: topWidgetPadding,
+            padding: topWidgetPadding,
           ),
           SeparatorWidget(),
         ],

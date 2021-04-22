@@ -12,7 +12,10 @@ import 'package:places/ui/widgets/custom_page_view_indicator.dart';
 /// Widget for OnBoarding page
 class OnBoardingScreen extends StatefulWidget {
   static const routeName = '/onBoardingScreen';
-  OnBoardingScreen({Key key}) : super(key: key);
+
+  OnBoardingScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
@@ -24,10 +27,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-      appBar:  AppBar(
+      appBar: AppBar(
         elevation: 0,
         actions: [
           FlatButton(
@@ -64,8 +65,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           isButtonVisible
               ? Padding(
-                padding: standardWidgetPadding,
-                child: CustomButtonWidget(
+                  padding: standardWidgetPadding,
+                  child: CustomButtonWidget(
                     title: startButtonTitle,
                     onPressed: () {
                       Navigator.pushReplacementNamed(
@@ -74,7 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       );
                     },
                   ),
-              )
+                )
               : Container(
                   height: 100,
                 )

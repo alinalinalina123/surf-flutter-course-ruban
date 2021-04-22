@@ -7,10 +7,10 @@ class CustomFloatingActionButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const CustomFloatingActionButton({
-    Key key,
-    @required this.title,
-    this.icon,
-    this.onPressed,
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.onPressed,
   }) : super(key: key);
 
   @override

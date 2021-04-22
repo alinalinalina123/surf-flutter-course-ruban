@@ -20,7 +20,7 @@ class SearchSightScreen extends StatefulWidget {
 
 class _SearchSightScreenState extends State<SearchSightScreen> {
   String queryString = "";
-  List<Sight> filteredSights;
+  List<Sight> filteredSights = [];
 
   @override
   Widget build(BuildContext context) {

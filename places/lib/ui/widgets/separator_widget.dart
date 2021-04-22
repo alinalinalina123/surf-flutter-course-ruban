@@ -4,7 +4,7 @@ import 'package:places/ui/res/text_styles.dart';
 //Widget to define custom app divider
 class SeparatorWidget extends StatelessWidget {
 
-  const SeparatorWidget({Key key})
+  const SeparatorWidget({Key? key})
       : super(key: key);
 
   @override

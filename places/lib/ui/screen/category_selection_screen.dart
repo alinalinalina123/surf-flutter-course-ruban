@@ -11,12 +11,12 @@ import 'package:places/ui/widgets/custom_button_widget.dart';
 
 class CategorySelectionScreenArguments {
   final void Function(Category) notifyParent;
-  final Category initialCategory;
+  final Category? initialCategory;
 
   CategorySelectionScreenArguments({
-    Key key,
+    Key? key,
     this.initialCategory,
-    this.notifyParent,
+    required this.notifyParent,
   });
 }
 
@@ -26,7 +26,7 @@ class CategorySelectionScreen extends StatefulWidget {
       '/mainScreen/sightListScreen/searchScreen/filtersScreen/categorySelectionScreen';
 
   CategorySelectionScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -35,12 +35,12 @@ class CategorySelectionScreen extends StatefulWidget {
 }
 
 class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
-  int selectedRadioTile;
+  int? selectedRadioTile;
 
   @override
   Widget build(BuildContext context) {
     final CategorySelectionScreenArguments input =
-    ModalRoute.of(context).settings.arguments as CategorySelectionScreenArguments;
+    ModalRoute.of(context)?.settings.arguments as CategorySelectionScreenArguments;
     return Scaffold(
       appBar: CustomAppBar(
         title: categoryPageTitle,
@@ -67,13 +67,13 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
 
   Widget _buildCategoryCell(Category category, CategorySelectionScreenArguments input) {
     return ListTile(
-      selected: category.type.index == selectedRadioTile ?? input.initialCategory?.type?.index,
+      selected: category.type.index == (selectedRadioTile ?? input.initialCategory?.type.index),
       selectedTileColor: Colors.transparent,
       title: Text(
         category.name,
         style: greySimpleTitle,
       ),
-      trailing: category.type.index == selectedRadioTile ?? input.initialCategory?.type?.index
+      trailing: category.type.index == (selectedRadioTile ?? input.initialCategory?.type.index)
           ? Icon(
               Icons.done,
               color: colorGreen,

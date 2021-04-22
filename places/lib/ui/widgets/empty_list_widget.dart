@@ -8,7 +8,7 @@ import 'package:places/ui/widgets/sub_title_widget.dart';
 class EmptyListWidget extends StatelessWidget {
   final SightStateType type;
 
-  const EmptyListWidget({Key key, @required this.type}) : super(key: key);
+  const EmptyListWidget({Key? key, required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +28,25 @@ class EmptyListWidget extends StatelessWidget {
               name:
                   type == SightStateType.initial ? emptySearchText : emptyText,
               style: greyTitleLightStyle,
-              paddings: titleWidgetPadding,
+              padding: titleWidgetPadding,
             ),
             if (type == SightStateType.want_to_visit)
               SubTitleWidget(
                 name: emptyWantToVisitText,
                 style: greySubTitleLightStyle,
-                paddings: bottomWidgetPadding,
+                padding: bottomWidgetPadding,
               ),
             if (type == SightStateType.visited)
               SubTitleWidget(
                 name: emptyVisitedText,
                 style: greySubTitleLightStyle,
-                paddings: bottomWidgetPadding,
+                padding: bottomWidgetPadding,
               ),
             if (type == SightStateType.initial)
               SubTitleWidget(
                 name: emptySearchDescriptionText,
                 style: greySubTitleLightStyle,
-                paddings: bottomWidgetPadding,
+                padding: bottomWidgetPadding,
               ),
           ],
           mainAxisAlignment: MainAxisAlignment.center,

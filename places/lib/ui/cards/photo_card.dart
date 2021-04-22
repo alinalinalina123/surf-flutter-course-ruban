@@ -14,10 +14,10 @@ class PhotoCard extends StatelessWidget {
   final void Function() updatePhotos;
 
   PhotoCard({
-    Key key,
-    @required this.source,
-    @required this.index,
-    @required this.updatePhotos,
+    Key? key,
+    required this.source,
+    required this.index,
+    required this.updatePhotos,
   }) : super(key: key);
 
   @override

@@ -9,32 +9,32 @@ class TabNavigationItem {
   final Widget title;
   final Icon icon;
 
-  TabNavigationItem({
-    @required this.page,
-    @required this.title,
-    @required this.icon,
-  });
+  TabNavigationItem(
+    this.page,
+    this.title,
+    this.icon,
+  );
 
   static List<TabNavigationItem> get items => [
     TabNavigationItem(
-      page: SightListScreen(),
-      icon: Icon(Icons.list_alt),
-      title: Text(""),
+       SightListScreen(),
+       Text(""),
+       Icon(Icons.list_alt),
     ),
     TabNavigationItem(
-      page: Scaffold(),
-      icon: Icon(Icons.map_outlined),
-      title: Text(""),
+       Scaffold(),
+       Text(""),
+       Icon(Icons.map_outlined),
     ),
     TabNavigationItem(
-      page: VisitingScreen(),
-      icon: Icon(Icons.favorite_outline_rounded),
-      title: Text(""),
+       VisitingScreen(),
+       Text(""),
+       Icon(Icons.favorite_outline_rounded),
     ),
     TabNavigationItem(
-      page: SettingsScreen(),
-      icon: Icon(Icons.settings),
-      title: Text(""),
+       SettingsScreen(),
+       Text(""),
+       Icon(Icons.settings),
     ),
   ];
 }

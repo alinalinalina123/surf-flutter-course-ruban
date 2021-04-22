@@ -3,16 +3,16 @@ import 'package:places/domain/sight_type.dart';
 
 //Data class for category
 class Category {
-  SightType type;
-  String name;
-  bool isSelected;
-  String iconName;
+  late SightType type;
+  late String name;
+  late bool isSelected;
+  late String iconName;
 
-  Category({
-    @required SightType type,
-    @required bool isSelected,
-    @required String iconName,
-  }) {
+  Category(
+     SightType type,
+     bool isSelected,
+     String iconName,
+  ) {
     this.type = type;
     this.name = type.name;
     this.isSelected = isSelected;

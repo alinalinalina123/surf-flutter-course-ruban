@@ -10,7 +10,7 @@ import 'package:places/utils/text_formatter_coordinates.dart';
 
 //Widget for custom input field
 class CustomInputField extends StatefulWidget {
-  final String hint;
+  final String? hint;
   final void Function(String) onChanged;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -18,13 +18,13 @@ class CustomInputField extends StatefulWidget {
   final GlobalKey formKey;
 
   CustomInputField({
-    Key key,
-    @required this.onChanged,
+    Key? key,
+    required this.onChanged,
     this.hint,
-    @required this.controller,
-    @required this.focusNode,
-    @required this.formKey,
-    this.type,
+    required this.controller,
+    required this.focusNode,
+    required this.formKey,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -71,11 +71,11 @@ class _CustomInputFieldState extends State<CustomInputField> {
             : null,
         inputFormatters: _inputForNumbers()
             ? <TextInputFormatter>[
-                TextFormatterForCoordinates(type: widget.type),
+                TextFormatterForCoordinates(widget.type),
               ]
             : null,
-        validator: (String value) {
-          return _validateInput(value);
+        validator: (String? value) {
+          return _validateInput(value ?? "");
         },
         decoration: InputDecoration(
           suffixIcon: _showClearButton
@@ -107,7 +107,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
     );
   }
 
-  String _validateInput(String value) {
+  String? _validateInput(String value) {
     if (widget.controller.text.length == 0) return inputEmptyErrorTitle;
     if ((widget.type == InputFieldType.lat ||
             widget.type == InputFieldType.lon) &&
@@ -134,6 +134,6 @@ extension Utility on BuildContext {
   void nextEditableTextFocus() {
     do {
       FocusScope.of(this).nextFocus();
-    } while (FocusScope.of(this).focusedChild.context.widget is! EditableText);
+    } while (FocusScope.of(this).focusedChild?.context?.widget is! EditableText);
   }
 }

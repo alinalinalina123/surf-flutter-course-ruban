@@ -81,13 +81,12 @@ void updateStateOfData() {
 }
 
 final List<Category> categories = [
-  Category(type: SightType.hotel, isSelected: false, iconName: hotelIcon),
-  Category(
-      type: SightType.restourant, isSelected: false, iconName: restourantIcon),
-  Category(type: SightType.place, isSelected: false, iconName: placeIcon),
-  Category(type: SightType.park, isSelected: false, iconName: parkIcon),
-  Category(type: SightType.museum, isSelected: false, iconName: museumIcon),
-  Category(type: SightType.cafe, isSelected: false, iconName: cafeIcon),
+  Category(SightType.hotel, false, hotelIcon),
+  Category(SightType.restourant, false, restourantIcon),
+  Category(SightType.place, false, placeIcon),
+  Category(SightType.park, false, parkIcon),
+  Category(SightType.museum, false, museumIcon),
+  Category(SightType.cafe, false, cafeIcon),
 ];
 
 final List<String> photos = [

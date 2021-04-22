@@ -10,8 +10,8 @@ class CustomPageViewIndicator extends AnimatedWidget {
   final IndicatorType type;
 
   CustomPageViewIndicator({
-    this.controller,
-    this.itemCount,
+    required this.controller,
+    required this.itemCount,
     this.type = IndicatorType.lines,
   }) : super(listenable: controller);
 
@@ -33,13 +33,11 @@ class CustomPageViewIndicator extends AnimatedWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: dots,
         );
-        break;
       case IndicatorType.dots:
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: dots,
         );
-        break;
     }
   }
 
@@ -66,9 +64,7 @@ class CustomPageViewIndicator extends AnimatedWidget {
       height: 8,
       child: Material(
         type: index == currentPage ? MaterialType.card : MaterialType.circle,
-        color: index == currentPage
-            ? colorGreen
-            : colorGrey.withOpacity(0.5),
+        color: index == currentPage ? colorGreen : colorGrey.withOpacity(0.5),
       ),
     );
   }

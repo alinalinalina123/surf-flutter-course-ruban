@@ -18,6 +18,7 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,26 +56,31 @@ class _SightListScreenState extends State<SightListScreen> {
                 ]),
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                 (context, index) {
-                  return SightCard(
-                    sight: mocks[index],
-                    index: index,
-                    stateUpdated: () {
-                      setState(() {
-                        updateStateOfData();
-                      });
-                    },
-                  );
-                },
-                childCount: mocks.length,
-              ),
-            ),
+           _buildCollection(),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildCollection() {
+    var list = SliverList(
+      delegate: SliverChildBuilderDelegate(
+            (context, index) {
+          return SightCard(
+            sight: mocks[index],
+            index: index,
+            stateUpdated: () {
+              setState(() {
+                updateStateOfData();
+              });
+            },
+          );
+        },
+        childCount: mocks.length,
+      ),
+    );
+    return  list;
   }
 }
 

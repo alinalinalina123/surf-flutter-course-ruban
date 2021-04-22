@@ -6,28 +6,38 @@ import 'package:places/ui/screen/search_sight_screen.dart';
 import 'package:places/ui/widgets/search_bar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final AppBarType type;
-  final IconData backButtonIcon;
-  final String backButtonTitle;
-  final VoidCallback onClear;
-  final VoidCallback onSkip;
-  final Function(String) onQueryChanged;
-  final Function(List<Sight>) onFilterApplied;
-  final TabBar tabBar;
+  late final String title;
+  late final AppBarType type;
+  late final IconData? backButtonIcon;
+  late final String? backButtonTitle;
+  late final VoidCallback onClear;
+  late final VoidCallback onSkip;
+  late final Function(String) onQueryChanged;
+  late final Function(List<Sight>) onFilterApplied;
+  late final TabBar? tabBar;
 
-  const CustomAppBar(
-      {Key key,
-      @required this.title,
-      @required this.type,
-      this.backButtonIcon,
-      this.backButtonTitle,
-      this.onClear,
-      this.tabBar,
-      this.onSkip,
-      this.onQueryChanged,
-      this.onFilterApplied})
-      : super(key: key);
+  CustomAppBar({
+    Key? key,
+    required String title,
+    AppBarType? type,
+    IconData? backButtonIcon,
+    String? backButtonTitle,
+    VoidCallback? onClear,
+    VoidCallback? onSkip,
+    Function(String)? onQueryChanged,
+    Function(List<Sight>)? onFilterApplied,
+    TabBar? tabBar,
+  }) : super(key: key) {
+    this.title = title;
+    this.type = type ?? AppBarType.simple;
+    this.backButtonTitle = backButtonTitle;
+    this.backButtonIcon = backButtonIcon;
+    this.onFilterApplied = onFilterApplied ?? (List<Sight> list){};
+    this.onQueryChanged = onQueryChanged ?? (String query){};
+    this.onSkip = onSkip ?? (){};
+    this.onClear = onClear ?? (){};
+    this.tabBar = tabBar;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +63,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             bottom: tabBar,
           ),
         );
-        break;
 
       case AppBarType.search:
         return SizedBox(
@@ -90,6 +99,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         );
+
       case AppBarType.main:
         return SliverAppBar(
           expandedHeight: preferredSize.height,
@@ -107,11 +117,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         );
-        break;
     }
   }
 
-  Widget _leadingWidget(BuildContext context) {
+  Widget? _leadingWidget(BuildContext context) {
     if (backButtonIcon != null)
       return IconButton(
         icon: Icon(backButtonIcon),
@@ -121,7 +130,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
     if (backButtonTitle != null)
       return FlatButton(
-        child: Text(backButtonTitle),
+        child: Text(backButtonTitle ?? ""),
         textColor: Theme.of(context).accentColor,
         onPressed: () {
           Navigator.pop(context);

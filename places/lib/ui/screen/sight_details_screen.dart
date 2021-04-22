@@ -17,8 +17,8 @@ class SightDetailsBottomSheet extends StatefulWidget {
   final int sightId;
 
   SightDetailsBottomSheet({
-    Key key,
-    @required this.sightId,
+    Key? key,
+    required this.sightId,
   }) : super();
 
   @override
@@ -61,12 +61,12 @@ class _SightDetailsBottomSheetState extends State<SightDetailsBottomSheet> {
                                 SubTitleWidget(
                                   name: sight.type.name,
                                   style: Theme.of(context).textTheme.headline2,
-                                  paddings: leftWidgetPadding,
+                                  padding: leftWidgetPadding,
                                 ),
                                 SubTitleWidget(
                                   name: "закрыто до 09:00",
                                   style: greySubTitleLightStyle,
-                                  paddings: leftWidgetPadding,
+                                  padding: leftWidgetPadding,
                                 ),
                               ],
                               mainAxisSize: MainAxisSize.max,

@@ -9,9 +9,12 @@ class ButtonWithIconWidget extends StatelessWidget {
   final String iconName;
   final VoidCallback onPressed;
 
-  const ButtonWithIconWidget(
-      {Key key, @required this.title, this.iconName, @required this.onPressed})
-      : super(key: key);
+  const ButtonWithIconWidget({
+    Key? key,
+    required this.title,
+    required this.iconName,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

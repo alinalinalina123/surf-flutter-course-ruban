@@ -4,31 +4,35 @@ import 'package:places/ui/res/strings.dart';
 
 ///OnBoarding data
 class OnBoardingItem {
-  final String assetName;
-  final String title;
-  final String description;
+  late final String assetName;
+  late final String title;
+  late final String description;
 
-  OnBoardingItem({
-    @required this.assetName,
-    @required this.title,
-    @required this.description,
-  });
+  OnBoardingItem(
+    String assetName,
+    String title,
+    String description,
+  ) {
+    this.assetName = assetName;
+    this.title = title;
+    this.description = description;
+  }
 
   static List<OnBoardingItem> get items => [
-    OnBoardingItem(
-      assetName: onboarding_1,
-      description: onBoardingDescription_1,
-      title: onBoardingTitle_1,
-    ),
-    OnBoardingItem(
-      assetName: onboarding_2,
-      description: onBoardingDescription_2,
-      title: onBoardingTitle_2,
-    ),
-    OnBoardingItem(
-      assetName: onboarding_3,
-      description: onBoardingDescription_3,
-      title: onBoardingTitle_3,
-    ),
-  ];
+        OnBoardingItem(
+          onboarding_1,
+          onBoardingTitle_1,
+          onBoardingDescription_1,
+        ),
+        OnBoardingItem(
+          onboarding_2,
+          onBoardingTitle_2,
+          onBoardingDescription_2,
+        ),
+        OnBoardingItem(
+          onboarding_3,
+          onBoardingTitle_3,
+          onBoardingDescription_3,
+        ),
+      ];
 }

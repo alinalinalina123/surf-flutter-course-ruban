@@ -6,6 +6,7 @@ import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/field_types/input_field_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
+import 'package:places/domain/sight_type.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/cards/photo_card.dart';
 import 'package:places/ui/res/strings.dart';
@@ -24,7 +25,7 @@ class AddSightScreen extends StatefulWidget {
 }
 
 class _AddSightScreenState extends State<AddSightScreen> {
-  Category _categorySelected;
+  Category? _categorySelected;
   TextEditingController _controllerCategory = TextEditingController();
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerLatitude = TextEditingController();
@@ -153,6 +154,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
         formKey: _nameKey,
         controller: _controllerName,
         focusNode: _focusNodeName,
+        type: InputFieldType.simple,
         onChanged: (String value) {},
       ),
     );
@@ -219,19 +221,20 @@ class _AddSightScreenState extends State<AddSightScreen> {
     return CustomButtonWidget(
       title: createTitle,
       onPressed: () {
-        if (_nameKey.currentState.validate() &&
-            _latKey.currentState.validate() &&
-            _lonKey.currentState.validate() &&
-            _descriptionKey.currentState.validate()) {
+        if (_nameKey.currentState?.validate() == true &&
+            _latKey.currentState?.validate() == true &&
+            _lonKey.currentState?.validate() == true &&
+            _descriptionKey.currentState?.validate() == true
+        ) {
           var sight = Sight(
             id: mocks.length + 1,
-            name: _controllerName.text ?? "",
+            name: _controllerName.text,
             urls: [""],
             lat: double.tryParse(_controllerLatitude.text) ?? 0.0,
             lon: double.tryParse(_controllerLongitude.text) ?? 0.0,
-            type: _categorySelected.type,
+            type: _categorySelected?.type ?? SightType.museum,
             state: SightStateType.initial,
-            details: _controllerDescription.text ?? "",
+            details: _controllerDescription.text,
           );
           mocks.add(sight);
           Navigator.pop(context);
