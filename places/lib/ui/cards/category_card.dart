@@ -10,9 +10,9 @@ class CategoryCard extends StatefulWidget {
   final void Function(Category) notifyParent;
 
   CategoryCard({
-    Key key,
-    @required this.category,
-    @required this.notifyParent,
+    Key? key,
+    required this.category,
+    required this.notifyParent,
   }) : super(key: key);
 
   @override

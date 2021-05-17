@@ -6,14 +6,14 @@ import 'package:places/ui/res/text_styles.dart';
 /// Widget to display button with customized title and background color
 class CustomButtonWidget extends StatelessWidget {
   final String title;
-  final String iconName;
+  final String? iconName;
   final bool isEnabled;
   final VoidCallback onPressed;
 
   const CustomButtonWidget({
-    Key key,
-    @required this.title,
-    @required this.onPressed,
+    Key? key,
+    required this.title,
+    required this.onPressed,
     this.iconName,
     this.isEnabled = true,
   }) : super(key: key);
@@ -30,7 +30,7 @@ class CustomButtonWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            icon: SvgPicture.asset(iconName),
+            icon: SvgPicture.asset(iconName ?? ""),
             label: Text(
               title,
               style: whiteTitleStyle,

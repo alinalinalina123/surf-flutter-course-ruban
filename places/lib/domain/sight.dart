@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
@@ -6,25 +5,25 @@ import 'package:places/ui/res/strings.dart';
 
 //Data class for sight
 class Sight {
-  int id;
-  String name;
-  double lat;
-  double lon;
-  List<String> urls;
-  String details;
-  SightType type;
-  SightStateType state;
-  DateTime dateOfVisit;
+  late int id;
+  late String name;
+  late double lat;
+  late double lon;
+  late List<String> urls;
+  late String details;
+  late SightType type;
+  late SightStateType? state;
+  late DateTime dateOfVisit;
 
   Sight({
-    @required int id,
-    @required String name,
-    @required List<String> urls,
-    @required double lat,
-    @required double lon,
-    @required String details,
-    @required SightType type,
-    SightStateType state,
+    required int id,
+    required String name,
+    required List<String> urls,
+    required double lat,
+    required double lon,
+    required String details,
+    required SightType type,
+    SightStateType? state,
   }) {
     this.id = id;
     this.name = name;

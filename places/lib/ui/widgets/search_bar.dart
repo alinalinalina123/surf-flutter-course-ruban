@@ -7,18 +7,23 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/screen/filters_screen.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  final VoidCallback onPressed;
-  final Function(String) onQueryChanged;
-  final Function(List<Sight>) onFilterApplied;
-  final bool isForNavigation;
+  late final VoidCallback onPressed;
+  late final Function(String) onQueryChanged;
+  late final Function(List<Sight>) onFilterApplied;
+  late final bool isForNavigation;
 
   CustomSearchBar({
-    Key key,
-    @required this.onPressed,
-    @required this.isForNavigation,
-    this.onQueryChanged,
-    this.onFilterApplied,
-  }) : super(key: key);
+    Key? key,
+    required VoidCallback onPressed,
+    Function(String)? onQueryChanged,
+    Function(List<Sight>)? onFilterApplied,
+    required bool isForNavigation,
+  }) : super(key: key) {
+    this.onPressed = onPressed;
+    this.isForNavigation = isForNavigation;
+    this.onQueryChanged = onQueryChanged ?? (String query){};
+    this.onFilterApplied = onFilterApplied ?? (List<Sight> list){};
+  }
 
   @override
   _CustomSearchBarState createState() => _CustomSearchBarState();

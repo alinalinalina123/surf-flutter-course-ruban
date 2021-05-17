@@ -7,7 +7,7 @@ class ImageFullWidget extends StatelessWidget {
   final List<String> urls;
   final _controller = PageController();
 
-  ImageFullWidget({Key key, @required this.urls}) : super(key: key);
+  ImageFullWidget({Key? key, required this.urls}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

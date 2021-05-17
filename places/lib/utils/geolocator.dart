@@ -8,6 +8,17 @@ Future<Position> _determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
 
+  var defaultPosition = Position(
+    longitude: 0.0,
+    latitude: 0.0,
+    timestamp: DateTime.now(),
+    accuracy: 0,
+    altitude: 0,
+    heading: 0,
+    speed: 0,
+    speedAccuracy: 0,
+  );
+
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     return Future.error('Location services are disabled.');
@@ -23,26 +34,28 @@ Future<Position> _determinePosition() async {
     permission = await Geolocator.requestPermission();
     if (permission != LocationPermission.whileInUse &&
         permission != LocationPermission.always) {
-      return Future.error(
-          'Location permissions are denied.');
+      return Future.error('Location permissions are denied.');
     }
   }
 
-  return await Geolocator.getLastKnownPosition();
+  return await Geolocator.getLastKnownPosition() ?? defaultPosition;
 }
 
 /// Calculate distance between user and sight
-Future<List<Sight>> distanceBetweenUserAndSight(List<Sight> sights, RangeValues range) async {
-  if(range.start == null && range.end == null) {
+Future<List<Sight>> distanceBetweenUserAndSight(
+    List<Sight> sights, RangeValues? range) async {
+  if (range?.start == null && range?.end == null) {
     return mocks;
   }
 
   Position position = await _determinePosition();
-  return sights.where((sight) =>
-      Geolocator.distanceBetween(
-              position.latitude, position.longitude, sight.lat, sight.lon) >=
-          range.start &&
-      Geolocator.distanceBetween(
-              position.latitude, position.longitude, sight.lat, sight.lon) <=
-          range.end).toList();
+  return sights
+      .where((sight) =>
+          Geolocator.distanceBetween(position.latitude, position.longitude,
+                  sight.lat, sight.lon) >=
+              (range?.start ?? 0) &&
+          Geolocator.distanceBetween(position.latitude, position.longitude,
+                  sight.lat, sight.lon) <=
+              (range?.end ?? 0))
+      .toList();
 }

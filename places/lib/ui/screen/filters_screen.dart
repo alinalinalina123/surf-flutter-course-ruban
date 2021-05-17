@@ -15,7 +15,7 @@ class FiltersScreen extends StatefulWidget {
       '/mainScreen/sightListScreen/searchScreen/filtersScreen';
 
   FiltersScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -23,13 +23,13 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  RangeValues values;
+  RangeValues? values;
   List<Category> categorySelected = [];
 
   @override
   Widget build(BuildContext context) {
     final Function(List<Sight>) filteredSights =
-    ModalRoute.of(context).settings.arguments as Function(List<Sight>);
+    ModalRoute.of(context)?.settings.arguments as Function(List<Sight>);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -114,7 +114,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: CustomButtonWidget(
                 title: _buttonTitle(snapshot.data),
                 onPressed: () {
-                  filteredSights(snapshot.data);
+                  filteredSights(snapshot.data ?? []);
                   Navigator.of(context).pop();
                 },
               ),
@@ -130,15 +130,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
         });
   }
 
-  String _buttonTitle(List<Sight> sightsFilteredByDistance) {
+  String _buttonTitle(List<Sight>? sightsFilteredByDistance) {
     var categoriesToApply =
         categorySelected.isEmpty ? categories : categorySelected;
-    var sightsFiltered = sightsFilteredByDistance.where((sightByDistance) =>
+    var sightsFiltered = sightsFilteredByDistance?.where((sightByDistance) =>
         categoriesToApply
             .where((category) => sightByDistance.type == category.type)
             .length >
         0);
-    return "$showButtonTitle (${sightsFiltered.length})";
+    return "$showButtonTitle (${sightsFiltered?.length ?? 0})";
   }
 
   Widget buildSlider() {

@@ -15,20 +15,26 @@ import 'package:places/ui/widgets/sub_title_widget.dart';
 /// Widget for card view of sight
 
 class SightCard extends StatefulWidget {
-  final Sight sight;
-  final int index;
-  final SightStateType type;
-  final VoidCallback stateUpdated;
-  final VoidCallback orderChanged;
+  late final Sight sight;
+  late final int index;
+  late final SightStateType type;
+  late final VoidCallback stateUpdated;
+  late final VoidCallback orderChanged;
 
-  SightCard(
-      {Key key,
-      @required this.sight,
-      @required this.index,
-      this.stateUpdated,
-      this.type = SightStateType.initial,
-      this.orderChanged})
-      : super(key: key);
+  SightCard({
+    Key? key,
+    required Sight sight,
+    required int index,
+    SightStateType? type,
+    VoidCallback? stateUpdated,
+    VoidCallback? orderChanged,
+  }) : super(key: key) {
+    this.sight = sight;
+    this.index = index;
+    this.type = type ?? SightStateType.initial;
+    this.stateUpdated = stateUpdated ?? (){};
+    this.orderChanged = orderChanged ?? (){};
+  }
 
   @override
   _SightCardState createState() => _SightCardState();
@@ -53,18 +59,15 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
 
     var target = DragTarget<Sight>(
       onWillAccept: (sight) {
+        if(sight == null) return false;
         switch (widget.type) {
           case SightStateType.initial:
             return false;
-            break;
           case SightStateType.want_to_visit:
             return listWantToVisit.indexOf(sight) != widget.index;
-            break;
           case SightStateType.visited:
             return listVisited.indexOf(sight) != widget.index;
-            break;
         }
-        return false;
       },
       onAccept: (sight) {
         switch (widget.type) {
@@ -88,7 +91,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
             break;
         }
       },
-      builder: (BuildContext context, List<Sight> candidateData,
+      builder: (BuildContext context, List<Sight?> candidateData,
           List<dynamic> rejectedData) {
         return Column(
           children: [
@@ -101,10 +104,8 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
     switch (widget.type) {
       case SightStateType.initial:
         return card;
-        break;
       default:
         return target;
-        break;
     }
   }
 
@@ -193,7 +194,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
         SubTitleWidget(
           name: widget.sight.type.name,
           style: whiteTitleStyle,
-          paddings: standardWidgetPadding,
+          padding: standardWidgetPadding,
         ),
         PositionedIconButtonWidget(
           top: 16,
@@ -224,14 +225,14 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
     );
   }
 
-  Future<DateTime> _openDateTimeSlection() async {
+  Future<DateTime?> _openDateTimeSlection() async {
     return await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
         lastDate: DateTime(2025),
-        locale : const Locale(russianLanguageCode, russianCountryCode),
-        builder: (BuildContext context, Widget child) {
+        locale: const Locale(russianLanguageCode, russianCountryCode),
+        builder: (BuildContext context, Widget? child) {
           return Theme(
             data: ThemeData.dark().copyWith(
               colorScheme: ColorScheme.dark(
@@ -242,7 +243,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
               ),
               dialogBackgroundColor: Theme.of(context).primaryColor,
             ),
-            child: child,
+            child: child ?? Container(),
           );
         });
   }
@@ -279,24 +280,24 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
       children: [
         SubTitleWidget(
           name: widget.sight.name,
-          paddings: topWidgetPadding,
+          padding: topWidgetPadding,
         ),
         if (widget.type == SightStateType.visited)
           SubTitleWidget(
             name: widget.sight.stateDescription,
             style: greenSubTitleStyle,
-            paddings: bottomWidgetPadding,
+            padding: bottomWidgetPadding,
           ),
         if (widget.type == SightStateType.want_to_visit)
           SubTitleWidget(
             name: widget.sight.stateDescription,
             style: greySubTitleLightStyle,
-            paddings: bottomWidgetPadding,
+            padding: bottomWidgetPadding,
           ),
         SubTitleWidget(
           name: widget.sight.details,
           style: greySubTitleLightStyle,
-          paddings: bottomWidgetPadding,
+          padding: bottomWidgetPadding,
         )
       ],
       mainAxisSize: MainAxisSize.max,
