@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/strings.dart';
 

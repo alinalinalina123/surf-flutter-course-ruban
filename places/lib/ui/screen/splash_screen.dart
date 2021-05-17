@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/screen/on_boarding_screen.dart';
 
-
 //Entry widget of application
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splashScreen';
