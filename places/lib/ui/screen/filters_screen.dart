@@ -85,41 +85,37 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   Widget buildCategories() {
-    print("ashjdkjsa ${MediaQuery.of(context).size.height}");
-    var isSmallSized = MediaQuery.of(context).size.height < 600;
-    var categoryCards = List.generate(
-      categories.length,
-      (index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CategoryCard(
-            category: categories[index],
-            notifyParent: refreshCategories,
-          ),
+  child: isSmallSizedPlatform
+          ? SizedBox(
+              height: 70.0,
+              child: ListView(
+                children: cards,
+                scrollDirection: Axis.horizontal,
+              ),
+            )
+          : SizedBox(
+              height: 250.0,
         );
       },
     );
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: isSmallSized
+      child: isSmallSizedPlatform
           ? SizedBox(
-              height: 100,
+              height: 70.0,
               child: ListView(
+                children: cards,
                 scrollDirection: Axis.horizontal,
-                children: categoryCards,
-                physics: Platform.isAndroid
-                    ? ClampingScrollPhysics()
-                    : BouncingScrollPhysics(),
               ),
             )
           : SizedBox(
-              height: 250,
+              height: 250.0,
               child: GridView.count(
                 crossAxisCount: 3,
                 crossAxisSpacing: 8.0,
                 mainAxisSpacing: 8.0,
-                children: categoryCards,
+                children: cards,
               ),
             ),
     );

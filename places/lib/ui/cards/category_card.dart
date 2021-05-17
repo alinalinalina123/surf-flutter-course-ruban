@@ -40,7 +40,7 @@ class _CategoryCardState extends State<CategoryCard> {
       ],
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 
