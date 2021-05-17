@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/sight.dart';
@@ -28,8 +30,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Function(List<Sight>) filteredSights =
-    ModalRoute.of(context)?.settings.arguments as Function(List<Sight>);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -62,7 +62,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 ),
                 buildCategories(),
                 buildSlider(),
-                buildSubmitButton(filteredSights),
+                buildSubmitButton(),
               ],
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -85,26 +85,47 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   Widget buildCategories() {
+    print("ashjdkjsa ${MediaQuery.of(context).size.height}");
+    var isSmallSized = MediaQuery.of(context).size.height < 600;
+    var categoryCards = List.generate(
+      categories.length,
+      (index) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CategoryCard(
+            category: categories[index],
+            notifyParent: refreshCategories,
+          ),
+        );
+      },
+    );
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SizedBox(
-        height: 250.0,
-        child: GridView.count(
-          crossAxisCount: 3,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-          children: List.generate(categories.length, (index) {
-            return CategoryCard(
-              category: categories[index],
-              notifyParent: refreshCategories,
-            );
-          }),
-        ),
-      ),
+      child: isSmallSized
+          ? SizedBox(
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: categoryCards,
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
+              ),
+            )
+          : SizedBox(
+              height: 250,
+              child: GridView.count(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                children: categoryCards,
+              ),
+            ),
     );
   }
 
-  Widget buildSubmitButton(Function(List<Sight>) filteredSights) {
+  Widget buildSubmitButton() {
     return FutureBuilder<List<Sight>>(
         future: distanceBetweenUserAndSight(mocks, values),
         builder: (context, snapshot) {
@@ -114,8 +135,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: CustomButtonWidget(
                 title: _buttonTitle(snapshot.data),
                 onPressed: () {
-                  filteredSights(snapshot.data ?? []);
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(snapshot.data ?? []);
                 },
               ),
             );
@@ -123,8 +143,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           return CustomButtonWidget(
             title: _buttonTitle(mocks),
             onPressed: () {
-              filteredSights(mocks);
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(mocks);
             },
           );
         });

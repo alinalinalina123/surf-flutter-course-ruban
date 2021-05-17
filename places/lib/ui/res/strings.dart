@@ -5,6 +5,7 @@ const simpleDateFormat = "dd MM. yyyy";
 
 // Buttons title
 const clearButtonTitle = 'Очистить';
+const applyButtonTitle = 'Применить';
 const startButtonTitle = 'На старт';
 const skipButtonTitle = 'Пропустить';
 const cameraButtonTitle = 'Камера';

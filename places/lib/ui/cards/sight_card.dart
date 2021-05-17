@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
@@ -32,8 +35,8 @@ class SightCard extends StatefulWidget {
     this.sight = sight;
     this.index = index;
     this.type = type ?? SightStateType.initial;
-    this.stateUpdated = stateUpdated ?? (){};
-    this.orderChanged = orderChanged ?? (){};
+    this.stateUpdated = stateUpdated ?? () {};
+    this.orderChanged = orderChanged ?? () {};
   }
 
   @override
@@ -59,7 +62,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
 
     var target = DragTarget<Sight>(
       onWillAccept: (sight) {
-        if(sight == null) return false;
+        if (sight == null) return false;
         switch (widget.type) {
           case SightStateType.initial:
             return false;
@@ -217,7 +220,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
                 : shareIconLight,
             onPressed: () {
               if (widget.type == SightStateType.want_to_visit) {
-                _openDateTimeSlection();
+                _openDateTimeSelection();
               }
             },
           )
@@ -225,27 +228,61 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
     );
   }
 
-  Future<DateTime?> _openDateTimeSlection() async {
-    return await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2025),
-        locale: const Locale(russianLanguageCode, russianCountryCode),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.dark().copyWith(
-              colorScheme: ColorScheme.dark(
-                primary: colorGreen,
-                onPrimary: Theme.of(context).accentColor,
-                surface: Theme.of(context).primaryColor,
-                onSurface: Theme.of(context).accentColor,
+  Future<DateTime?> _openDateTimeSelection() async {
+    if (Platform.isAndroid) {
+      return await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime(2025),
+          locale: const Locale(russianLanguageCode, russianCountryCode),
+          builder: (BuildContext context, Widget? child) {
+            return Theme(
+              data: ThemeData.dark().copyWith(
+                colorScheme: ColorScheme.dark(
+                  primary: colorGreen,
+                  onPrimary: Theme.of(context).accentColor,
+                  surface: Theme.of(context).primaryColor,
+                  onSurface: Theme.of(context).accentColor,
+                ),
+                dialogBackgroundColor: Theme.of(context).primaryColor,
               ),
-              dialogBackgroundColor: Theme.of(context).primaryColor,
-            ),
-            child: child ?? Container(),
-          );
-        });
+              child: child ?? Container(),
+            );
+          });
+    } else {
+      return await showCupertinoModalPopup(
+        context: context,
+        builder: (_) => Container(
+          height: 300,
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                height: 200,
+                child: CupertinoDatePicker(
+                  initialDateTime: DateTime.now(),
+                  onDateTimeChanged: (selectedDate) {
+                    setState(() {});
+                  },
+                ),
+              ),
+
+              // Close the modal
+              CupertinoButton(
+                child: Text(
+                  applyButtonTitle,
+                  style: TextStyle(
+                    color: colorGreen,
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   void _deleteFromList() {

@@ -21,8 +21,8 @@ class CustomSearchBar extends StatefulWidget {
   }) : super(key: key) {
     this.onPressed = onPressed;
     this.isForNavigation = isForNavigation;
-    this.onQueryChanged = onQueryChanged ?? (String query){};
-    this.onFilterApplied = onFilterApplied ?? (List<Sight> list){};
+    this.onQueryChanged = onQueryChanged ?? (String query) {};
+    this.onFilterApplied = onFilterApplied ?? (List<Sight> list) {};
   }
 
   @override
@@ -79,11 +79,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                     Navigator.pushNamed(
                       context,
                       FiltersScreen.routeName,
-                      arguments: {
-                        (List<Sight> sights) {
-                          widget.onFilterApplied(sights);
-                        },
-                      },
+                    ).then(
+                      (sights) => widget.onFilterApplied(sights as List<Sight>),
                     );
                   },
                   child: Padding(
