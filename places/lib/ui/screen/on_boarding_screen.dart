@@ -28,12 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   void initState() {
-    test();
     super.initState();
-  }
-
-  void test() async {
-    await PlaceRepository().allPlaces();
   }
 
   @override

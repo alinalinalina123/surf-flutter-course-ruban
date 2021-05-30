@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/place_interactor.dart';
+import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings.dart';
@@ -27,9 +29,24 @@ class SightDetailsBottomSheet extends StatefulWidget {
 }
 
 class _SightDetailsBottomSheetState extends State<SightDetailsBottomSheet> {
+
+  Sight? sight;
+
+  @override
+  void initState() {
+    _place();
+    super.initState();
+  }
+
+  void _place() async {
+    var sightDetails = await placeInteractor.getPlaceDetails(widget.sightId);
+    setState(() {
+      sight = sightDetails;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    var sight = mocks.firstWhere((sight) => sight.id == widget.sightId);
     return Container(
       height: (MediaQuery.of(context).size.height / 4) * 3,
       color: bottomSheetColor,
@@ -47,19 +64,19 @@ class _SightDetailsBottomSheetState extends State<SightDetailsBottomSheet> {
                 CustomScrollView(
                   slivers: [
                     SliverPersistentHeader(
-                      delegate: SliverFullImageDelegate(sight.urls),
+                      delegate: SliverFullImageDelegate(sight?.urls ?? List.empty()),
                     ),
                     SliverFillRemaining(
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
                             TitleWidget(
-                              name: sight.name,
+                              name: sight?.name ?? "",
                             ),
                             Row(
                               children: [
                                 SubTitleWidget(
-                                  name: sight.type.name,
+                                  name: sight?.type.name ?? "",
                                   style: Theme.of(context).textTheme.headline2,
                                   padding: leftWidgetPadding,
                                 ),
@@ -73,7 +90,7 @@ class _SightDetailsBottomSheetState extends State<SightDetailsBottomSheet> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                             ),
-                            SubTitleWidget(name: sight.details),
+                            SubTitleWidget(name: sight?.details ?? ""),
                             CustomButtonWidget(
                               title: buildDirectionButtonTitle,
                               iconName: directionIconLight,
