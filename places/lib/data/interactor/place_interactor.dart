@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/data/model/requests/filter_criteria.dart';
 import 'package:places/data/model/responses/place_dto_response.dart';
 import 'package:places/data/repository/place_repository.dart';
 import 'package:places/domain/category.dart';

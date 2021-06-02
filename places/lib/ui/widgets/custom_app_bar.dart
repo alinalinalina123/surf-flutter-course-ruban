@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
-import 'package:places/domain/sight.dart';
+import 'package:places/domain/filter_screen_input.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/search_sight_screen.dart';
 import 'package:places/ui/widgets/search_bar.dart';
@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   late final VoidCallback onClear;
   late final VoidCallback onSkip;
   late final Function(String) onQueryChanged;
-  late final Function(List<Sight>) onFilterApplied;
+  late final Function(FilterScreenInput) onFilterApplied;
   late final TabBar? tabBar;
 
   CustomAppBar({
@@ -25,14 +25,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     VoidCallback? onClear,
     VoidCallback? onSkip,
     Function(String)? onQueryChanged,
-    Function(List<Sight>)? onFilterApplied,
+    Function(FilterScreenInput)? onFilterApplied,
     TabBar? tabBar,
   }) : super(key: key) {
     this.title = title;
     this.type = type ?? AppBarType.simple;
     this.backButtonTitle = backButtonTitle;
     this.backButtonIcon = backButtonIcon;
-    this.onFilterApplied = onFilterApplied ?? (List<Sight> list){};
+    this.onFilterApplied = onFilterApplied ?? (FilterScreenInput input){};
     this.onQueryChanged = onQueryChanged ?? (String query){};
     this.onSkip = onSkip ?? (){};
     this.onClear = onClear ?? (){};
@@ -86,8 +86,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onQueryChanged: (String query) {
                   onQueryChanged(query);
                 },
-                onFilterApplied: (sights) {
-                  onFilterApplied(sights);
+                onFilterApplied: (input) {
+                  onFilterApplied(input);
                 },
                 onPressed: () {
                   Navigator.pushNamed(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/domain/category.dart';
+import 'package:places/domain/filter_screen_input.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/colors.dart';
@@ -9,20 +11,20 @@ import 'package:places/ui/screen/filters_screen.dart';
 class CustomSearchBar extends StatefulWidget {
   late final VoidCallback onPressed;
   late final Function(String) onQueryChanged;
-  late final Function(List<Sight>) onFilterApplied;
+  late final Function(FilterScreenInput)  onFilterApplied;
   late final bool isForNavigation;
 
   CustomSearchBar({
     Key? key,
     required VoidCallback onPressed,
     Function(String)? onQueryChanged,
-    Function(List<Sight>)? onFilterApplied,
+    Function(FilterScreenInput)? onFilterApplied,
     required bool isForNavigation,
   }) : super(key: key) {
     this.onPressed = onPressed;
     this.isForNavigation = isForNavigation;
     this.onQueryChanged = onQueryChanged ?? (String query) {};
-    this.onFilterApplied = onFilterApplied ?? (List<Sight> list) {};
+    this.onFilterApplied = onFilterApplied ?? (FilterScreenInput input) {};
   }
 
   @override
@@ -80,7 +82,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                       context,
                       FiltersScreen.routeName,
                     ).then(
-                      (sights) => widget.onFilterApplied(sights as List<Sight>),
+                      (input) => widget.onFilterApplied(input as FilterScreenInput),
                     );
                   },
                   child: Padding(
