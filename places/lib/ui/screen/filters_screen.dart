@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/sight.dart';
@@ -83,13 +85,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   Widget buildCategories() {
-    var isSmallSizedPlatform = MediaQuery.of(context).size.height < 600;
-    var cards = List.generate(
-      categories.length,
-      (index) {
-        return CategoryCard(
-          category: categories[index],
-          notifyParent: refreshCategories,
+  child: isSmallSizedPlatform
+          ? SizedBox(
+              height: 70.0,
+              child: ListView(
+                children: cards,
+                scrollDirection: Axis.horizontal,
+              ),
+            )
+          : SizedBox(
+              height: 250.0,
         );
       },
     );
