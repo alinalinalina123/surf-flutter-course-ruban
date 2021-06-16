@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:places/data/repository/place_repository.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
 import 'package:places/ui/res/strings.dart';
@@ -19,7 +20,21 @@ class SightListScreen extends StatefulWidget {
   _SightListScreenState createState() => _SightListScreenState();
 }
 
+
+
 class _SightListScreenState extends State<SightListScreen> {
+  var mocks = [];
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
+  void allPlaces() async {
+    var allPlaces = await PlaceRepository().allPlaces();
+    mocks.add(allPlaces);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
