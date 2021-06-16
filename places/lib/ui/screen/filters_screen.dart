@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
@@ -123,7 +124,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   Widget buildSubmitButton() {
     return FutureBuilder<List<Sight>>(
-        future: distanceBetweenUserAndSight(mocks, values),
+        future: placeInteractor.getPlacesFiltered(values, categorySelected),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Padding(
@@ -137,9 +138,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
             );
           }
           return CustomButtonWidget(
-            title: _buttonTitle(mocks),
+            title: _buttonTitle(List.empty()),
             onPressed: () {
-              Navigator.of(context).pop(mocks);
+              Navigator.of(context).pop(List.empty());
             },
           );
         });

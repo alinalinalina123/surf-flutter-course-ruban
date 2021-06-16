@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:places/data/model/requests/base_request.dart';
+import 'package:places/domain/sight.dart';
 
 class PlaceDTO implements BaseRequest {
   late int id;
   late double lat;
-  late double lon;
+  late double lng;
   late double? distance;
   late String name;
   late String placeType;
@@ -14,7 +15,7 @@ class PlaceDTO implements BaseRequest {
   PlaceDTO(
     this.id,
     this.lat,
-    this.lon,
+    this.lng,
     this.description,
     this.name,
     this.placeType,
@@ -22,11 +23,20 @@ class PlaceDTO implements BaseRequest {
     this.distance,
   );
 
+  PlaceDTO.fromSight(Sight sight) {
+   this.name = sight.name;
+   this.description = sight.details;
+   this.lat = sight.lat;
+   this.lng = sight.lon;
+   this.urls = List.empty();
+   this.placeType = sight.type.toString().split('.').last;
+  }
+
   factory PlaceDTO.fromJson(Map<dynamic, dynamic> json) {
     return PlaceDTO(
       json['id'],
       json['lat'],
-      json['lon'],
+      json['lng'],
       json['description'],
       json['name'],
       json['placeType'],
@@ -39,7 +49,7 @@ class PlaceDTO implements BaseRequest {
   String convertToRequest() {
     return jsonEncode(<String, dynamic>{
       'lat': this.lat,
-      'lon': this.lon,
+      'lng': this.lng,
       'description': this.description,
       'name': this.name,
       'placeType':this.placeType,

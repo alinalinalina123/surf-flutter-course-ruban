@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/category.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/field_types/input_field_type.dart';
@@ -229,14 +230,14 @@ class _AddSightScreenState extends State<AddSightScreen> {
           var sight = Sight(
             id: mocks.length + 1,
             name: _controllerName.text,
-            urls: [""],
+            urls: photosOfSight,
             lat: double.tryParse(_controllerLatitude.text) ?? 0.0,
             lon: double.tryParse(_controllerLongitude.text) ?? 0.0,
             type: _categorySelected?.type ?? SightType.museum,
             state: SightStateType.initial,
             details: _controllerDescription.text,
           );
-          mocks.add(sight);
+          placeInteractor.addNewPlace(sight);
           Navigator.pop(context);
         }
       },

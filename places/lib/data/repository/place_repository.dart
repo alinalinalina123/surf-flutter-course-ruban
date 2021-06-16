@@ -26,7 +26,7 @@ class PlaceRepository {
   // Get place by ID
   Future<PlaceDTO?> getPlace(int id) async {
     try {
-      var response = await provider.getHTTP('/place', query: {"id": id});
+      var response = await provider.getHTTP('/place/$id');
       return PlaceDTO.fromJson(json.decode(response ?? ""));
     } catch (e) {
       print(e);

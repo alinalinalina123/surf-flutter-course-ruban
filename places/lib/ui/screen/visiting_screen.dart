@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
@@ -19,6 +20,9 @@ class VisitingScreen extends StatefulWidget {
 class _VisitingScreenState extends State<VisitingScreen> {
   @override
   Widget build(BuildContext context) {
+
+    var listVisited = placeInteractor.getVisitPlaces();
+    var listWantToVisit = placeInteractor.getFavouritePlaces();
 
     return DefaultTabController(
       length: 2,
@@ -56,7 +60,7 @@ class _VisitingScreenState extends State<VisitingScreen> {
                     },
                     stateUpdated: (){
                       setState(() {
-                        updateStateOfData();
+                        //updateStateOfData();
                       });
                     },
                   );
@@ -82,7 +86,7 @@ class _VisitingScreenState extends State<VisitingScreen> {
                     type: SightStateType.visited,
                     stateUpdated: (){
                       setState(() {
-                        updateStateOfData();
+                        //updateStateOfData();
                       });
                     },
                   );
