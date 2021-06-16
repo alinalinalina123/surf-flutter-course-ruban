@@ -79,4 +79,3 @@ final List<String> photos = [
   "https://architime.ru/specarch/gustave_eiffel/1.jpg"
 ];
 
-final List<String> searchHistory = ["Музей", "кафе один"];

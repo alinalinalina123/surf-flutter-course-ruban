@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:places/domain/sight.dart';
 
 /// Retrieves location of user
-Future<Position> _determinePosition() async {
+Future<Position> determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
 
@@ -47,7 +47,7 @@ Future<List<Sight>> distanceBetweenUserAndSight(
     return sights;
   }
 
-  Position position = await _determinePosition();
+  Position position = await determinePosition();
   return sights
       .where((sight) =>
           Geolocator.distanceBetween(position.latitude, position.longitude,

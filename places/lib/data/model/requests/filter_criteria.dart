@@ -2,22 +2,32 @@ import 'dart:convert';
 
 import 'package:places/data/model/requests/base_request.dart';
 
+///Criteria for filtering places
 class FilterCriteria implements BaseRequest {
-  late String nameFilter;
-  late double lat;
-  late double lon;
-  late List<String> typeFilter;
+  late String? nameFilter;
+  late double? lat;
+  late double? lon;
+  late List<String>? typeFilter;
+  late int? radius;
 
   FilterCriteria({
-    required String nameFilter,
-    required List<String> typeFilter,
-    required double lat,
-    required double lon,
+    String? nameFilter,
+    List<String>? typeFilter,
+    double? lat,
+    double? lon,
+    int? radius,
   }) {
     this.nameFilter = nameFilter;
     this.typeFilter = typeFilter;
-    this.lat = lat;
-    this.lon = lon;
+    if(radius != null && lat != null && lon != null) {
+      this.lat = lat;
+      this.lon = lon;
+      this.radius = radius;
+    } else {
+      this.lat = null;
+      this.lon = null;
+      this.radius = null;
+    }
   }
 
   @override
@@ -27,6 +37,7 @@ class FilterCriteria implements BaseRequest {
       'typeFilter': this.typeFilter,
       'lat': this.lat,
       'lon': this.lon,
+      'radius' : this.radius
     });
   }
 }
