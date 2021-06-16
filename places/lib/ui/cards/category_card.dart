@@ -25,7 +25,7 @@ class _CategoryCardState extends State<CategoryCard> {
     return Column(
       children: [
         Stack(
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.bottomCenter,
           children: [
             _buildCircleButton(),
             if (widget.category.isSelected)
