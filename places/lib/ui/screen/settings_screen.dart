@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/data/interactor/setting_interactor.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/colors.dart';
@@ -8,7 +9,6 @@ import 'package:places/ui/screen/on_boarding_screen.dart';
 import 'package:places/ui/screen/res/themes.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/utils/theme_notifier.dart';
-import 'package:provider/provider.dart';
 
 //Widget for Settings page
 class SettingsScreen extends StatefulWidget {
@@ -43,8 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _darkThemeSwitcherWidget() {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-    _darkTheme = (themeNotifier.getTheme() == darkTheme);
+    _darkTheme = settingsInteractor.getTheme(context);
     return Row(
       children: [
         Text(
@@ -58,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             setState(() {
               _darkTheme = isDark;
             });
-            onThemeChanged(isDark, themeNotifier);
+            settingsInteractor.changeTheme(context, isDark);
           },
         )
       ],
@@ -89,11 +88,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
     );
-  }
-
-  void onThemeChanged(bool value, ThemeNotifier themeNotifier) async {
-    value
-        ? themeNotifier.setTheme(darkTheme)
-        : themeNotifier.setTheme(lightTheme);
   }
 }
