@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:places/data/model/requests/filter_criteria.dart';
 import 'package:places/data/model/responses/place_dto_response.dart';
 import 'package:places/data/repository/place_repository.dart';
 import 'package:places/domain/category.dart';
@@ -18,7 +17,11 @@ class PlaceInteractor {
 
   Future<List<Sight>> getPlaces() async {
     List<PlaceDTO>? places = await _placeRepository.allPlaces();
-    _allSights = places?.map<Sight>((place) => Sight.withDto(place)).toList() ?? List.empty();
+    if(_allSights.isEmpty) {
+      _allSights =
+          places?.map<Sight>((place) => Sight.withDto(place)).toList() ??
+              List.empty();
+    }
     return _allSights;
   }
 
