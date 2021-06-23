@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/category.dart';
+import 'package:places/domain/filter_screen_input.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/cards/category_card.dart';
@@ -9,7 +11,6 @@ import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
-import 'package:places/utils/geolocator.dart';
 
 /// Widget to show filters for list of sights
 class FiltersScreen extends StatefulWidget {
@@ -123,7 +124,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   Widget buildSubmitButton() {
     return FutureBuilder<List<Sight>>(
-        future: distanceBetweenUserAndSight(mocks, values),
+        future: placeInteractor.getPlacesFiltered(values, categorySelected),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Padding(
@@ -131,15 +132,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: CustomButtonWidget(
                 title: _buttonTitle(snapshot.data),
                 onPressed: () {
-                  Navigator.of(context).pop(snapshot.data ?? []);
+                  var input = FilterScreenInput(values?.end.toInt(), categorySelected);
+                  Navigator.of(context).pop(input);
                 },
               ),
             );
           }
           return CustomButtonWidget(
-            title: _buttonTitle(mocks),
+            title: _buttonTitle(List.empty()),
             onPressed: () {
-              Navigator.of(context).pop(mocks);
+              Navigator.of(context).pop(List.empty());
             },
           );
         });

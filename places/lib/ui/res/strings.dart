@@ -19,9 +19,12 @@ const dateTimePickerTitle = 'Выберите дату для напоминан
 const museumName = 'Музей';
 const hotelName = 'Отель';
 const restourantName = 'Ресторан';
-const placeName = "Особое место";
+const templeName = "Храм";
 const parkName = "Парк";
 const cafeName = "Кафе";
+const monumentName = "Памятник";
+const theatreName = "Театр";
+const otherName = "Другое";
 
 //Sight Details
 const scheduleButtonTitle = "Запланировать";

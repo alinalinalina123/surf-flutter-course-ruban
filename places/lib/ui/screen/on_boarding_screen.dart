@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:places/data/repository/place_repository.dart';
 import 'package:places/domain/field_types/indicators_type.dart';
 import 'package:places/domain/onboarding_item.dart';
-import 'package:places/network/places_api_provider.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
@@ -28,14 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   void initState() {
-    testCall();
     super.initState();
-  }
-
-  void testCall() async {
-    var provider = PlacesApiProvider();
-    var response = await provider.test();
-    print(response.toString());
   }
 
   @override

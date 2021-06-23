@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/mocks.dart';
 
 /// Retrieves location of user
-Future<Position> _determinePosition() async {
+Future<Position> determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
 
@@ -45,10 +44,10 @@ Future<Position> _determinePosition() async {
 Future<List<Sight>> distanceBetweenUserAndSight(
     List<Sight> sights, RangeValues? range) async {
   if (range?.start == null && range?.end == null) {
-    return mocks;
+    return sights;
   }
 
-  Position position = await _determinePosition();
+  Position position = await determinePosition();
   return sights
       .where((sight) =>
           Geolocator.distanceBetween(position.latitude, position.longitude,

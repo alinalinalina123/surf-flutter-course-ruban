@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/search_interactor.dart';
+import 'package:places/data/model/requests/filter_criteria.dart';
+import 'package:places/domain/category.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
@@ -10,6 +13,7 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
+import 'package:places/utils/geolocator.dart';
 
 class SearchSightScreen extends StatefulWidget {
   static const routeName = '/mainScreen/sightListScreen/searchScreen';
@@ -20,7 +24,23 @@ class SearchSightScreen extends StatefulWidget {
 
 class _SearchSightScreenState extends State<SearchSightScreen> {
   String queryString = "";
+  int? radius;
+  List<Category>? categories;
   List<Sight> filteredSights = [];
+
+  void _getFilteredSights() async {
+    var userPosition = await determinePosition();
+    var criteria = FilterCriteria(
+        nameFilter: queryString,
+        typeFilter: categories?.map<String>((category) => category.type.toString().split('.').last).toList(),
+        lat: userPosition.latitude,
+        lon: userPosition.longitude,
+        radius: radius);
+    var allPlaces = await searchInteractor.searchPlaces(criteria);
+    setState(() {
+      filteredSights = allPlaces;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +48,19 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
       appBar: CustomAppBar(
         title: appBarTitle,
         type: AppBarType.search,
-        onFilterApplied: (sights) {
+        onFilterApplied: (input) {
           setState(() {
-            filteredSights = sights;
+            this.radius = input.radius;
+            this.categories = input.categories;
+            _getFilteredSights();
           });
         },
         onQueryChanged: (String query) {
-          if (query.isNotEmpty && !searchHistory.contains(query))
-            searchHistory.add(query);
+          if (query.isNotEmpty && !searchInteractor.getOldHistory().contains(query))
+          searchInteractor.saveQueryToHistory(query);
           setState(() {
             queryString = query;
+            _getFilteredSights();
           });
         },
       ),
@@ -46,16 +69,15 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
   }
 
   Widget _buildListOfSights() {
-    var sightsToDisplay = _sightSearchResult(queryString);
-    if (sightsToDisplay.length > 0) {
+    if (filteredSights.length > 0) {
       return ListView.builder(
-        itemCount: sightsToDisplay.length,
+        itemCount: filteredSights.length,
         physics: Platform.isAndroid
             ? ClampingScrollPhysics()
             : BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return SearchSightCard(
-            sight: sightsToDisplay[index],
+            sight: filteredSights[index],
           );
         },
       );
@@ -64,14 +86,6 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
         type: SightStateType.initial,
       );
     }
-  }
-
-  List<Sight> _sightSearchResult(String query) {
-    var listToDisplay = filteredSights != null ? filteredSights : mocks;
-    return listToDisplay
-        .where(
-            (sight) => sight.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
   }
 
   Widget _buildHistory() {
@@ -88,7 +102,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
 
   List<Widget> _createHistoryList() {
     List<Widget> widgets = [];
-    for (String oldQuery in searchHistory) {
+    for (String oldQuery in searchInteractor.getOldHistory()) {
       widgets.add(_buildHistoryCell(oldQuery));
     }
     if (widgets.length > 0) widgets.add(_clearHistoryButton());
@@ -101,7 +115,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
       textColor: colorGreen,
       onPressed: () {
         setState(() {
-          searchHistory.clear();
+          searchInteractor.deleteAllHistory();
         });
       },
     );
@@ -116,7 +130,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
       trailing: IconButton(
         onPressed: () {
           setState(() {
-            searchHistory.remove(oldQuery);
+            searchInteractor.deleteQueryFromHistory(oldQuery);
           });
         },
         icon: Icon(

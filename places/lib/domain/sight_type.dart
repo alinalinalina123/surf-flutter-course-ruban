@@ -1,7 +1,7 @@
 import 'package:places/ui/res/strings.dart';
 
 //Sight type
-enum SightType { hotel, restourant, place, park, museum, cafe }
+enum SightType { temple, monument, park, theatre, museum, hotel, restourant, cafe, other }
 
 extension SightTypeName on SightType {
   String get name {
@@ -12,14 +12,18 @@ extension SightTypeName on SightType {
         return hotelName;
       case SightType.restourant:
         return restourantName;
-      case SightType.place:
-        return placeName;
+      case SightType.temple:
+        return templeName;
       case SightType.park:
         return parkName;
       case SightType.cafe:
         return cafeName;
-      default:
-        return notSelectedTitle;
+      case SightType.monument:
+        return monumentName;
+      case SightType.theatre:
+        return theatreName;
+      case SightType.other:
+        return otherName;
     }
   }
 }

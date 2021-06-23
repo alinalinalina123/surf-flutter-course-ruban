@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/domain/sight_type.dart';
-import 'package:places/mocks.dart';
 import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
@@ -44,6 +44,9 @@ class SightCard extends StatefulWidget {
 }
 
 class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
+  var listVisited = placeInteractor.getVisitPlaces();
+  var listWantToVisit = placeInteractor.getFavouritePlaces();
+
   @override
   Widget build(BuildContext context) {
     Widget card = _buildCard(context);
@@ -221,6 +224,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
             onPressed: () {
               if (widget.type == SightStateType.want_to_visit) {
                 _openDateTimeSelection();
+                placeInteractor.addToVisit(widget.sight);
               }
             },
           )
@@ -288,25 +292,12 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
   void _deleteFromList() {
     switch (widget.type) {
       case SightStateType.initial:
-        mocks.forEach(
-          (sightFromData) => {
-            if (sightFromData == widget.sight)
-              {
-                widget.sight.state =
-                    widget.sight.state == SightStateType.want_to_visit
-                        ? SightStateType.initial
-                        : SightStateType.want_to_visit
-              }
-          },
-        );
+        widget.sight.state == SightStateType.want_to_visit
+            ? placeInteractor.removeFromFavourites(widget.sight)
+            : placeInteractor.addToFavourites(widget.sight);
         break;
       default:
-        mocks.forEach(
-          (sightFromData) => {
-            if (sightFromData == widget.sight)
-              {widget.sight.state = SightStateType.initial}
-          },
-        );
+        placeInteractor.removeFromFavourites(widget.sight);
         break;
     }
     widget.stateUpdated();

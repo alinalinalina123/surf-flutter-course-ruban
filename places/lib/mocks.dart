@@ -25,7 +25,7 @@ final List<Sight> mocks = [
     lat: 37.8185,
     lon: -122.4738,
     details: "Закрыто до 9:00",
-    type: SightType.place,
+    type: SightType.other,
     state: SightStateType.visited,
   ),
   Sight(
@@ -35,7 +35,7 @@ final List<Sight> mocks = [
     lat: 37.8185,
     lon: -122.4738,
     details: "Закрыто до 8:00",
-    type: SightType.place,
+    type: SightType.other,
     state: SightStateType.want_to_visit,
   ),
   Sight(
@@ -64,26 +64,11 @@ final List<Sight> mocks = [
   )
 ];
 
-var listVisited =
-    mocks.where((sight) => (sight).state == SightStateType.visited).toList();
-
-var listWantToVisit = mocks
-    .where((sight) => (sight).state == SightStateType.want_to_visit)
-    .toList();
-
-void updateStateOfData() {
-  listVisited =
-      mocks.where((sight) => (sight).state == SightStateType.visited).toList();
-
-  listWantToVisit = mocks
-      .where((sight) => (sight).state == SightStateType.want_to_visit)
-      .toList();
-}
 
 final List<Category> categories = [
   Category(SightType.hotel, false, hotelIcon),
   Category(SightType.restourant, false, restourantIcon),
-  Category(SightType.place, false, placeIcon),
+  Category(SightType.other, false, placeIcon),
   Category(SightType.park, false, parkIcon),
   Category(SightType.museum, false, museumIcon),
   Category(SightType.cafe, false, cafeIcon),
@@ -94,4 +79,3 @@ final List<String> photos = [
   "https://architime.ru/specarch/gustave_eiffel/1.jpg"
 ];
 
-final List<String> searchHistory = ["Музей", "кафе один"];
