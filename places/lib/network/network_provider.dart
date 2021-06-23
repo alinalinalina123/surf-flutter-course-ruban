@@ -3,24 +3,27 @@ import 'package:dio/dio.dart';
 // API client class
 class NetworkProvider {
   static final String url = 'https://test-backend-flutter.surfstudio.ru';
-  
-  final dio = createDio();
+  Dio? dio;
 
-  static BaseOptions opts = BaseOptions(
+  NetworkProvider(){
+    dio = createDio();
+  }
+
+  BaseOptions opts = BaseOptions(
     baseUrl: url,
-    connectTimeout: 5000,
-    receiveTimeout: 5000,
-    sendTimeout: 5000,
+    connectTimeout: 50000,
+    receiveTimeout: 50000,
+    sendTimeout: 50000,
     headers: {"Accept":"application/json", "Content-Type":"application/json"},
   );
 
-  static Dio createDio() {
+  Dio createDio() {
     var client = Dio(opts);
     addInterceptors(client);
     return client;
   }
 
-  static void addInterceptors(Dio dio) {
+  void addInterceptors(Dio dio) {
     int _maxCharactersPerLine = 200;
     dio.interceptors.add(
       InterceptorsWrapper(
@@ -65,56 +68,56 @@ class NetworkProvider {
     );
   }
 
-  Future<String?> getHTTP(String? path, {Map<String, dynamic>? query}) async {
+  Future<String?> get(String? path, {Map<String, dynamic>? query}) async {
     try {
-      Response<String> response = await dio.get(path ?? "", queryParameters: query);
-      var statusCode = response.statusCode ?? 0;
+      Response<String>? response = await dio?.get(path ?? "", queryParameters: query);
+      var statusCode = response?.statusCode ?? 0;
       if(statusCode >= 200 && statusCode <= 299) {
-        return response.data;
+        return response?.data;
       } else {
-        throw Exception("API EXCEPTION for GET method: \n ${response.requestOptions.uri}");
+        throw Exception("API EXCEPTION for GET method: \n ${response?.requestOptions.uri}");
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<String?> deleteHTTP(String? path, {Map<String, dynamic>? query}) async {
+  Future<String?> delete(String? path, {Map<String, dynamic>? query}) async {
     try {
-      Response<String> response = await dio.delete(path ?? "", queryParameters: query);
-      var statusCode = response.statusCode ?? 0;
+      Response<String>? response = await dio?.delete(path ?? "", queryParameters: query);
+      var statusCode = response?.statusCode ?? 0;
       if(statusCode >= 200 && statusCode <= 299) {
-        return response.data;
+        return response?.data;
       } else {
-        throw Exception("API EXCEPTION for DELETE method: \n ${response.requestOptions.uri}");
+        throw Exception("API EXCEPTION for DELETE method: \n ${response?.requestOptions.uri}");
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<String?> postHTTP(String url, dynamic data) async {
+  Future<String?> post(String url, dynamic data) async {
     try {
-      Response<String> response = await dio.post(url, data: data);
-      var statusCode = response.statusCode ?? 0;
+      Response<String>? response = await dio?.post(url, data: data);
+      var statusCode = response?.statusCode ?? 0;
       if(statusCode >= 200 && statusCode <= 299) {
-        return response.data;
+        return response?.data;
       } else {
-        throw Exception("API EXCEPTION for POST method: \n ${response.requestOptions.uri}");
+        throw Exception("API EXCEPTION for POST method: \n ${response?.requestOptions.uri}");
       }
     } on DioError catch (e) {
       print(e);
     }
   }
 
-  Future<String?> putHTTP(String url, dynamic data, {Map<String, dynamic>? query}) async {
+  Future<String?> put(String url, dynamic data, {Map<String, dynamic>? query}) async {
     try {
-      Response<String> response = await dio.put(url, queryParameters: query, data: data);
-      var statusCode = response.statusCode ?? 0;
+      Response<String>? response = await dio?.put(url, queryParameters: query, data: data);
+      var statusCode = response?.statusCode ?? 0;
       if(statusCode >= 200 && statusCode <= 299) {
-        return response.data;
+        return response?.data;
       } else {
-        throw Exception("API EXCEPTION for PUT method: \n ${response.requestOptions.uri}");
+        throw Exception("API EXCEPTION for PUT method: \n ${response?.requestOptions.uri}");
       }
     } on DioError catch (e) {
       print(e);

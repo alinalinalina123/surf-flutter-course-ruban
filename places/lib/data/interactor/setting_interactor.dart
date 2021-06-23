@@ -10,7 +10,7 @@ final settingsInteractor = SettingsInteractor();
 class SettingsInteractor {
 
   SettingsInteractor();
-  
+
   void changeTheme(BuildContext context, bool isDark) {
     var themeNotifier = Provider.of<ThemeNotifier>(context);
     isDark

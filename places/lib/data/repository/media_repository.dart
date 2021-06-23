@@ -16,6 +16,6 @@ class MediaRepository {
       "file":
       await MultipartFile.fromFile(file.path, filename:fileName),
     });
-    return await provider.postHTTP("/upload_file", formData);
+    return await provider.post("/upload_file", formData);
   }
 }

@@ -14,7 +14,7 @@ class SearchRepository {
   //Filtered places request
   Future<List<PlaceDTO>?> filteredPlaces(FilterCriteria criteria) async {
     try {
-      var response = await provider.postHTTP('/filtered_places', criteria.convertToRequest());
+      var response = await provider.post('/filtered_places', criteria.convertToRequest());
       List responseJson = json.decode(response ?? "");
       return responseJson.map<PlaceDTO>((m) => new PlaceDTO.fromJson(m)).toList();
     } catch (e) {
