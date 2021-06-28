@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/data/repository/place_repository.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
+import 'package:places/domain/sight.dart';
 import 'package:places/ui/cards/sight_card.dart';
 import 'package:places/ui/res/strings.dart';
 
@@ -22,19 +25,24 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
-  var sights = List.empty();
+  final StreamController<List<Sight>> _sightStreamCtrl =
+      StreamController<List<Sight>>.broadcast();
+
+  Stream<List<Sight>> get onSightsListChanged => _sightStreamCtrl.stream;
+
+  void updateSightsListState() => _sightStreamCtrl.sink
+      .addStream(Stream.fromFuture(placeInteractor.getPlaces()));
+
+  @override
+  void dispose() {
+    _sightStreamCtrl.close();
+    super.dispose();
+  }
 
   @override
   void initState() {
-    _allPlaces();
+    updateSightsListState();
     super.initState();
-  }
-
-  void _allPlaces() async {
-    var allPlaces = await placeInteractor.getPlaces();
-    setState(() {
-      sights = allPlaces;
-    });
   }
 
   @override
@@ -74,14 +82,28 @@ class _SightListScreenState extends State<SightListScreen> {
                 ]),
               ),
             ),
-            _buildCollection(),
+            StreamBuilder<List<Sight>>(
+                stream: onSightsListChanged,
+                builder: (context, AsyncSnapshot<List<Sight>> snapshot) {
+                  if (snapshot.hasData) {
+                    return _buildCollection(snapshot.data ?? List.empty());
+                  } else {
+                    return SliverFillRemaining(
+                      child: Container(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    );
+                  }
+                }),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildCollection() {
+  Widget _buildCollection(List<Sight> sights) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var list = SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -90,7 +112,7 @@ class _SightListScreenState extends State<SightListScreen> {
             sight: sights[index],
             index: index,
             stateUpdated: () {
-              setState(() {});
+              updateSightsListState();
             },
           );
         },
@@ -109,7 +131,7 @@ class _SightListScreenState extends State<SightListScreen> {
             sight: sights[index],
             index: index,
             stateUpdated: () {
-              setState(() {});
+              updateSightsListState();
             },
           );
         },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildImageLoadingIndicator(
-    BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+Widget buildImageLoadingIndicator(BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
   if (loadingProgress == null) return child;
   return Center(
     child: CircularProgressIndicator(
@@ -12,3 +11,4 @@ Widget buildImageLoadingIndicator(
     ),
   );
 }
+
