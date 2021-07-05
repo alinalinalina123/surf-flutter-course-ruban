@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:places/data/interactor/place_interactor.dart';
-import 'package:places/data/repository/place_repository.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/cards/sight_card.dart';
@@ -12,6 +11,7 @@ import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/screen/search_sight_screen.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_fab.dart';
+import 'package:places/ui/widgets/error_widget.dart';
 import 'package:places/ui/widgets/search_bar.dart';
 
 import 'add_sight_screen.dart';
@@ -85,7 +85,15 @@ class _SightListScreenState extends State<SightListScreen> {
             StreamBuilder<List<Sight>>(
                 stream: onSightsListChanged,
                 builder: (context, AsyncSnapshot<List<Sight>> snapshot) {
-                  if (snapshot.hasData) {
+                  if(snapshot.hasError) {
+                    return SliverFillRemaining(
+                      child: Container(
+                        child: Center(
+                          child: ApiErrorWidget(),
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
                     return _buildCollection(snapshot.data ?? List.empty());
                   } else {
                     return SliverFillRemaining(
