@@ -2,11 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
+import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/ui/cards/sight_card.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/res/strings.dart';
-import 'package:places/mocks.dart';
+import 'package:provider/provider.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/empty_list_widget.dart';
 
@@ -18,12 +19,11 @@ class VisitingScreen extends StatefulWidget {
 }
 
 class _VisitingScreenState extends State<VisitingScreen> {
+
   @override
   Widget build(BuildContext context) {
-
-    var listVisited = placeInteractor.getVisitPlaces();
-    var listWantToVisit = placeInteractor.getFavouritePlaces();
-
+    var listVisited = context.read<PlaceInteractor>().getVisitPlaces();
+    var listWantToVisit = context.read<PlaceInteractor>().getFavouritePlaces();
     return DefaultTabController(
       length: 2,
       child: Scaffold(

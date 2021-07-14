@@ -6,8 +6,6 @@ import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
 import 'package:places/utils/geolocator.dart';
 
-final placeInteractor = PlaceInteractor(PlaceRepository());
-
 ///Interactor for places
 class PlaceInteractor {
   final PlaceRepository _placeRepository;

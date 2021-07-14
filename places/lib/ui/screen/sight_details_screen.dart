@@ -12,6 +12,7 @@ import 'package:places/ui/widgets/sub_title_widget.dart';
 import 'package:places/ui/widgets/title_widget.dart';
 import 'package:places/domain/sight_type.dart';
 import 'package:places/ui/res/assets_name.dart';
+import 'package:provider/provider.dart';
 import '../../mocks.dart';
 
 /// Widget to show the details of the sight
@@ -34,15 +35,12 @@ class _SightDetailsBottomSheetState extends State<SightDetailsBottomSheet> {
 
   @override
   void initState() {
-    _place();
-    super.initState();
-  }
-
-  void _place() async {
-    var sightDetails = await placeInteractor.getPlaceDetails(widget.sightId);
-    setState(() {
-      sight = sightDetails;
+    context.read<PlaceInteractor>().getPlaceDetails(widget.sightId).then((value)  {
+          setState(() {
+            sight = value;
+          });
     });
+    super.initState();
   }
 
   @override
