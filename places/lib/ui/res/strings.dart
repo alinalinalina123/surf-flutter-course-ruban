@@ -96,3 +96,7 @@ const onBoardingDescription_3 = "Делись самыми интересным�
 const russianLanguageCode = "ru";
 const russianCountryCode = "RU";
 
+
+//Errors
+
+const apiException = "В запросе {0} возникла ошибка: {1} {2}";
