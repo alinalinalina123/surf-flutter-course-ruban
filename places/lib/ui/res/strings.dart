@@ -100,3 +100,5 @@ const russianCountryCode = "RU";
 //Errors
 
 const apiException = "В запросе {0} возникла ошибка: {1} {2}";
+const errorTitle = "Ошибка";
+const errorDescription = "Что-то пошло не так \n попробуйте позже.";

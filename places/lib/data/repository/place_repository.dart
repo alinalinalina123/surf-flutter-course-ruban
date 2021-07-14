@@ -17,13 +17,9 @@ class PlaceRepository {
 
   // Get all places
   Future<List<PlaceDTO>?> allPlaces() async {
-    try {
       var response = await _provider?.get('/place');
       var responseJson = json.decode(response ?? "");
       return responseJson.map<PlaceDTO>((m) => new PlaceDTO.fromJson(m)).toList();
-    } catch (e) {
-      print(e.toString());
-    }
   }
 
   // Get place by ID

@@ -37,3 +37,5 @@ const onboarding_1 = "res/images/onboarding/onboarding_1.svg";
 const onboarding_2 = "res/images/onboarding/onboarding_2.svg";
 const onboarding_3 = "res/images/onboarding/onboarding_3.svg";
 
+const errorIcon = "res/images/error_api.svg";
+
