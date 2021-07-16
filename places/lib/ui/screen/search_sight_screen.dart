@@ -6,7 +6,7 @@ import 'package:places/domain/category.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/domain/sight_state_type.dart';
-import 'package:places/mocks.dart';
+import 'package:provider/provider.dart';
 import 'package:places/ui/cards/search_sight_card.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
@@ -36,7 +36,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
         lat: userPosition.latitude,
         lon: userPosition.longitude,
         radius: radius);
-    var allPlaces = await searchInteractor.searchPlaces(criteria);
+    var allPlaces = await context.read<SearchInteractor>().searchPlaces(criteria);
     setState(() {
       filteredSights = allPlaces;
     });
@@ -56,8 +56,8 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
           });
         },
         onQueryChanged: (String query) {
-          if (query.isNotEmpty && !searchInteractor.getOldHistory().contains(query))
-          searchInteractor.saveQueryToHistory(query);
+          if (query.isNotEmpty && !context.read<SearchInteractor>().getOldHistory().contains(query))
+            context.read<SearchInteractor>().saveQueryToHistory(query);
           setState(() {
             queryString = query;
             _getFilteredSights();
@@ -102,7 +102,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
 
   List<Widget> _createHistoryList() {
     List<Widget> widgets = [];
-    for (String oldQuery in searchInteractor.getOldHistory()) {
+    for (String oldQuery in context.read<SearchInteractor>().getOldHistory()) {
       widgets.add(_buildHistoryCell(oldQuery));
     }
     if (widgets.length > 0) widgets.add(_clearHistoryButton());
@@ -115,7 +115,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
       textColor: colorGreen,
       onPressed: () {
         setState(() {
-          searchInteractor.deleteAllHistory();
+          context.read<SearchInteractor>().deleteAllHistory();
         });
       },
     );
@@ -130,7 +130,7 @@ class _SearchSightScreenState extends State<SearchSightScreen> {
       trailing: IconButton(
         onPressed: () {
           setState(() {
-            searchInteractor.deleteQueryFromHistory(oldQuery);
+            context.read<SearchInteractor>().deleteQueryFromHistory(oldQuery);
           });
         },
         icon: Icon(

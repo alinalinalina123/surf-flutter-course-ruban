@@ -4,7 +4,6 @@ import 'package:places/ui/screen/res/themes.dart';
 import 'package:places/utils/theme_notifier.dart';
 import 'package:provider/provider.dart';
 
-final settingsInteractor = SettingsInteractor();
 
 ///Interactor for search places
 class SettingsInteractor {

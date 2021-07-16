@@ -6,9 +6,8 @@ import 'package:places/ui/res/assets_name.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/screen/on_boarding_screen.dart';
-import 'package:places/ui/screen/res/themes.dart';
+import 'package:provider/provider.dart';
 import 'package:places/ui/widgets/custom_app_bar.dart';
-import 'package:places/utils/theme_notifier.dart';
 
 //Widget for Settings page
 class SettingsScreen extends StatefulWidget {
@@ -43,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _darkThemeSwitcherWidget() {
-    _darkTheme = settingsInteractor.getTheme(context);
+    _darkTheme = context.read<SettingsInteractor>().getTheme(context);
     return Row(
       children: [
         Text(
@@ -57,7 +56,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             setState(() {
               _darkTheme = isDark;
             });
-            settingsInteractor.changeTheme(context, isDark);
+            context.read<SettingsInteractor>().changeTheme(context, isDark);
           },
         )
       ],

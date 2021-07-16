@@ -11,6 +11,7 @@ import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/strings.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/widgets/custom_button_widget.dart';
+import 'package:provider/provider.dart';
 
 /// Widget to show filters for list of sights
 class FiltersScreen extends StatefulWidget {
@@ -124,7 +125,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   Widget buildSubmitButton() {
     return FutureBuilder<List<Sight>>(
-        future: placeInteractor.getPlacesFiltered(values, categorySelected),
+        future: context.read<PlaceInteractor>().getPlacesFiltered(values, categorySelected),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Padding(

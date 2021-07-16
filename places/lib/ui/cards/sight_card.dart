@@ -14,6 +14,7 @@ import 'package:places/ui/screen/sight_details_screen.dart';
 import 'package:places/ui/widgets/image_card_widget.dart';
 import 'package:places/ui/widgets/positioned_icon_button_widget.dart';
 import 'package:places/ui/widgets/sub_title_widget.dart';
+import 'package:provider/provider.dart';
 
 /// Widget for card view of sight
 
@@ -44,8 +45,15 @@ class SightCard extends StatefulWidget {
 }
 
 class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
-  var listVisited = placeInteractor.getVisitPlaces();
-  var listWantToVisit = placeInteractor.getFavouritePlaces();
+  var listWantToVisit = List.empty();
+  var listVisited = List.empty();
+
+  @override
+  void initState() {
+    listWantToVisit = context.read<PlaceInteractor>().getFavouritePlaces();
+    listVisited = context.read<PlaceInteractor>().getVisitPlaces();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +232,7 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
             onPressed: () {
               if (widget.type == SightStateType.want_to_visit) {
                 _openDateTimeSelection();
-                placeInteractor.addToVisit(widget.sight);
+                context.read<PlaceInteractor>().addToVisit(widget.sight);
               }
             },
           )
@@ -293,11 +301,11 @@ class _SightCardState extends State<SightCard> with TickerProviderStateMixin {
     switch (widget.type) {
       case SightStateType.initial:
         widget.sight.state == SightStateType.want_to_visit
-            ? placeInteractor.removeFromFavourites(widget.sight)
-            : placeInteractor.addToFavourites(widget.sight);
+            ? context.read<PlaceInteractor>().removeFromFavourites(widget.sight)
+            : context.read<PlaceInteractor>().addToFavourites(widget.sight);
         break;
       default:
-        placeInteractor.removeFromFavourites(widget.sight);
+        context.read<PlaceInteractor>().removeFromFavourites(widget.sight);
         break;
     }
     widget.stateUpdated();

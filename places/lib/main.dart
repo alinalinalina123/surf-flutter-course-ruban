@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:places/data/interactor/place_interactor.dart';
+import 'package:places/data/interactor/search_interactor.dart';
+import 'package:places/data/interactor/setting_interactor.dart';
+import 'package:places/data/repository/place_repository.dart';
+import 'package:places/data/repository/search_repository.dart';
 import 'package:places/ui/screen/add_sight_screen.dart';
 import 'package:places/ui/screen/category_selection_screen.dart';
 import 'package:places/ui/screen/filters_screen.dart';
@@ -28,29 +33,41 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
-    return MaterialApp(
-      title: 'Places app',
-      home: SplashScreen(),
-      theme: themeNotifier.getTheme(),
-      routes: {
-        SplashScreen.routeName: (context) => SplashScreen(),
-        OnBoardingScreen.routeName: (context) => OnBoardingScreen(),
-        TabsScreen.routeName: (context) => TabsScreen(),
-        SightListScreen.routeName: (context) => SightListScreen(),
-        VisitingScreen.routeName: (context) => VisitingScreen(),
-        SettingsScreen.routeName: (context) => SettingsScreen(),
-        SearchSightScreen.routeName: (context) => SearchSightScreen(),
-        AddSightScreen.routeName: (context) => AddSightScreen(),
-        FiltersScreen.routeName: (context) => FiltersScreen(),
-        CategorySelectionScreen.routeName: (context) => CategorySelectionScreen(),
-      },
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiProvider(
+      providers: [
+        Provider<PlaceInteractor>(
+          create: (_) => PlaceInteractor(PlaceRepository()),
+        ),
+        Provider<SearchInteractor>(
+          create: (_) => SearchInteractor(SearchRepository()),
+        ),
+        Provider<SettingsInteractor>(
+          create: (_) => SettingsInteractor(),
+        )
       ],
-      supportedLocales: [
-        const Locale('ru')
-      ],
+      child: MaterialApp(
+        title: 'Places app',
+        home: SplashScreen(),
+        theme: themeNotifier.getTheme(),
+        routes: {
+          SplashScreen.routeName: (context) => SplashScreen(),
+          OnBoardingScreen.routeName: (context) => OnBoardingScreen(),
+          TabsScreen.routeName: (context) => TabsScreen(),
+          SightListScreen.routeName: (context) => SightListScreen(),
+          VisitingScreen.routeName: (context) => VisitingScreen(),
+          SettingsScreen.routeName: (context) => SettingsScreen(),
+          SearchSightScreen.routeName: (context) => SearchSightScreen(),
+          AddSightScreen.routeName: (context) => AddSightScreen(),
+          FiltersScreen.routeName: (context) => FiltersScreen(),
+          CategorySelectionScreen.routeName: (context) =>
+              CategorySelectionScreen(),
+        },
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [const Locale('ru')],
+      ),
     );
   }
 }

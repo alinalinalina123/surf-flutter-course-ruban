@@ -13,7 +13,7 @@ import 'package:places/ui/widgets/custom_app_bar.dart';
 import 'package:places/ui/widgets/custom_fab.dart';
 import 'package:places/ui/widgets/error_widget.dart';
 import 'package:places/ui/widgets/search_bar.dart';
-
+import 'package:provider/provider.dart';
 import 'add_sight_screen.dart';
 
 //Widget that displays list of sights
@@ -30,8 +30,10 @@ class _SightListScreenState extends State<SightListScreen> {
 
   Stream<List<Sight>> get onSightsListChanged => _sightStreamCtrl.stream;
 
-  void updateSightsListState() => _sightStreamCtrl.sink
-      .addStream(Stream.fromFuture(placeInteractor.getPlaces()));
+  void updateSightsListState() {
+    _sightStreamCtrl.sink
+        .addStream(Stream.fromFuture(context.read<PlaceInteractor>().getPlaces()));
+  }
 
   @override
   void dispose() {
@@ -40,13 +42,8 @@ class _SightListScreenState extends State<SightListScreen> {
   }
 
   @override
-  void initState() {
-    updateSightsListState();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    updateSightsListState();
     return SafeArea(
       child: Scaffold(
         floatingActionButton: CustomFloatingActionButton(

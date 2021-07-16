@@ -5,7 +5,6 @@ import 'package:places/data/model/responses/place_dto_response.dart';
 import 'package:places/data/repository/search_repository.dart';
 import 'package:places/domain/sight.dart';
 
-final searchInteractor = SearchInteractor(SearchRepository());
 
 ///Interactor for search places
 class SearchInteractor {
