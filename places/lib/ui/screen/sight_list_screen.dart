@@ -1,10 +1,12 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:mobx/mobx.dart';
 import 'package:places/data/interactor/place_interactor.dart';
 import 'package:places/domain/field_types/app_bar_type.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/store/sights_list_store.dart';
 import 'package:places/ui/cards/sight_card.dart';
 import 'package:places/ui/res/strings.dart';
 
@@ -25,25 +27,18 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
-  final StreamController<List<Sight>> _sightStreamCtrl =
-      StreamController<List<Sight>>.broadcast();
 
-  Stream<List<Sight>> get onSightsListChanged => _sightStreamCtrl.stream;
-
-  void updateSightsListState() {
-    _sightStreamCtrl.sink
-        .addStream(Stream.fromFuture(context.read<PlaceInteractor>().getPlaces()));
-  }
+  late SightsListStore store;
 
   @override
-  void dispose() {
-    _sightStreamCtrl.close();
-    super.dispose();
+  void initState() {
+    store = SightsListStore(context.read<PlaceInteractor>());
+    store.getAllPlaces();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    updateSightsListState();
     return SafeArea(
       child: Scaffold(
         floatingActionButton: CustomFloatingActionButton(
@@ -79,29 +74,16 @@ class _SightListScreenState extends State<SightListScreen> {
                 ]),
               ),
             ),
-            StreamBuilder<List<Sight>>(
-                stream: onSightsListChanged,
-                builder: (context, AsyncSnapshot<List<Sight>> snapshot) {
-                  if(snapshot.hasError) {
-                    return SliverFillRemaining(
-                      child: Container(
-                        child: Center(
-                          child: ApiErrorWidget(),
-                        ),
-                      ),
-                    );
-                  } else if (snapshot.hasData) {
-                    return _buildCollection(snapshot.data ?? List.empty());
-                  } else {
-                    return SliverFillRemaining(
-                      child: Container(
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-                    );
-                  }
-                }),
+            Observer(builder: (_) {
+              return store.allPlaces.status == FutureStatus.pending ?
+              SliverFillRemaining(
+                child: Container(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ) : _buildCollection(store.allPlaces.value ?? List.empty());
+            })
           ],
         ),
       ),
@@ -117,7 +99,7 @@ class _SightListScreenState extends State<SightListScreen> {
             sight: sights[index],
             index: index,
             stateUpdated: () {
-              updateSightsListState();
+              store.getAllPlaces();
             },
           );
         },
@@ -136,7 +118,7 @@ class _SightListScreenState extends State<SightListScreen> {
             sight: sights[index],
             index: index,
             stateUpdated: () {
-              updateSightsListState();
+              store.getAllPlaces();
             },
           );
         },
